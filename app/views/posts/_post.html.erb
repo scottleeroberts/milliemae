@@ -1,0 +1,13 @@
+<div class='col-sm-6 col-lg-4'>
+  <div class="card">
+    <%= link_to post do %>
+      <div class="card-topper" style='background-image: url(https://static.pexels.com/photos/343219/pexels-photo-343219.jpeg);'></div>
+    <% end %>
+    <div class="card-block">
+      <h4 class="card-title"><%= link_to post.title, post %></h4>
+      <p class="published-date">Feb 21, 2018<p>
+      <p class="card-text"><%= truncate(post.description, length: 130) %></p>
+      <%= link_to 'Read', post, clss: 'btn btn-read' %>
+    </div>
+  </div>
+</div>
