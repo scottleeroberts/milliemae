@@ -5,7 +5,7 @@
     <% end %>
     <div class="card-block">
       <h4 class="card-title"><%= link_to post.title, post %></h4>
-      <p class="published-date">Feb 21, 2018<p>
+      <p class="published-date"><%= post.published_date%><p>
       <p class="card-text"><%= truncate(post.description, length: 130) %></p>
       <%= link_to 'Read', post, clss: 'btn btn-read' %>
     </div>
