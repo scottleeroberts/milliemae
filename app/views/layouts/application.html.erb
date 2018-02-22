@@ -9,8 +9,9 @@
   </head>
 
   <body>
+    <%= render 'layouts/navbar' %>
     <div class="container <%= controller %> <%= action_name %>">
       <%= yield %>
-    <div>
+    </div>
   </body>
 </html>
