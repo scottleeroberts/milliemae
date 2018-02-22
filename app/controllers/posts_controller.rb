@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
-    @posts = Post.all
+    @posts = Post.most_recent
   end
 
   def show
@@ -45,11 +45,11 @@ class PostsController < ApplicationController
   end
 
   private
-    def set_post
-      @post = Post.friendly.find(params[:id])
-    end
+  def set_post
+    @post = Post.friendly.find(params[:id])
+  end
 
-    def post_params
-      params.require(:post).permit(:title, :body, :description)
-    end
+  def post_params
+    params.require(:post).permit(:title, :body, :description)
+  end
 end
