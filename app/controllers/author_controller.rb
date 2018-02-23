@@ -1,3 +1,2 @@
-class AuthorController < ActionController::Base
-  protect_from_forgery with: :exception
+class AuthorController < ApplicationController
 end
