@@ -11,4 +11,5 @@ Rails.application.routes.draw do
     get 'posts' => 'posts#index', as: :posts
     get 'posts/:id' => 'posts#show', as: :post
   end
+
 end
