@@ -1,4 +1,4 @@
-class PagesController < ApplicationController
+class Blog::PagesController < BlogController
 
   def about
 
