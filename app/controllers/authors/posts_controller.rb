@@ -1,4 +1,4 @@
-class Author::PostsController < AuthorController
+class Authors::PostsController < AuthorController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -20,7 +20,7 @@ class Author::PostsController < AuthorController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to author_post_path(@post), notice: 'Post was successfully created.' }
+        format.html { redirect_to authors_post_path(@post), notice: 'Post was successfully created.' }
       else
         format.html { render :new }
       end
@@ -30,7 +30,7 @@ class Author::PostsController < AuthorController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to author_post_path(@post), notice: 'Post was successfully updated.' }
+        format.html { redirect_to authors_post_path(@post), notice: 'Post was successfully updated.' }
       else
         format.html { render :edit }
       end
@@ -40,7 +40,7 @@ class Author::PostsController < AuthorController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to author_posts_url, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to authors_posts_url, notice: 'Post was successfully destroyed.' }
     end
   end
 
