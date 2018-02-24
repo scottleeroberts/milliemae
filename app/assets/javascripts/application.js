@@ -16,5 +16,7 @@
 //= require popper
 //= require turbolinks
 //= require bootstrap-sprockets
-
+//= require quill.min
+//= require quill.global
+/
 //= require_tree .

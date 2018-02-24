@@ -34,6 +34,8 @@ gem 'devise'
 
 gem 'friendly_id', '~> 5.1.0'
 
+gem 'quilljs-rails'
+
 gem 'bootstrap', '~> 4.0.0'
 
 gem 'jquery-rails'
