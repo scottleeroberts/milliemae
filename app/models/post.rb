@@ -13,14 +13,18 @@ class Post < ApplicationRecord
   end
 
   def published_date
+    if published_at.present?
       "Published: #{published_at.strftime('%-b %-d, %-Y')}"
+    else
+      "Not published yet"
+    end
   end
 
   def publish
     update(published: true, published_at: Time.zone.now)
   end
 
-  def unpubish
+  def unpublish
     update(published: false, published_at: nil)
   end
 end
