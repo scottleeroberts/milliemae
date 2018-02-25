@@ -1,8 +1,18 @@
 class Authors::PostsController < AuthorController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :publish, :unpublish]
 
   def index
-    @posts = current_author.posts.most_recent
+    @posts = current_author.posts
+  end
+
+  def publish
+    @post.publish
+    redirect_to authors_posts_url
+  end
+
+  def unpublish
+    @post.unpublish
+    redirect_to authors_posts_url
   end
 
   def show
