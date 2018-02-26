@@ -19,6 +19,7 @@ gem 'quilljs-rails'
 gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'will_paginate', '~> 3.1.0'
+gem 'acts-as-taggable-on', '~> 4.0'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
