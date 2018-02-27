@@ -1,7 +1,12 @@
 class Blog::PostsController < BlogController
 
   def index
-    @posts = Post.most_recent.published.paginate(:page => params[:page], per_page: 3)
+    t = params[:tag]
+    @posts = if t.present?
+               Post.most_recent.published.tagged_with(t).paginate(:page => params[:page], per_page: 3)
+             else
+               Post.most_recent.published.paginate(:page => params[:page], per_page: 3)
+             end
   end
 
   def show
