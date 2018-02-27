@@ -10,6 +10,6 @@ class Blog::PostsController < BlogController
   end
 
   def show
-    @post = Post.friendly.find(params[:id])
+    @post = Post.friendly.published.find(params[:id])
   end
 end
