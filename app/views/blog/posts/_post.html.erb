@@ -7,7 +7,9 @@
       <h4 class="card-title"><%= link_to post.title, post %></h4>
       <p class="published-date"><%= post.published_date%></p>
       <p> <%= raw post.tags.map{ |tag| link_to tag.name, posts_path(tag:  tag.name, anchor: 'disqus_threat') }.join(', ') %></p>
-      <p class="card-text"><%= truncate(post.description, length: 130) %></p>
+      <%= link_to post do %>
+        <p class="card-text"><%= truncate(post.description, length: 130) %></p>
+      <% end %>
       <%= link_to 'Read', post_path(id: post.friendly_id, anchor: "disqus_thread"), class: 'btn btn-read', :data=> { :disqus_identifier => post.slug } %>
     </div>
   </div>
