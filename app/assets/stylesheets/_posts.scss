@@ -5,6 +5,12 @@
     height: 400px;
     margin-bottom: 20px;
     background-color: white;
+    a:hover{
+      text-decoration: none;
+      .badge{
+        opacity: .7;
+      }
+    }
     .card-topper {
       height: 200px;
       width: 100%;
@@ -21,13 +27,6 @@
           text-decoration: none;
         }
       }
-      .tags {
-        margin-bottom: 0;
-        a {
-          font-family: 'Montserrat', sans-serif;
-          font-size: 12px;
-        }
-      }
       .published-date {
         font-size: 0.8rem;
         color: #787878;
@@ -39,7 +38,6 @@
         font-size: 0.9rem;
         color: black;
       }
-
     }
   }
 }

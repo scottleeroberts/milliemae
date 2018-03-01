@@ -2,7 +2,7 @@
 <% provide(:blog_active, "active") %>
 
 <div class="row">
-  <div class="col-md-10 col-lg-8 text-xs-center">
+  <div class="col-md-10 offset-md-1 text-lg-center text-xs-center">
     <h1><%= @post.title %></h1>
     <h6><%= @post.published_date  %></h6>
     <%= @post.body.html_safe %>
