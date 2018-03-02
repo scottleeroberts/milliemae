@@ -6,6 +6,8 @@ class Author < ApplicationRecord
 
   has_many :posts
 
+  validates_presence_of :name, :email
+
   def change_password(attrs)
     update(password: attrs[:new_password], password_confirmation: attrs[:new_password_confirmation])
   end
@@ -16,7 +18,7 @@ class Author < ApplicationRecord
 
   private
 
- def gravatar_hash
-   Digest::MD5.hexdigest(self.email.downcase)
- end
+  def gravatar_hash
+    Digest::MD5.hexdigest(self.email.downcase)
+  end
 end
