@@ -7,11 +7,10 @@ class Authors::AccountsController < AuthorController
     if current_author.update(author_info_params)
       flash[:success] = 'Successfully saved info.'
     else
-      flash[:danger] = current_author.display_error_messages
+      flash[:danger] = current_author.pretty_errors
     end
     redirect_to edit_authors_account_path
   end
-
 
   private
 
