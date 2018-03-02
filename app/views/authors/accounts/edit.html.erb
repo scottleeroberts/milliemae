@@ -38,7 +38,7 @@
   </div>
 
   <div class="col-md-6">
-    <%= form_tag authors_password_path do %>
+    <%= form_tag authors_change_password_path, method: :patch do %>
       <%= fields_for :author do  |f| %>
         <div class="card"">
           <div class= "card-block">
@@ -66,7 +66,7 @@
               </div>
             </li>
             <li class="list-group-item">
-              <%= f.submit "Update Password", class: 'btn btn-warning'%>
+              <%= f.submit "Change Password", class: 'btn btn-warning'%>
             </li>
           </ul>
         </div>

@@ -1,4 +1,4 @@
-class Authors::PasswordController
+class Authors::ChangePasswordsController < AuthorController
 
   def update
     author = current_author
@@ -7,13 +7,13 @@ class Authors::PasswordController
         sign_in(author, bypass: true)
         flash[:success] = 'Successfully changed password.'
       else
-        flash[:danger] = author.display_error_messages
+        flash[:danger] = author.pretty_errors
       end
     else
       flash[:danger] = 'Current password was incorrect.'
     end
 
-    redirect_to authors_account_path
+    redirect_to edit_authors_account_path
   end
 
   private
