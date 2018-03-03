@@ -1,5 +1,4 @@
 <ul class="navbar-nav ml-auto float-right">
-
   <li class="nav-item">
     <%= link_to 'Blog', root_path, class: "nav-link #{yield(:blog_active)}" %>
   </li>
@@ -12,7 +11,7 @@
   <% if author_signed_in? %>
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle <%= yield(:author) %>" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Author
+        <%= current_author.display_name %>
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
         <%= link_to 'My posts', authors_posts_path, class: "dropdown-item" %>

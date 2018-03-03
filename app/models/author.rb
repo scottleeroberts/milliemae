@@ -16,6 +16,11 @@ class Author < ApplicationRecord
     "https://www.gravatar.com/avatar/#{gravatar_hash}"
   end
 
+  def display_name
+    return "Author" unless name.present?
+    name
+  end
+
   private
 
   def gravatar_hash
