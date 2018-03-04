@@ -1,0 +1,20 @@
+html
+  head
+    title
+      = yield(:page_title)
+      |  | MillieMae
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+  body
+    = render 'layouts/navbar'
+    .container class="#{controller_name} #{action_name}"
+      - if flash.any?
+        - flash.keys.each do |key|
+          .alert.alert-dismissible
+            button.close[type="button" data-dismiss="alert" aria-label="Close"]
+              span[aria-hidden="true"]
+                | ×
+            = flash[key]
+      = yield

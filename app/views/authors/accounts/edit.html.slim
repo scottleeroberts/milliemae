@@ -1,0 +1,47 @@
+.row
+  .col-md-6
+    = form_tag authors_account_path, method: :patch do
+      = fields_for :author do  |f|
+        |  <div class="card""> 
+        .card-block
+          .card-title
+            |  Basic Info 
+        ul.list-group.list-group-flush
+          li.list-group-item
+            = image_tag(current_author.gravatar_image_url)
+          li.list-group-item
+            .field
+              = f.label :name
+              = f.text_field :name, value: current_author.name, class: 'form-control'
+          li.list-group-item
+            .field
+              = f.label :email
+              = f.email_field :email, value: current_author.email, class: 'form-control'
+          li.list-group-item
+            .field
+              = f.label :bio
+              = f.text_area :bio, value: current_author.bio, class: 'form-control'
+          li.list-group-item
+            = f.submit "Update Account", class: 'btn btn-primary'
+.col-md-6
+  = form_tag authors_change_password_path, method: :patch do
+    = fields_for :author do  |f|
+      |  <div class="card""> 
+      .card-block
+        .card-title
+          |  Change Password 
+      ul.list-group.list-group-flush
+        li.list-group-item
+          .field
+            = f.label :current_password
+            = f.password_field :current_password, class: 'form-control'
+        li.list-group-item
+          .field
+            = f.label :new_password
+            = f.password_field :new_password, class: 'form-control'
+        li.list-group-item
+          .field
+            = f.label :new_password_confirmation
+            = f.password_field :new_password_confirmation, class: 'form-control'
+        li.list-group-item
+          = f.submit "Change Password", class: 'btn btn-warning'

@@ -21,6 +21,10 @@ gem 'jquery-rails'
 gem 'will_paginate', '~> 3.1.0'
 gem 'acts-as-taggable-on', '~> 5.0'
 
+gem 'slim-rails'
+gem 'bcrypt'
+gem 'erubis'
+
 group :development, :test do
   gem 'pry-rails'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

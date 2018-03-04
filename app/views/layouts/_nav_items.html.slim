@@ -1,0 +1,19 @@
+ul.navbar-nav.ml-auto.float-right
+  li.nav-item
+    = link_to 'Blog', root_path, class: "nav-link #{yield(:blog_active)}"
+  li.nav-item
+    = link_to 'About', about_path, class: "nav-link #{yield(:about_active)}"
+  li.nav-item
+    = link_to 'Contact', contact_path, class: "nav-link #{yield(:contact_active)}"
+  - if author_signed_in?
+    li.nav-item.dropdown.author-nav
+      = link_to "#", class: 'nav-link dropdown-toggle', id: 'navbarDropdownMenuLink', data: {toggle:'dropdown'}, aria: {haspopup: 'true', expanded: 'false'}  do
+        = image_tag(current_author.gravatar_image_url)
+        = current_author.display_name
+      .dropdown-menu[aria-labelledby="navbarDropdownMenuLink"]
+        = link_to 'My posts', authors_posts_path, class: "dropdown-item"
+        = link_to 'Account', edit_authors_account_path, class: "dropdown-item"
+        = link_to 'Logout', destroy_author_session_path, method: :delete, class: "dropdown-item"
+  - else
+    li.nav-item
+      = link_to 'Sign In', authors_posts_path, class: "nav-link #{yield(:author)}"
