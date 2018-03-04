@@ -1,4 +1,4 @@
-class Author < ApplicationRecord
+class Designer < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :registerable and :omniauthable
   devise :database_authenticatable,
@@ -17,7 +17,7 @@ class Author < ApplicationRecord
   end
 
   def display_name
-    return "Author" unless name.present?
+    return "Designer" unless name.present?
     name
   end
 

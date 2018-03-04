@@ -1,36 +1,36 @@
-class Authors::PostsController < AuthorController
+class Designers::PostsController < DesignerController
   before_action :set_post, only: [:show, :edit, :update, :destroy, :publish, :unpublish]
 
   def index
-    @posts = current_author.posts
+    @posts = current_designer.posts
   end
 
   def publish
     @post.publish
-    redirect_to authors_posts_url
+    redirect_to designers_posts_url
   end
 
   def unpublish
     @post.unpublish
-    redirect_to authors_posts_url
+    redirect_to designers_posts_url
   end
 
   def show
   end
 
   def new
-    @post = current_author.posts.new
+    @post = current_designer.posts.new
   end
 
   def edit
   end
 
   def create
-    @post = current_author.posts.new(post_params)
+    @post = current_designer.posts.new(post_params)
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to authors_post_path(@post), notice: 'Post was successfully created.' }
+        format.html { redirect_to designers_post_path(@post), notice: 'Post was successfully created.' }
       else
         format.html { render :new }
       end
@@ -40,7 +40,7 @@ class Authors::PostsController < AuthorController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to authors_post_path(@post), notice: 'Post was successfully updated.' }
+        format.html { redirect_to designers_post_path(@post), notice: 'Post was successfully updated.' }
       else
         format.html { render :edit }
       end
@@ -50,13 +50,13 @@ class Authors::PostsController < AuthorController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to authors_posts_url, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to designers_posts_url, notice: 'Post was successfully destroyed.' }
     end
   end
 
   private
   def set_post
-    @post = current_author.posts.friendly.find(params[:id])
+    @post = current_designer.posts.friendly.find(params[:id])
   end
 
   def post_params

@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180302182708) do
+ActiveRecord::Schema.define(version: 20180304210116) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "authors", force: :cascade do |t|
+  create_table "designers", force: :cascade do |t|
     t.string "name"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -30,8 +30,8 @@ ActiveRecord::Schema.define(version: 20180302182708) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "bio"
-    t.index ["email"], name: "index_authors_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_authors_on_reset_password_token", unique: true
+    t.index ["email"], name: "index_designers_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_designers_on_reset_password_token", unique: true
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -54,10 +54,10 @@ ActiveRecord::Schema.define(version: 20180302182708) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "banner_image_url"
-    t.integer "author_id"
+    t.integer "designer_id"
     t.boolean "published", default: false
     t.datetime "published_at"
-    t.index ["author_id"], name: "index_posts_on_author_id"
+    t.index ["designer_id"], name: "index_posts_on_designer_id"
     t.index ["slug"], name: "index_posts_on_slug", unique: true
   end
 

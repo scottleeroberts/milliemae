@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :authors
+  devise_for :designers
   root to: 'blog/posts#index'
 
-  namespace :authors do
+  namespace :designers do
     resource 'account', only: [:edit, :update]
     resource 'change_password', only: [:update]
     resources :posts do

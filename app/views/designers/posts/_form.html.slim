@@ -1,4 +1,4 @@
-= form_for([:authors, post], local: true) do |form|
+= form_for([:designers, post], local: true) do |form|
   - if post.errors.any?
     #error_explanation
       h2
@@ -44,7 +44,7 @@
     - if post.persisted?
       = link_to 'Show', @post
       |  | 
-    = link_to 'Back', authors_posts_path
+    = link_to 'Back', designers_posts_path
   .col-md-8
     .field
       = form.text_area :body, id: :post_body, class: 'quill_container'

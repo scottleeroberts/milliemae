@@ -1,31 +1,31 @@
 .row
   .col-md-6
-    = form_tag authors_account_path, method: :patch do
-      = fields_for :author do  |f|
+    = form_tag designers_account_path, method: :patch do
+      = fields_for :designer do  |f|
         |  <div class="card""> 
         .card-block
           .card-title
             |  Basic Info 
         ul.list-group.list-group-flush
           li.list-group-item
-            = image_tag(current_author.gravatar_image_url)
+            = image_tag(current_designer.gravatar_image_url)
           li.list-group-item
             .field
               = f.label :name
-              = f.text_field :name, value: current_author.name, class: 'form-control'
+              = f.text_field :name, value: current_designer.name, class: 'form-control'
           li.list-group-item
             .field
               = f.label :email
-              = f.email_field :email, value: current_author.email, class: 'form-control'
+              = f.email_field :email, value: current_designer.email, class: 'form-control'
           li.list-group-item
             .field
               = f.label :bio
-              = f.text_area :bio, value: current_author.bio, class: 'form-control'
+              = f.text_area :bio, value: current_designer.bio, class: 'form-control'
           li.list-group-item
             = f.submit "Update Account", class: 'btn btn-primary'
 .col-md-6
-  = form_tag authors_change_password_path, method: :patch do
-    = fields_for :author do  |f|
+  = form_tag designers_change_password_path, method: :patch do
+    = fields_for :designer do  |f|
       |  <div class="card""> 
       .card-block
         .card-title

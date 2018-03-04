@@ -1,0 +1,12 @@
+- provide(:page_title, @post.title)
+- provide(:designer, "active")
+div
+  = link_to 'Edit', edit_designers_post_path(@post), class: 'btn btn-sm btn-warning'
+  = link_to 'Remove', designers_post_path(@post), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger'
+.row
+  .col-md-10.col-lg-8.text-xs-center
+    h1
+      = @post.title
+    h6
+      | Feb 21, 2018 
+    = @post.body.html_safe
