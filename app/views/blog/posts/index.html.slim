@@ -2,5 +2,7 @@
 - provide(:blog_active, "active")
 .row
   = render @posts
-.apple_pagination
-  = will_paginate @posts, container: false
+
+- if @posts.count >= Post::PER_PAGE
+  .apple_pagination
+    = will_paginate @posts, container: false
