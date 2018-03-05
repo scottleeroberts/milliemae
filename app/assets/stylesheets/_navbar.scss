@@ -1,10 +1,14 @@
 .navbar {
     border-radius: 0;
     margin-bottom: 20px;
-    background-color: $primary-color !important;
+    padding: 4px;
+    background-color: white;
+    border: 1px solid  $lilac;
     .navbar-brand {
-        font-weight: bolder;
-        color: $accent-color;
+        padding: 0px;
+        font-family: 'Euphoria Script';
+        font-size: 30px;
+        color: $lilac;
         .light {
             font-weight: 300;
             color: $primary-color-text;
