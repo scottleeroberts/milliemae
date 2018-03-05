@@ -25,6 +25,8 @@ gem 'slim-rails'
 gem 'bcrypt'
 gem 'erubis'
 
+ gem 'material_icons'
+
 group :development, :test do
   gem 'pry-rails'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
