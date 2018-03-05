@@ -1,10 +1,27 @@
+$powder: #BFD8D2;
+$lilac: #D2BFD8;
+$lilac-light: #E8DFEB;
+$beigh: #D8D2BF;
+$peach: #FEDCD2;
+$warm: #DF744A;
+$lemon: #DCB239;
+
 $light-gray: #f7f7f9;
 
-$primary-color-dark:   #1976D2;
-$primary-color:        #2196F3;
+$primary-color-dark:   $lilac;
+$primary-color:        $lilac-light;
 $primary-color-light:  #BBDEFB;
 $primary-color-text:   #FFFFFF;
 $accent-color:         #CDDC39;
 $primary-text-color:   #212121;
 $secondary-text-color: #757575;
 $divider-color:        #BDBDBD;
+
+// $theme-colors: (
+//   primary: $lilac,
+//   secondary: $peach,
+//   success: $powder,
+//   info: $lilac,
+//   warning: $lemon,
+//   danger: $warm,
+// );

@@ -1,9 +1,9 @@
-/*
-*= require quill.snow
-*= require material_icons_unicode
-*/
-@import "bootstrap";
+
+@import "quill.snow";
+@import "material_icons_unicode";
 @import "colors";
+@import "bootstrap";
+
 @import "base";
 @import "navbar";
 @import "posts";
