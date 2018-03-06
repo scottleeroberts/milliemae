@@ -1,10 +1,9 @@
 - provide(:page_title, "All Posts")
 - provide(:designer, "active")
-.row
-  table.table.table-striped
-    tr
-      th[colspan="5"]
-        | Title
-      th
-        = link_to 'New Post', new_designers_post_path, class: 'btn btn-primary float-right'
+table.table.table-hover.table-sm
+    thead.thead-light
+      tr.d-flex
+        th.col-7 Your Designer Blog Posts
+        th.col-5
+          .float-right= link_to '+ New Post', new_designers_post_path, class: 'btn btn-primary float-right'
     = render @posts
