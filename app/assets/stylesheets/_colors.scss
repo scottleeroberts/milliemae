@@ -1,5 +1,6 @@
 $powder: #BFD8D2;
-$lilac: #D2BFD8;
+$powder-light: #BFD8D2;
+$lilac: #B4A4B9;
 $lilac-light: #E8DFEB;
 $beigh: #D8D2BF;
 $peach: #FEDCD2;
@@ -10,18 +11,18 @@ $light-gray: #f7f7f9;
 
 $primary-color-dark:   $lilac;
 $primary-color:        $lilac-light;
-$primary-color-light:  #BBDEFB;
+$primary-color-light:  $powder;
 $primary-color-text:   #FFFFFF;
 $accent-color:         #CDDC39;
 $primary-text-color:   #212121;
 $secondary-text-color: #757575;
 $divider-color:        #BDBDBD;
 
-// $theme-colors: (
-//   primary: $lilac,
-//   secondary: $peach,
-//   success: $powder,
-//   info: $lilac,
-//   warning: $lemon,
-//   danger: $warm,
-// );
+$theme-colors: (
+  primary: $lilac-light,
+  secondary: $peach,
+  success: $powder,
+  info: $lilac,
+  warning: $lemon,
+  danger: $warm,
+);

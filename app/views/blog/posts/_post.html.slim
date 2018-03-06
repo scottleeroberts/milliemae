@@ -1,10 +1,11 @@
 .col-sm-6.col-lg-4
-  .card
+  .card.h-140
     = link_to post do
       .card-topper style='background-image: url(#{image_path(post.banner_image_url)} )'
     .card-block
       h4.card-title
-        = link_to post.title, post
+        = link_to do
+          = truncate(post.title, length: 50)
       p.published-date
         = post.published_date
       .tags
@@ -16,4 +17,4 @@
         p.card-text
           = truncate(post.description, length: 120)
 
-      = link_to 'Read', post_path(id: post.friendly_id, anchor: 'disqus_thread'), class: 'btn btn-primary', :data=> { :disqus_identifier => post.slug }
+    = link_to 'Read', post_path(id: post.friendly_id, anchor: 'disqus_thread'), class: 'btn btn-primary read', :data=> { :disqus_identifier => post.slug }

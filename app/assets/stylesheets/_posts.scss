@@ -44,6 +44,12 @@
       }
     }
   }
+  .read{
+    width:50%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
 }
 
 .posts.edit, .posts.new {
