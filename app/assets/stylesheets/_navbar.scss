@@ -1,29 +1,33 @@
 .navbar {
-    border-radius: 0;
-    margin-bottom: 20px;
-    padding: 4px;
-    background-color: white;
-    border: 1px solid  $lilac;
-    .navbar-brand {
-        padding: 0px;
-        font-family: 'Euphoria Script';
-        font-size: 30px;
-        color: $lilac;
-        .light {
-            font-weight: 300;
-            color: $primary-color-text;
-        }
+  border-radius: 0;
+  margin-bottom: 20px;
+  padding: 4px;
+  background-color: white;
+  border: 1px solid  $lilac;
+  .navbar-brand {
+    padding: 0px;
+    font-family: 'Euphoria Script';
+    font-size: 30px;
+    color: $lilac;
+    .light {
+      font-weight: 300;
+      color: $primary-color-text;
     }
-    .navbar-toggler {
-        outline: none;
+  }
+  .navbar-toggler {
+    outline: none;
+  }
+  .nav-link {
+    color: $primary-color-light !important;
+    &.active {
+      color: $primary-color-text !important;
     }
-    .nav-link {
-      color: $primary-color-light !important;
-      &.active {
-        color: $primary-color-text !important;
-      }
+  }
+  .nav-item{
+    .dropdown-menu{
+      left: -65px;
     }
-    .nav-item.designer-nav {
+    &.designer-nav {
       img {
         height: 30px;
         width: 30px;
@@ -32,3 +36,4 @@
       }
     }
   }
+}

@@ -1,10 +1,8 @@
-nav.navbar.navbar-expand-lg.navbar-light.navbar-fixed-top
-  a.navbar-brand[href="/"]
+nav.navbar.navbar-expand-md.navbar-light.justify-content-center
+  a.navbar-brand.d-flex.w-50.mr-auto[href="/"]
     | Sew Twirly
-  button.navbar-toggler[type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"]
+  button.navbar-toggler[type="button" data-toggle="collapse" data-target="#navbarSupportedContent" ]
     span.navbar-toggler-icon
-  #navbarText.collapse.navbar-collapse.justify-content-end
+  #navbarSupportedContent.navbar-collapse.collapse.w-100
     = render 'layouts/nav_items'
 
-#navbarSupportedContent.collapse.navbar-collapse
-  = render 'layouts/nav_items'
