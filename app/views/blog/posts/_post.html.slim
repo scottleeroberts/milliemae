@@ -17,4 +17,4 @@
         p.card-text
           = truncate(post.description, length: 120)
 
-    = link_to 'Read', post_path(id: post.friendly_id, anchor: 'disqus_thread'), class: 'btn btn-primary read', :data=> { :disqus_identifier => post.slug }
+      .text-center= link_to 'Read', post_path(id: post.friendly_id, anchor: 'disqus_thread'), :data=> { :disqus_identifier => post.slug }
