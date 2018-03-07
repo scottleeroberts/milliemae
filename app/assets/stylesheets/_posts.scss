@@ -29,6 +29,10 @@
           text-decoration: none;
         }
       }
+      .info{
+        width: 100%;
+        display: inline-block;
+      }
       .published-date {
         font-size: 0.8rem;
         color:  $secondary-text-color;
