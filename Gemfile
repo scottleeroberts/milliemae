@@ -25,7 +25,9 @@ gem 'slim-rails'
 gem 'bcrypt'
 gem 'erubis'
 
- gem 'material_icons'
+gem 'material_icons'
+
+gem 'carrierwave', '~> 1.0'
 
 group :development, :test do
   gem 'pry-rails'
