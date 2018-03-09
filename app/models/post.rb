@@ -1,6 +1,9 @@
 class Post < ApplicationRecord
   extend FriendlyId
 
+  mount_uploader :flatlay_image, ImageUploader
+  mount_uploader :showcase_image, ImageUploader
+
   PER_PAGE = 3
 
   acts_as_taggable
