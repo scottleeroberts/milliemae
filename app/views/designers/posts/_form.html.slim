@@ -1,4 +1,4 @@
-= form_for([:designers, post], local: true) do |form|
+= form_for([:designers, post], local: true, multipart: true) do |form|
   - if post.errors.any?
     #error_explanation
       h2
@@ -10,7 +10,7 @@
             = message
   .row
     .col-md-4
-      |  <div class="card""> 
+      |  <div class="card"">
       .card-body
         - if post.new_record?
           h4.card-title
@@ -28,6 +28,14 @@
             = form.text_field :title, id: :post_title, class: 'form-control'
         li.list-group-item
           .field
+            = form.label :flatlay_image
+            = form.file_field :flatlay_image, id: :post_flatlay_image, class: 'form-control'
+        li.list-group-item
+          .field
+            = form.label :showcase_image
+            = form.file_field :showcase_image, id: :post_showcase_image, class: 'form-control'
+        li.list-group-item
+          .field
             = form.label :banner_image_url
             = form.text_field :banner_image_url, id: :banner_image_url, class: 'form-control'
         li.list-group-item
@@ -43,7 +51,7 @@
             = form.submit "Save Blog Post", class: 'btn btn-success btn-block'
     - if post.persisted?
       = link_to 'Show', @post
-      |  | 
+      |  |
     = link_to 'Back', designers_posts_path
   .col-md-8
     .field

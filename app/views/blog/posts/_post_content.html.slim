@@ -5,4 +5,16 @@
   h6
     .text-center= post.published_date
 .post-body
-  = post.body.html_safe
+
+  .post-images
+    -if @post.flatlay_image.url.present? && @post.showcase_image.url.present?
+      .col-md-6
+        = image_tag(@post.flatlay_image.url.to_s)
+      .col-md-6
+        = image_tag(@post.showcase_image.url.to_s)
+    -else
+      .col-md-6
+        = image_tag(@post.showcase_image.url.to_s)
+        = image_tag(@post.flatlay_image.url.to_s)
+  .body
+    = post.body.html_safe

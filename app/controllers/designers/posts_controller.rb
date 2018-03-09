@@ -60,6 +60,6 @@ class Designers::PostsController < DesignerController
   end
 
   def post_params
-    params.require(:post).permit(:title, :body, :description, :banner_image_url, :tag_list)
+    params.require(:post).permit(:title, :body, :description, :banner_image_url, :tag_list, :flatlay_image, :showcase_image)
   end
 end
