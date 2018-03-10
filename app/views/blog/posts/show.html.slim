@@ -1,8 +1,28 @@
 - provide(:page_title, @post.title)
 - provide(:blog_active, "active")
 
+article.flatlay
+  .row
+    .col-md-8.col-xs-12.no-padding
+      =image_tag(@post.flatlay_image.url.to_s, class: 'img-fluid')
+    .col-md-4.col-xs-12
+      aside
+        h5.title= @post.title
+        .published-date= @post.published_date
+        .tags
+          - @post.tags.map do |tag|
+            .badge.badge-info =tag.name
+  .row
+    article.post-body
+      = image_tag(@post.showcase_image.url.to_s, class: "img-fluid")
+      section
+        = @post.body.html_safe
+
 .row
-  .col-md-10.offset-md-1
-    = render "post_content", post: @post
+  section.designer-bio
     = render "designer_bio", post: @post
-    = render 'layouts/disqus'
+
+.row
+  section.comments
+    .col-md-10.offset-md-1
+      = render 'layouts/disqus'

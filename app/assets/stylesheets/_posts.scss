@@ -6,9 +6,6 @@
     height: 400px;
     margin-bottom: 20px;
     background-color: white;
-    .badge{
-      margin: 3px;
-    }
     a:hover{
       text-decoration: none;
       .badge{
@@ -79,26 +76,74 @@
 }
 
 .posts.show {
+  article.flatlay{
+    .row{
+      border: 1px $primary-color;
+      border-radius: 20px;
+      background: $primary-color;
+      padding: 0px;
+      margin: 0px;
+      margin-bottom:20px;
+      &:child{
+        padding: 0px;
+      }
+    }
+
+    img{
+      max-width: 100%;
+      height: auto
+    }
+
+    aside{
+      padding-top: 20px;
+    }
+  }
+
+  article.post-body{
+    section{
+      padding: 20px;
+    }
+
+    img{
+      float: right;
+      min-width: 300px;
+      height: auto;
+    }
+  }
+
   .designer-bio {
+    width: 100%;
     background-color: white;
     padding: 15px 45px;
     margin: 30px 0;
     img {
       border-radius: 50%;
     }
+
     img, h4 {
       margin-bottom: 10px;
     }
+
     h4 {
       font-weight: bold;
       font-size: 22px;
     }
+
     h6 {
       font-weight: 300;
       font-size: 14px
     }
   }
 }
+
+.published-date {
+  font-size: 0.8rem;
+  color:  $secondary-text-color;
+  font-weight: 300;
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+}
+
 
 @media screen and (min-width: 34em) {
   .posts.index .card {
