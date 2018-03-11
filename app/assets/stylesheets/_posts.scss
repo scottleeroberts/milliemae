@@ -78,6 +78,7 @@
 .posts.show {
   article.flatlay{
     .row{
+      box-shadow: 0 8px 16px -6px $lilac;
       border: 1px $primary-color;
       border-radius: 20px;
       background: $primary-color;
