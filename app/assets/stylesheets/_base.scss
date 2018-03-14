@@ -27,3 +27,8 @@ p, p span {
 .badge{
   margin: 3px;
 }
+
+a { color: $powder; }
+.btn{
+  a { color: white !important; }
+}
