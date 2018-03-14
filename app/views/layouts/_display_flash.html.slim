@@ -1,0 +1,8 @@
+#flash
+  - if flash.any?
+    - flash.keys.each do |key|
+      .alert.alert-dismissible
+        button.close[type="button" data-dismiss="alert" aria-label="Close"]
+          span[aria-hidden="true"]
+            | ×
+        = flash[key]
