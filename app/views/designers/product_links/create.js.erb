@@ -1,0 +1,4 @@
+$("#flash").html("<%=j(render 'layouts/display_flash', flash: flash)%>");
+$(".product-links").append("<%=j(render 'product_link', product_link: @product_link)%>");
+$("#new_product_link")[0].reset();
+

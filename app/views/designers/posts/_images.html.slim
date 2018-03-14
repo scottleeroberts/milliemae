@@ -1,0 +1,19 @@
+= form_for([:designers, post], local: true, multipart: true) do |form|
+  .card
+    .card-body
+      h4.card-title
+        b Adding images:
+        span.thin-text
+          =<> post.title
+    .card-text
+      ul.list-group.list-group-flush
+        li.list-group-item
+          .field
+            = form.label :flatlay_image
+            = form.file_field :flatlay_image, id: :post_flatlay_image, class: 'form-control'
+        li.list-group-item
+          .field
+            = form.label :showcase_image
+            = form.file_field :showcase_image, id: :post_showcase_image, class: 'form-control'
+        .actions.float-right
+          = form.submit "Save Blog Post", class: 'btn btn-danger'
