@@ -12,14 +12,15 @@ class Post < ApplicationRecord
 
   belongs_to :designer
 
+  has_many :product_links
+
+  validates_presence_of :title
+
   scope :most_recent, -> { order(published_at: :desc) }
   scope :published, -> { where(published: true) }
   scope :recent_paginated, -> (page) { most_recent.paginate(page: page, per_page: PER_PAGE) }
   scope :with_tag, -> (tag) { tagged_with(tag) if tag.present? }
-
-  scope :list_for, -> (page, tag) do
-    recent_paginated(page).with_tag(tag)
-  end
+  scope :list_for, -> (page, tag) { recent_paginated(page).with_tag(tag) }
 
   def should_generate_new_friendly_id?
     title_changed?
