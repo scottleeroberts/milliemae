@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180308021942) do
+ActiveRecord::Schema.define(version: 20180312014636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,12 @@ ActiveRecord::Schema.define(version: 20180308021942) do
     t.string "showcase_image"
     t.index ["designer_id"], name: "index_posts_on_designer_id"
     t.index ["slug"], name: "index_posts_on_slug", unique: true
+  end
+
+  create_table "product_links", force: :cascade do |t|
+    t.integer "post_id"
+    t.string "description"
+    t.string "url"
   end
 
   create_table "taggings", force: :cascade do |t|
