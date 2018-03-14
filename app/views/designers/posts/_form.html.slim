@@ -1,59 +1,18 @@
-= form_for([:designers, post], local: true, multipart: true) do |form|
-  - if post.errors.any?
-    #error_explanation
-      h2
-        = pluralize(post.errors.count, "error")
-        |  prohibited this post from being saved:
-      ul
-        - post.errors.full_messages.each do |message|
-          li
-            = message
-  .row
-    .col-md-4
-      |  <div class="card"">
-      .card-body
-        - if post.new_record?
-          h4.card-title
-            | New post
-        - else
-          h4.card-title
-            b
-              | Edit
-            span.thin-text
-              = post.title
-      ul.list-group.list-group-flush
-        li.list-group-item
-          .field
-            = form.label :title
-            = form.text_field :title, id: :post_title, class: 'form-control'
-        li.list-group-item
-          .field
-            = form.label :flatlay_image
-            = form.file_field :flatlay_image, id: :post_flatlay_image, class: 'form-control'
-        li.list-group-item
-          .field
-            = form.label :showcase_image
-            = form.file_field :showcase_image, id: :post_showcase_image, class: 'form-control'
-        li.list-group-item
-          .field
-            = form.label :banner_image_url
-            = form.text_field :banner_image_url, id: :banner_image_url, class: 'form-control'
-        li.list-group-item
-          .field
-            = form.label :description
-            = form.text_area :description, id: :post_description, class: 'form-control'
-        li.list-group-item
-          .field
-            = form.label 'Tags'
-            = form.text_area :tag_list, id: :tag_list, class: 'form-control'
-        li.list-group-item
-          .actions
-            = form.submit "Save Blog Post", class: 'btn btn-success btn-block'
-    - if post.persisted?
-      = link_to 'Show', @post
-      |  |
-    = link_to 'Back', designers_posts_path
-  .col-md-8
-    .field
-      = form.text_area :body, id: :post_body, class: 'quill_container'
-  .row
+nav
+  #nav-tab.nav.nav-pills srole="tablist"
+    a#nav-post-tab.nav-item.nav-link.active aria-controls="nav-post" aria-selected="true" data-toggle="tab" href="#nav-post" role="tab"
+      | 1. Edit Post
+    - if @post.persisted?
+      a#nav-product-links-tab.nav-item.nav-link aria-controls="nav-product-links" aria-selected="false" data-toggle="tab" href="#nav-product-links" role="tab"
+        | 2. Product links
+    - if @post.persisted?
+      a#nav-images-tab.nav-item.nav-link aria-controls="nav-product-links" aria-selected="false" data-toggle="tab" href="#nav-images" role="tab"
+        | 3. Images
+
+#nav-tabContent.tab-content
+  #nav-images.tab-pane.fade aria-labelledby="nav-product-links-tab" role="tabpanel"
+    = render "designers/posts/images", post: @post
+  #nav-product-links.tab-pane.fade aria-labelledby="nav-product-links-tab" role="tabpanel"
+    = render "designers/posts/product_links", post: @post
+  #nav-post.tab-pane.fade.show.active aria-labelledby="nav-post-tab" role="tabpanel"
+    = render "designers/posts/basic_post", post: @post

@@ -49,9 +49,15 @@
 }
 
 .posts.edit, .posts.new {
+  nav{
+    padding-bottom: 5px;
+  }
   .card {
     .card-block {
       background-color: $light-gray;
+    }
+    .card-body{
+      background-color: $primary-color;
     }
     .card-title {
       margin-bottom: 0;
@@ -73,6 +79,19 @@
       }
     }
   }
+  .ql-container{
+    overflow-y: visible;
+    max-height: 720px;
+  }
+  .product-links{
+    padding-bottom: 15px;
+  }
+
+  .product-links{
+    background: white;
+    margin: 15px;
+  }
+
 }
 
 .posts.show {
@@ -107,7 +126,7 @@
 
     img{
       float: right;
-      min-width: 300px;
+      max-width: 50%;
       height: auto;
     }
   }

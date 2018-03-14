@@ -1,14 +1,14 @@
 tbody
-    tr.d-flex
-      td.col-md-7.float-right
-        = post.title
-      - if post.published?
-        td
-          = link_to 'Unpublish', unpublish_designers_post_path(post), method: :put, class: 'btn btn-sm btn-primary'
-      - else
-        td
-          = link_to 'publish', publish_designers_post_path(post), method: :put, class: 'btn btn-sm btn-success'
+  tr.d-flex
+    td.col-md-7.float-right
+      = post.title
+    - if post.published?
       td
-        = link_to 'Edit', edit_designers_post_path(post), class: 'btn btn-sm btn-warning'
+        = link_to 'Unpublish', unpublish_designers_post_path(post), method: :put, class: 'btn btn-sm btn-primary'
+    - else
       td
-        = link_to 'Remove', designers_post_path(post), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger'
+        = link_to 'publish', publish_designers_post_path(post), method: :put, class: 'btn btn-sm btn-success'
+    td
+      = link_to 'Edit', edit_designers_post_path(post), class: 'btn btn-sm btn-warning'
+    td
+      = link_to 'Remove', designers_post_path(post), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger'
