@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resource 'account', only: [:edit, :update]
     resource 'change_password', only: [:update]
     resources :posts do
+      resources :product_links
       put 'publish' => 'posts#publish', on: :member
       put 'unpublish' => 'posts#unpublish', on: :member
     end
