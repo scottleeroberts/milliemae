@@ -9,7 +9,7 @@
             = truncate(post.title, length: 50)
         .row
           .float-left
-            .published-date= post.published_date
+            .published= post.published_date
           .float-right.ml-auto
             => link_to post do
               i.fa.fa-comment

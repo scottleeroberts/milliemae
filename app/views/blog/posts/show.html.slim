@@ -8,16 +8,19 @@ article.flatlay
     .col-md-4.col-xs-12
       aside
         h5.title= @post.title
-        .published-date= @post.published_date
+        .published= @post.published_date
         .tags
           - @post.tags.map do |tag|
             .badge.badge-info =tag.name
-        ul.product-links
-          - @post.product_links.each do |product_link|
-            li
-              = link_to product_link.url do
-                .fa.fa-tag
-                  = product_link.description
+        br
+        .product-links
+          ul
+            h4 What you need:
+            - @post.product_links.each do |product_link|
+              li
+                = link_to product_link.url do
+                  .fa.fa-tag
+                    = product_link.description
 
   .row
     article.post-body

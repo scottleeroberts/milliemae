@@ -32,13 +32,6 @@
         width: 100%;
         display: inline-block;
       }
-      .published-date {
-        font-size: 0.8rem;
-        color:  $secondary-text-color;
-        font-weight: 300;
-        margin-top: 0.3rem;
-        margin-bottom: 0.3rem;
-      }
       .card-text {
         font-size: 0.9rem;
         color: black;
@@ -117,10 +110,23 @@
     aside{
       padding-top: 20px;
     }
-    ul{
-      list-style-type: none;
+
+    .product-links{
+      padding-top: 20px;
+      padding-bottom: 20px;
+      border: 1px $secondary-text-color;
+      background: $lilac;
+      border-radius: 5%;
+
+      ul{
+        list-style-type: none;
+        a{
+          color:  white;
+        }
+      }
     }
   }
+
   article.post-body{
     section{
       padding: 20px;
@@ -158,7 +164,7 @@
   }
 }
 
-.published-date {
+.published {
   font-size: 0.8rem;
   color:  $secondary-text-color;
   font-weight: 300;
