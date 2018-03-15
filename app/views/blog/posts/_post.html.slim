@@ -3,23 +3,25 @@
     = link_to post do
       .card-topper style='background-image: url(#{image_path(post.banner_image_url)} )'
     .card-block
-      h4.card-title
-        = link_to post do
-          = truncate(post.title, length: 50)
-        .float-left
-          .published-date= post.published_date
-        .float-right
-          => link_to post do
-            i.fa.fa-comment
-          = link_to post_path(id: post.friendly_id, anchor: 'disqus_thread'), :data=> { :disqus_identifier => post.slug } do
-            | Comments
-      .tags
-        - post.tags.map do |tag|
-          = link_to posts_path(tag:  tag.name) do
-            .badge.badge-info
-              =tag.name
-      = link_to post do
-        p.card-text
-          = truncate(post.description, length: 120)
+      .col-12
+        h1.card-title
+          = link_to post do
+            = truncate(post.title, length: 50)
+        .row
+          .float-left
+            .published-date= post.published_date
+          .float-right.ml-auto
+            => link_to post do
+              i.fa.fa-comment
+            = link_to post_path(id: post.friendly_id, anchor: 'disqus_thread'), :data=> { :disqus_identifier => post.slug } do
+              | Comments
+        .row.tags
+          - post.tags.map do |tag|
+            = link_to posts_path(tag:  tag.name) do
+              .badge.badge-info
+                =tag.name
 
-
+        .row
+          = link_to post do
+            p.card-text
+              = truncate(post.description, length: 120)
