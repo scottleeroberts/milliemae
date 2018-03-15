@@ -12,28 +12,12 @@ article.flatlay
         .tags
           - @post.tags.map do |tag|
             .badge.badge-info =tag.name
-        .product-links
-          .container.border
-            br
-            =link_to '#' do
-              .fa.fa-tag.text-dark
-              .font-italic.text-muted.d-inline Really Pretty Fabric
-            br
-            =link_to '#' do
-              .fa.fa-tag.text-dark
-              .font-italic.text-muted.d-inline Cute Pattern
-            br
-            =link_to '#' do
-              .fa.fa-tag.text-dark
-              .font-italic.text-muted.d-inline Frilly Ribon
-            br
-            =link_to '#' do
-              .fa.fa-tag.text-dark
-              .font-italic.text-muted.d-inline Cutty Scissors
-            br
-            =link_to '#' do
-              .fa.fa-tag.text-dark
-              .font-italic.text-muted.d-inline Pink Thread!
+        ul.product-links
+          - @post.product_links.each do |product_link|
+            li
+              = link_to product_link.url do
+                .fa.fa-tag
+                  = product_link.description
 
   .row
     article.post-body
