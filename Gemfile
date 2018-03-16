@@ -25,6 +25,8 @@ gem 'slim-rails'
 gem 'bcrypt'
 gem 'erubis'
 
+gem 'fog-aws'
+
 gem 'material_icons'
 
 gem 'carrierwave', '~> 1.0'
