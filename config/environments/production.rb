@@ -30,9 +30,7 @@ Rails.application.configure do
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
 
-  config.middleware.use(Rack::Tracker) do
-    handler :google_analytics, { tracker: ENV['GOOGLE-TRACKING-ID'] }
-  end
+  config.google_tracking_id = ENV['GOOGLE-TRACKING-ID']
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 

@@ -151,10 +151,6 @@ GEM
     rack (2.0.4)
     rack-test (0.8.3)
       rack (>= 1.0, < 3)
-    rack-tracker (1.5.0)
-      activesupport (>= 3.0)
-      rack (>= 1.4)
-      tilt (>= 1.4)
     rails (5.1.5)
       actioncable (= 5.1.5)
       actionmailer (= 5.1.5)
@@ -267,7 +263,6 @@ DEPENDENCIES
   pry-rails
   puma (~> 3.7)
   quilljs-rails
-  rack-tracker
   rails (~> 5.1.5)
   sass-rails (~> 5.0)
   selenium-webdriver
