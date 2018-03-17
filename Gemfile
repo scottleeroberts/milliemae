@@ -29,6 +29,8 @@ gem 'fog-aws'
 
 gem 'carrierwave', '~> 1.0'
 
+gem 'rack-tracker'
+
 group :development, :test do
   gem 'pry-rails'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
