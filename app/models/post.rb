@@ -4,7 +4,7 @@ class Post < ApplicationRecord
   mount_uploader :flatlay_image, ImageUploader
   mount_uploader :showcase_image, ImageUploader
 
-  PER_PAGE = 3
+  PER_PAGE = 6
 
   acts_as_taggable
 
