@@ -27,8 +27,6 @@ gem 'erubis'
 
 gem 'fog-aws'
 
-gem 'material_icons'
-
 gem 'carrierwave', '~> 1.0'
 
 group :development, :test do
