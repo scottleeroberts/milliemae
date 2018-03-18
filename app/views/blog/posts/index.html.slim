@@ -1,5 +1,15 @@
 - provide(:page_title, "All Posts")
 - provide(:blog_active, "active")
+
+- if @filter_tag.present?
+  .row
+    .ml-auto
+      = link_to posts_path, class:'btn btn-primary btn-sm' do
+        .fa.fa-ban.text-danger
+        =<> "Clear Filters:"
+
+        .badge.badge-info
+          = @filter_tag
 .row
   = render @posts
 
