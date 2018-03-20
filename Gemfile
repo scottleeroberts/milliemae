@@ -22,12 +22,13 @@ gem 'will_paginate', '~> 3.1.0'
 gem 'acts-as-taggable-on', '~> 5.0'
 
 gem 'slim-rails'
+
 gem 'bcrypt'
 gem 'erubis'
 
 gem 'fog-aws'
-
 gem 'carrierwave', '~> 1.0'
+gem "mini_magick"
 
 group :development, :test do
   gem 'pry-rails'
