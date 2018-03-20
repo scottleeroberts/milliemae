@@ -18,7 +18,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   process resize_to_fit: [1200, 800]
 
   version :mini do
-    process resize_to_fit: [200, 200]
+    process resize_to_fill: [200, 200]
   end
 
   def extension_whitelist
