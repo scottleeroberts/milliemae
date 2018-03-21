@@ -1,8 +1,8 @@
 class Post < ApplicationRecord
   extend FriendlyId
 
-  mount_uploader :flatlay_image, ImageUploader
-  mount_uploader :showcase_image, ImageUploader
+  mount_uploader :flatlay_image, FlatlayUploader
+  mount_uploader :showcase_image, ShowcaseUploader
 
   PER_PAGE = 6
 
