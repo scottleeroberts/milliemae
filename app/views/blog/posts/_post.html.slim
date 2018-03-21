@@ -1,7 +1,7 @@
 .col-sm-6.col-lg-4
   .card.h-140
     = link_to post do
-      .card-topper style='background-image: url(#{image_path(post.banner_image_url)} )'
+      .card-topper style='background-image: url(#{image_path(post.showcase_image_url(:mini))} )'
     .card-block
       .col-12
         h1.card-title
