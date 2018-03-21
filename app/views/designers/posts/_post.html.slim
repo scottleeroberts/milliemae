@@ -1,14 +1,23 @@
 tbody
   tr.d-flex
-    td.col-md-7.float-right
-      = post.title
-    - if post.published?
-      td
-        = link_to 'Unpublish', unpublish_designers_post_path(post), method: :put, class: 'btn btn-sm btn-primary'
-    - else
-      td
-        = link_to 'publish', publish_designers_post_path(post), method: :put, class: 'btn btn-sm btn-success'
-    td
-      = link_to 'Edit', edit_designers_post_path(post), class: 'btn btn-sm btn-warning'
-    td
-      = link_to 'Remove', designers_post_path(post), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger'
+    td.col-md-4
+      - if post.showcase_image_url(:thumb).present?
+        = image_tag(image_path(post.showcase_image_url(:thumb)))
+      - else
+        | NO IMAGE
+    td.col-md-8
+      .container-fluid
+        .row
+          = post.title
+        br
+        br
+        .row.align-bottom
+          .col-md-2
+            - if post.published?
+                = link_to 'Unpublish', unpublish_designers_post_path(post), method: :put, class: 'btn btn-sm btn-primary'
+            - else
+                = link_to 'publish', publish_designers_post_path(post), method: :put, class: 'btn btn-sm btn-success'
+          .col-md-2
+            = link_to 'Edit', edit_designers_post_path(post), class: 'btn btn-sm btn-warning'
+          .col-md-2
+            = link_to 'Remove', designers_post_path(post), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger'
