@@ -56,6 +56,16 @@
       margin-bottom: 0;
       font-size: 18px;
     }
+    .card-text{
+      .form-control{
+        margin-bottom: 5px !important;
+      }
+      #flatlay-for-selection{
+        img{
+          width: 100%;
+        }
+      }
+    }
     .list-group-item {
       padding: 10px;
       border-left: 0;
@@ -77,6 +87,7 @@
     max-height: 720px;
   }
   .product-links{
+    padding-top: 15px;
     padding-bottom: 15px;
   }
 
