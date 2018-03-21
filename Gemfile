@@ -30,6 +30,8 @@ gem 'fog-aws'
 gem 'carrierwave', '~> 1.0'
 gem "mini_magick"
 
+gem 'jcrop-rails-v2'
+
 group :development, :test do
   gem 'pry-rails'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
