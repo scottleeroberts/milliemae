@@ -13,7 +13,10 @@
         .row
           .col-md-7
             #flatlay-for-selection
-              = image_tag(image_path(post.showcase_image_url()))
+              - if post.showcase_image_url().present?
+                = image_tag(image_path(post.showcase_image_url()))
+              - else
+                | NO IMAGE
           .col-md-4
             #collapseProductLinks.collapse
               = form_for([:designers, post, ProductLink.new], remote: true, id: 'product-links-form') do |form|
