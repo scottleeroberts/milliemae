@@ -47,7 +47,7 @@ class Designers::ProductLinksController < DesignerController
   end
 
   def product_link_params
-    params.require(:product_link).permit(:url, :description)
+    params.require(:product_link).permit(:url, :description, :x1, :y1, :x2, :y2)
   end
 end
 

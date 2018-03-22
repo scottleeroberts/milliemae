@@ -18,6 +18,10 @@
             | NO IMAGE
         #collapseProductLinks.collapse
           = form_for([:designers, post, ProductLink.new], remote: true, id: 'product-links-form') do |form|
+            = form.hidden_field :x1, id: 'form-x1'
+            = form.hidden_field :y1, id: 'form-y1'
+            = form.hidden_field :x2, id: 'form-x2'
+            = form.hidden_field :y2, id: 'form-y2'
             .form-row
               = form.text_field :description, placeholder: "Enter description",  class: 'form-control'
             .form-row
