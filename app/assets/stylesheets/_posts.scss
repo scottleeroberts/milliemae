@@ -60,10 +60,12 @@
       .form-control{
         margin-bottom: 5px !important;
       }
-      #flatlay-for-selection{
-        img{
-          width: 100%;
-        }
+      #flatlay-selection{
+          // max-width:none;
+          max-width: 100%;
+      }
+      #collapseProductLinks{
+        width:300px;
       }
     }
     .list-group-item {

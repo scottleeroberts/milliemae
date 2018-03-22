@@ -1,33 +1,33 @@
-  .card
-    .card-body
-      h4.card-title
-        b Adding product links:
-        span.thin-text
-          =<> post.title
-        button.btn.btn-success.float-right aria-controls="collapseProductLinks" aria-expanded="false" data-target="#collapseProductLinks" data-toggle="collapse" type="button"
-          =link_to "javascript:;" do
-            .fa.fa-plus
+.card
+  .card-body
+    h4.card-title
+      b Adding product links:
+      span.thin-text
+        =<> post.title
+      button.btn.btn-success.float-right id='toggle-product-link-form' aria-controls="collapseProductLinks" aria-expanded="false" data-target="#collapseProductLinks" data-toggle="collapse" type="button"
+        =link_to "javascript:;" do
+          .fa.fa-plus
 
-    .card-text
-      .container
-        .row
-          .col-md-7
-            #flatlay-for-selection
-              - if post.showcase_image_url().present?
-                = image_tag(image_path(post.showcase_image_url()))
-              - else
-                | NO IMAGE
-          .col-md-4
-            #collapseProductLinks.collapse
-              = form_for([:designers, post, ProductLink.new], remote: true, id: 'product-links-form') do |form|
-                .form-row
-                  = form.text_field :description, placeholder: "Enter description",  class: 'form-control'
-                .form-row
-                  = form.text_field :url, placeholder: "Enter product URL",  class: 'form-control'
-                button.btn.btn-success type="submit"
-                  i.fa.fa-check
-                  | Add product
-            .product-links
-              - @post.product_links.each do |product_link|
-                =render 'designers/product_links/product_link', product_link: product_link
+  .card-text
+    .container
+      .row
+        .flatlay-selection
+          - if post.showcase_image_url().present?
+            = image_tag( image_path(post.showcase_image_url()), id: 'flatlay-selection')
+          - else
+            | NO IMAGE
+        #collapseProductLinks.collapse
+          = form_for([:designers, post, ProductLink.new], remote: true, id: 'product-links-form') do |form|
+            .form-row
+              = form.text_field :description, placeholder: "Enter description",  class: 'form-control'
+            .form-row
+              = form.text_field :url, placeholder: "Enter product URL",  class: 'form-control'
+            button.btn.btn-success type="submit"
+              i.fa.fa-check
+              | Add product
+        .product-links
+          h4 Product Links in Layflat:
+          .list
+            - @post.product_links.each do |product_link|
+              =render 'designers/product_links/product_link', product_link: product_link
 
