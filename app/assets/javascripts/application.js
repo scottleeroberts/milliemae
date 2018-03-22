@@ -18,5 +18,5 @@
 //= require bootstrap-sprockets
 //= require quill.min
 //= require quill.global
-//= require jquery.Jcrop
+//= require jquery.Jcrop.min
 //= require_tree .
