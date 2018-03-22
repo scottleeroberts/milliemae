@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180321001427) do
+ActiveRecord::Schema.define(version: 20180322103551) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,10 @@ ActiveRecord::Schema.define(version: 20180321001427) do
     t.integer "post_id"
     t.string "description"
     t.string "url"
+    t.integer "x1"
+    t.integer "y1"
+    t.integer "x2"
+    t.integer "y2"
   end
 
   create_table "taggings", force: :cascade do |t|
