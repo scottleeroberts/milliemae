@@ -10,6 +10,6 @@ showCoords = (c) ->
   $('#form-y1').val c.y
   $('#form-x2').val c.x2
   $('#form-y2').val c.y2
-  # $('#w').val c.w
-  # $('#h').val c.h
+  $('#form-width').val c.w
+  $('#form-height').val c.h
   return
