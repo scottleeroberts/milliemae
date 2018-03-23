@@ -13,7 +13,7 @@
       .row
         .flatlay-selection
           - if post.showcase_image_url().present?
-            = image_tag( image_path(post.showcase_image_url()), id: 'flatlay-selection')
+            = image_tag( image_path(post.flatlay_image_url()), id: 'flatlay-selection')
           - else
             | NO IMAGE
         #collapseProductLinks.collapse
