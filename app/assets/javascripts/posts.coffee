@@ -13,3 +13,4 @@ showCoords = (c) ->
   $('#form-width').val c.w
   $('#form-height').val c.h
   return
+
