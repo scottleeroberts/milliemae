@@ -102,6 +102,13 @@
 
 .posts.show {
   article.flatlay{
+    aside{
+      padding-top: 20px;
+    }
+    img{
+      max-width: 100%;
+      height: auto
+    }
     .row{
       box-shadow: 0 8px 16px -6px $lilac;
       border: 1px $primary-color;
@@ -115,33 +122,40 @@
       }
     }
 
-    img{
-      max-width: 100%;
-      height: auto
-    }
-
-    .product-selection-highlight{
+    .flatlay-highlight{
+      opacity: 0.2;
       background: white;
-      opacity: 0.2; /* Real browsers */
-      filter: alpha(opacity = 60); /* MSIE */
       z-index: 9;
       display: block;
       position: absolute;
       border: 2px dashed;
     }
 
-    aside{
-      padding-top: 20px;
+    .url-highlight{
+      background: $lilac-light;
+      z-index: 9;
+      a{
+        color: black !important;
+      }
+    }
+
+    .product-link-url{
+      padding-left: 10px;
     }
 
     .product-links{
-      padding-top: 20px;
-      padding-bottom: 20px;
+      border-radius:  10px;
+      padding-top: 10px;
+      padding-bottom: 10px;
       border: 1px $secondary-text-color;
       background: $lilac;
-      border-radius: 5%;
+      margin-bottom: 10px;
 
       ul{
+        h5{
+          padding-left: 5px;
+        }
+        padding-left: 0px;
         list-style-type: none;
         a{
           color:  white;
@@ -167,6 +181,7 @@
     background-color: white;
     padding: 15px 45px;
     margin: 30px 0;
+
     img {
       border-radius: 50%;
     }

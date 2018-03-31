@@ -1,3 +1,9 @@
+jQuery.fn.visible = ->
+  @css 'opacity', '0.2'
+
+jQuery.fn.invisible = ->
+  @css 'opacity', '0.0'
+
 $(document).on 'turbolinks:load', ->
   $('#flatlay-selection').Jcrop({
     onChange: showCoords,
@@ -5,7 +11,10 @@ $(document).on 'turbolinks:load', ->
     boxWidth: 750
   })
 
-  $('.pl_link').hover(showSelectionBox, hideSelectionBox)
+  setupFlatlaySelections()
+
+  $('.product-link-url').hover(showSelectionBox, hideSelectionBox)
+  $('.flatlay-selection').hover(showUrlHighlight, hideUrlHighlight)
 
 showCoords = (c) ->
   $('#form-x1').val c.x
@@ -15,21 +24,44 @@ showCoords = (c) ->
   $('#form-width').val c.w
   $('#form-height').val c.h
 
+setupFlatlaySelections = ->
+  $('.product-link-url').each( ->
+    flatlay_selection_id = $(@).data('productLinkId')
+    flatlay_selection = $(".flatlay-selection[data-product-link-id='" + flatlay_selection_id + "']")
+    left = flatlay_selection.data('left')
+    top = flatlay_selection.data('top')
+    width = flatlay_selection.data('width')
+    height = flatlay_selection.data('height')
+
+    flatlay_selection.invisible()
+    flatlay_selection.css('left', "#{left}%")
+    flatlay_selection.css('top', "#{top}%")
+    flatlay_selection.css('width', "#{width}%")
+    flatlay_selection.css('height', "#{height}%")
+  )
+
 showSelectionBox =  ->
-  pl_selection = $('#' + $(@).attr('pl_link_id'))
+  flatlay_selection_id = $(@).data('productLinkId')
+  flatlay_selection = $(".flatlay-selection[data-product-link-id='" + flatlay_selection_id + "']")
 
-  left = pl_selection.data('left')
-  top = pl_selection.data('top')
-  width = pl_selection.data('width')
-  height = pl_selection.data('height')
-
-  pl_selection.css('left', "#{left}%")
-  pl_selection.css('top', "#{top}%")
-  pl_selection.css('width', "#{width}%")
-  pl_selection.css('height', "#{height}%")
-  pl_selection.show()
+  flatlay_selection.visible()
 
 hideSelectionBox = ->
-  pl_selection = $('#' + $(@).attr('pl_link_id'))
-  pl_selection.hide()
+  flatlay_selection_id = $(@).data('productLinkId')
+  flatlay_selection = $(".flatlay-selection[data-product-link-id='" + flatlay_selection_id + "']")
+  flatlay_selection.invisible()
+
+showUrlHighlight =  ->
+  product_link_id = $(this).data('productLinkId')
+  product_link_url = $(".product-link-url[data-product-link-id='" + product_link_id + "']")
+  product_link_url.addClass('url-highlight')
+  showSelectionBox()
+
+hideUrlHighlight = ->
+  product_link_id = $(this).data('productLinkId')
+  product_link_url = $(".product-link-url[data-product-link-id='" + product_link_id + "']")
+  product_link_url.removeClass('url-highlight')
+  hideSelectionBox()
+
+
 
