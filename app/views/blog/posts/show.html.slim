@@ -8,7 +8,7 @@ article.flatlay
 
       - @post.product_links.each do |product_link|
         - present(product_link, presenter_class: Blog::ProductLinkSelectionPresenter) do |presenter|
-          span.pl_selection id=dom_id(product_link) data={left: presenter.left, right: presenter.right, top: presenter.top, bottom: presenter.bottom}
+          span.pl_selection.product-selection-highlight id=dom_id(product_link) data={ left: presenter.left, width: presenter.width, top: presenter.top, height: presenter.height }
 
     .col-md-4.col-xs-12
       aside
@@ -23,9 +23,10 @@ article.flatlay
             h4 What you need:
             - @post.product_links.each do |product_link|
               li
-                = link_to product_link.url do
-                  .fa.fa-tag
-                    = product_link.description
+                .pl_link pl_link_id=dom_id(product_link)
+                  = link_to product_link.url do
+                    .fa.fa-tag
+                      = product_link.description
 
   .row
     article.post-body

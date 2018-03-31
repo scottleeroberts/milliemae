@@ -6,19 +6,17 @@ class Blog::ProductLinkSelectionPresenter < Presenter
     (y1.to_f / image_height) * 100
   end
 
-  def bottom
-    return 0 unless product_link.y2
-    (y2.to_f / image_height) * 100
-  end
-
   def left
     return 0 unless product_link.x1
     (x1.to_f / image_width) * 100
   end
 
-  def right
-    return 0 unless product_link.x2
-    (x2.to_f / image_width) * 100
+  def width
+    ( (x2.to_f - x1.to_f) / image_width ) * 100
+  end
+
+  def height
+    ( (y2.to_f - y1.to_f) / image_height ) * 100
   end
 
   private
