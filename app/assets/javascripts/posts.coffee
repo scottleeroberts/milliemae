@@ -1,28 +1,7 @@
-jQuery.fn.visible = ->
-  @css 'opacity', '0.2'
-
-jQuery.fn.invisible = ->
-  @css 'opacity', '0.0'
-
 $(document).on 'turbolinks:load', ->
-  $('#flatlay-selection').Jcrop({
-    onChange: showCoords,
-    onSelect: showCoords,
-    boxWidth: 750
-  })
-
   setupFlatlaySelections()
-
   $('.product-link-url').hover(showSelectionBox, hideSelectionBox)
   $('.flatlay-selection').hover(showUrlHighlight, hideUrlHighlight)
-
-showCoords = (c) ->
-  $('#form-x1').val c.x
-  $('#form-y1').val c.y
-  $('#form-x2').val c.x2
-  $('#form-y2').val c.y2
-  $('#form-width').val c.w
-  $('#form-height').val c.h
 
 setupFlatlaySelections = ->
   $('.product-link-url').each( ->
