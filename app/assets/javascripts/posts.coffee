@@ -23,7 +23,7 @@ setupFlatlayHotspots = ->
 
 showHotspots =  ->
   $('.flatlay-hotspot').each( ->
-    getFlatLayHotspot(@).css('background': 'none')
+    getFlatLayHotspot(@).css('background': rgb(255, 255, 255, .3))
     getFlatLayHotspot(@).visible()
   )
 
@@ -32,7 +32,7 @@ hideHotspots =  ->
 
 showHighlight =  ->
   getFlatLayHotspot(@).visible()
-  getFlatLayHotspot(@).css('background', 'white')
+  getFlatLayHotspot(@).css('background': rgb(110, 110, 110, .3))
   getProductLinkUrl(@).addClass('url-highlight')
 
 hideHighlight= ->
