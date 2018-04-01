@@ -123,12 +123,11 @@
     }
 
     .flatlay-highlight{
-      opacity: 0.2;
       background: white;
       z-index: 9;
       display: block;
       position: absolute;
-      border: 2px dashed;
+      border: 2px dotted;
     }
 
     .url-highlight{
