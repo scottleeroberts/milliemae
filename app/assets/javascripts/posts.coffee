@@ -3,10 +3,12 @@ $(document).on 'turbolinks:load', ->
   $('.product-link-url').hover(showSelectionBox, hideSelectionBox)
   $('.flatlay-selection').hover(showUrlHighlight, hideUrlHighlight)
 
+
+
 setupFlatlaySelections = ->
   $('.product-link-url').each( ->
-    flatlay_selection_id = $(@).data('productLinkId')
-    flatlay_selection = $(".flatlay-selection[data-product-link-id='" + flatlay_selection_id + "']")
+    flatlay_selection = getFlatLaySelection($(@).data('productLinkId'))
+
     left = flatlay_selection.data('left')
     top = flatlay_selection.data('top')
     width = flatlay_selection.data('width')
@@ -20,27 +22,23 @@ setupFlatlaySelections = ->
   )
 
 showSelectionBox =  ->
-  flatlay_selection_id = $(@).data('productLinkId')
-  flatlay_selection = $(".flatlay-selection[data-product-link-id='" + flatlay_selection_id + "']")
-
+  flatlay_selection = getFlatLaySelection($(@).data('productLinkId'))
   flatlay_selection.visible()
 
 hideSelectionBox = ->
-  flatlay_selection_id = $(@).data('productLinkId')
-  flatlay_selection = $(".flatlay-selection[data-product-link-id='" + flatlay_selection_id + "']")
+  flatlay_selection = getFlatLaySelection($(@).data('productLinkId'))
   flatlay_selection.invisible()
 
 showUrlHighlight =  ->
-  product_link_id = $(this).data('productLinkId')
-  product_link_url = $(".product-link-url[data-product-link-id='" + product_link_id + "']")
+  product_link_url = getProductLinkUrl($(@).data('productLinkId'))
   product_link_url.addClass('url-highlight')
-  showSelectionBox()
 
 hideUrlHighlight = ->
-  product_link_id = $(this).data('productLinkId')
-  product_link_url = $(".product-link-url[data-product-link-id='" + product_link_id + "']")
+  product_link_url = getProductLinkUrl($(@).data('productLinkId'))
   product_link_url.removeClass('url-highlight')
-  hideSelectionBox()
 
+getProductLinkUrl = (product_link_id) ->
+  $(".product-link-url[data-product-link-id='" + product_link_id + "']")
 
-
+getFlatLaySelection = (flatlay_selection_id) ->
+   $(".flatlay-selection[data-product-link-id='" + flatlay_selection_id + "']")
