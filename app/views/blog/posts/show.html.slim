@@ -4,7 +4,7 @@
 article.flatlay
   .row
     .col-md-8.col-xs-12.no-padding
-      =image_tag(@post.flatlay_image.url.to_s, class: 'img-fluid')
+      =image_tag(@post.flatlay_image.url.to_s, id: "flatlay_image", class: 'img-fluid')
 
       - @post.product_links.each do |product_link|
         - present(product_link, presenter_class: Blog::ProductLinkHotspotPresenter) do |presenter|

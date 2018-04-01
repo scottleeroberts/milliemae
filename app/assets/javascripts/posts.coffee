@@ -2,6 +2,7 @@ $(document).on 'turbolinks:load', ->
   setupFlatlayHotspots()
   $('.product-link-url').hover(showHighlight, hideHighlight)
   $('.flatlay-hotspot').hover(showHighlight, hideHighlight)
+  $('#flatlay_image').hover(showHotspots, hideHotspots)
 
 
 
@@ -20,6 +21,13 @@ setupFlatlayHotspots = ->
     flatlay_hotspot.css('width', "#{width}%")
     flatlay_hotspot.css('height', "#{height}%")
   )
+
+showHotspots =  ->
+  $('.flatlay-hotspot').each(showHighlight)
+
+hideHotspots =  ->
+  $('.flatlay-hotspot').each(hideHighlight)
+
 
 showHighlight =  ->
   getFlatLayHotspot(@).visible()
