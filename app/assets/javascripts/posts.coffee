@@ -3,8 +3,7 @@ $(document).on 'turbolinks:load', ->
   $('.product-link-url').hover(showHighlight, hideHighlight)
   $('.flatlay-hotspot').hover(showHighlight, hideHighlight)
   $('#flatlay_image').hover(showHotspots, hideHotspots)
-
-
+  $('.flatlay-hotspot').tooltip()
 
 setupFlatlayHotspots = ->
   $('.product-link-url').each( ->
