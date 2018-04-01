@@ -23,11 +23,10 @@ setupFlatlayHotspots = ->
   )
 
 showHotspots =  ->
-  $('.flatlay-hotspot').each(showHighlight)
+  $('.flatlay-hotspot').each( -> getFlatLayHotspot(@).visible() )
 
 hideHotspots =  ->
-  $('.flatlay-hotspot').each(hideHighlight)
-
+  $('.flatlay-hotspot').each( -> getFlatLayHotspot(@).invisible() )
 
 showHighlight =  ->
   getFlatLayHotspot(@).visible()
