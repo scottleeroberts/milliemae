@@ -1,7 +1,7 @@
 $(document).on 'turbolinks:load', ->
   setupFlatlaySelections()
-  $('.product-link-url').hover(showSelectionBox, hideSelectionBox)
-  $('.flatlay-selection').hover(showUrlHighlight, hideUrlHighlight)
+  $('.product-link-url').hover(showHighlight, hideHighlight)
+  $('.flatlay-selection').hover(showHighlight, hideHighlight)
 
 
 
@@ -21,19 +21,13 @@ setupFlatlaySelections = ->
     flatlay_selection.css('height', "#{height}%")
   )
 
-showSelectionBox =  ->
+showHighlight =  ->
   getFlatLaySelection(@).visible()
-
-hideSelectionBox = ->
-  getFlatLaySelection(@).invisible()
-
-showUrlHighlight =  ->
   getProductLinkUrl(@).addClass('url-highlight')
-  getFlatLaySelection(@).visible()
 
-hideUrlHighlight = ->
-  getProductLinkUrl(@).removeClass('url-highlight')
+hideHighlight= ->
   getFlatLaySelection(@).invisible()
+  getProductLinkUrl(@).removeClass('url-highlight')
 
 getProductLinkUrl = (flatlay_selection_element) ->
   product_link_id = $(flatlay_selection_element).data('productLinkId')
