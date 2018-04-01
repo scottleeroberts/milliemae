@@ -7,7 +7,7 @@ $(document).on 'turbolinks:load', ->
 
 setupFlatlaySelections = ->
   $('.product-link-url').each( ->
-    flatlay_selection = getFlatLaySelection($(@).data('productLinkId'))
+    flatlay_selection = getFlatLaySelection(@)
 
     left = flatlay_selection.data('left')
     top = flatlay_selection.data('top')
@@ -22,23 +22,23 @@ setupFlatlaySelections = ->
   )
 
 showSelectionBox =  ->
-  flatlay_selection = getFlatLaySelection($(@).data('productLinkId'))
-  flatlay_selection.visible()
+  getFlatLaySelection(@).visible()
 
 hideSelectionBox = ->
-  flatlay_selection = getFlatLaySelection($(@).data('productLinkId'))
-  flatlay_selection.invisible()
+  getFlatLaySelection(@).invisible()
 
 showUrlHighlight =  ->
-  product_link_url = getProductLinkUrl($(@).data('productLinkId'))
-  product_link_url.addClass('url-highlight')
+  getProductLinkUrl(@).addClass('url-highlight')
+  getFlatLaySelection(@).visible()
 
 hideUrlHighlight = ->
-  product_link_url = getProductLinkUrl($(@).data('productLinkId'))
-  product_link_url.removeClass('url-highlight')
+  getProductLinkUrl(@).removeClass('url-highlight')
+  getFlatLaySelection(@).invisible()
 
-getProductLinkUrl = (product_link_id) ->
+getProductLinkUrl = (flatlay_selection_element) ->
+  product_link_id = $(flatlay_selection_element).data('productLinkId')
   $(".product-link-url[data-product-link-id='" + product_link_id + "']")
 
-getFlatLaySelection = (flatlay_selection_id) ->
-   $(".flatlay-selection[data-product-link-id='" + flatlay_selection_id + "']")
+getFlatLaySelection = (product_link_url_element) ->
+   product_link_id = $(product_link_url_element).data('productLinkId')
+   $(".flatlay-selection[data-product-link-id='" + product_link_id + "']")
