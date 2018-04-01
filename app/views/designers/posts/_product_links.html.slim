@@ -11,9 +11,9 @@
   .card-text
     .container
       .row
-        .flatlay-selection
+        .flatlay-hotspot
           - if post.showcase_image_url().present?
-            = image_tag( image_path(post.flatlay_image_url()), id: 'flatlay-selection')
+            = image_tag( image_path(post.flatlay_image_url()), id: 'flatlay-hotspot')
           - else
             | NO IMAGE
         #collapseProductLinks.collapse

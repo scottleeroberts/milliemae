@@ -7,8 +7,8 @@ article.flatlay
       =image_tag(@post.flatlay_image.url.to_s, class: 'img-fluid')
 
       - @post.product_links.each do |product_link|
-        - present(product_link, presenter_class: Blog::ProductLinkSelectionPresenter) do |presenter|
-          span.flatlay-selection.flatlay-highlight data={ product_link_id: dom_id(product_link), left: presenter.left, width: presenter.width, top: presenter.top, height: presenter.height }
+        - present(product_link, presenter_class: Blog::ProductLinkHotspotPresenter) do |presenter|
+          span.flatlay-hotspot.flatlay-highlight data={ product_link_id: dom_id(product_link), left: presenter.left, width: presenter.width, top: presenter.top, height: presenter.height }
 
     .col-md-4.col-xs-12
         h4.title= @post.title

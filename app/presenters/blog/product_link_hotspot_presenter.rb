@@ -1,4 +1,4 @@
-class Blog::ProductLinkSelectionPresenter < Presenter
+class Blog::ProductLinkHotspotPresenter < Presenter
   presents :product_link
 
   def top

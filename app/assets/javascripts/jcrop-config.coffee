@@ -1,5 +1,5 @@
 $(document).on 'turbolinks:load', ->
-  $('#flatlay-selection').Jcrop({
+  $('#flatlay-hotspot').Jcrop({
     onChange: showCoords,
     onSelect: showCoords,
     boxWidth: 750

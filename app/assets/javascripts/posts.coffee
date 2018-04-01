@@ -1,38 +1,38 @@
 $(document).on 'turbolinks:load', ->
-  setupFlatlaySelections()
+  setupFlatlayHotspots()
   $('.product-link-url').hover(showHighlight, hideHighlight)
-  $('.flatlay-selection').hover(showHighlight, hideHighlight)
+  $('.flatlay-hotspot').hover(showHighlight, hideHighlight)
 
 
 
-setupFlatlaySelections = ->
+setupFlatlayHotspots = ->
   $('.product-link-url').each( ->
-    flatlay_selection = getFlatLaySelection(@)
+    flatlay_hotspot = getFlatLayHotspot(@)
 
-    left = flatlay_selection.data('left')
-    top = flatlay_selection.data('top')
-    width = flatlay_selection.data('width')
-    height = flatlay_selection.data('height')
+    left = flatlay_hotspot.data('left')
+    top = flatlay_hotspot.data('top')
+    width = flatlay_hotspot.data('width')
+    height = flatlay_hotspot.data('height')
 
-    flatlay_selection.invisible()
-    flatlay_selection.css('left', "#{left}%")
-    flatlay_selection.css('top', "#{top}%")
-    flatlay_selection.css('width', "#{width}%")
-    flatlay_selection.css('height', "#{height}%")
+    flatlay_hotspot.invisible()
+    flatlay_hotspot.css('left', "#{left}%")
+    flatlay_hotspot.css('top', "#{top}%")
+    flatlay_hotspot.css('width', "#{width}%")
+    flatlay_hotspot.css('height', "#{height}%")
   )
 
 showHighlight =  ->
-  getFlatLaySelection(@).visible()
+  getFlatLayHotspot(@).visible()
   getProductLinkUrl(@).addClass('url-highlight')
 
 hideHighlight= ->
-  getFlatLaySelection(@).invisible()
+  getFlatLayHotspot(@).invisible()
   getProductLinkUrl(@).removeClass('url-highlight')
 
-getProductLinkUrl = (flatlay_selection_element) ->
-  product_link_id = $(flatlay_selection_element).data('productLinkId')
+getProductLinkUrl = (flatlay_hotspot_element) ->
+  product_link_id = $(flatlay_hotspot_element).data('productLinkId')
   $(".product-link-url[data-product-link-id='" + product_link_id + "']")
 
-getFlatLaySelection = (product_link_url_element) ->
+getFlatLayHotspot = (product_link_url_element) ->
    product_link_id = $(product_link_url_element).data('productLinkId')
-   $(".flatlay-selection[data-product-link-id='" + product_link_id + "']")
+   $(".flatlay-hotspot[data-product-link-id='" + product_link_id + "']")
