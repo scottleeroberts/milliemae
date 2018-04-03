@@ -2,7 +2,7 @@
   .card.h-140
     = link_to post do
       -if post.showcase_image_url().present?
-        .card-topper style='background-image: url(#{image_path(post.showcase_image_url(:mini))} )'
+        .card-topper data={layflat_image: "#{image_path(post.flatlay_image_url(:mini))}", showcase_image: "#{image_path(post.showcase_image_url(:mini))}"} style='background-image: url(#{image_path(post.showcase_image_url(:mini))} )'
       - else
         .card-topper
     .card-block
