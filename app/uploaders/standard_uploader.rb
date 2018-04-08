@@ -1,5 +1,6 @@
 module StandardUploader
   extend ActiveSupport::Concern
+  include CarrierWave::ImageOptimizer
 
   included do
     if Rails.env.production?
@@ -8,14 +9,17 @@ module StandardUploader
       storage :file
     end
 
-    process resize_to_fit: [1200, 800]
+    process resize_to_fit: [1000, 667]
+    process :optimize
 
     version :mini do
       process resize_to_fit: [700, 400]
+      process :optimize
     end
 
     version :thumb do
       process resize_to_fit: [200, 200]
+      process :optimize
     end
   end
 
