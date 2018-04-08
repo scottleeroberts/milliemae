@@ -40,7 +40,7 @@ class Designers::PostsController < DesignerController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to designers_post_path(@post), notice: 'Post was successfully updated.' }
+        format.html { render :edit, notice: 'Post was successfully updated.' }
       else
         format.html { render :edit }
       end
