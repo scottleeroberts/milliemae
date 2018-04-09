@@ -1,11 +1,11 @@
 $(document).on 'turbolinks:load', ->
-  $('#flatlay-hotspot').Jcrop({
-    onChange: showCoords,
-    onSelect: showCoords,
-    boxWidth: 750
-  })
-
-showCoords = (c) ->
+  $(document).on 'click', '.js-toggle-product-link-form', (e) ->
+    $('#flatlay-hotspot').Jcrop({
+      onChange: saveCoordsToForm,
+      onSelect: saveCoordsToForm,
+      boxWidth: 750
+    })
+saveCoordsToForm = (c) ->
   $('#form-x1').val c.x
   $('#form-y1').val c.y
   $('#form-x2').val c.x2
