@@ -13,7 +13,7 @@
       }
     }
     .card-topper {
-      height: 200px;
+      height: 240px;
       width: 100%;
       background-size: cover;
       background-position: center;
@@ -213,20 +213,20 @@
 
 @media screen and (min-width: 34em) {
   .posts.index .card {
-    height: 440px;
+    height: 465px;
   }
 }
 
 /* Medium. Above 48em (768px) */
 @media screen and (min-width: 48em) {
   .posts.index .card {
-    height: 420px;
+    height: 465px;
   }
 }
 
 /* Extra large. Above 75em (1200px) */
 @media screen and (min-width: 75em) {
   .posts.index .card {
-    height: 415px;
+    height: 465px;
   }
 }
