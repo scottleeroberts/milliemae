@@ -3,11 +3,10 @@ nav
     a#nav-post-tab.nav-item.nav-link.active aria-controls="nav-post" aria-selected="true" data-toggle="tab" href="#nav-post" role="tab"
       | 1. Edit Post
     - if @post.persisted?
-      a#nav-product-links-tab.nav-item.nav-link aria-controls="nav-product-links" aria-selected="false" data-toggle="tab" href="#nav-product-links" role="tab"
-        | 2. Product links
-    - if @post.persisted?
       a#nav-images-tab.nav-item.nav-link aria-controls="nav-product-links" aria-selected="false" data-toggle="tab" href="#nav-images" role="tab"
-        | 3. Images
+        | 2. Images
+      a#nav-product-links-tab.nav-item.nav-link aria-controls="nav-product-links" aria-selected="false" data-toggle="tab" href="#nav-product-links" role="tab"
+        | 3. Product links
 
 #nav-tabContent.tab-content
   #nav-images.tab-pane.fade aria-labelledby="nav-product-links-tab" role="tabpanel"
