@@ -1,4 +1,4 @@
-$("#toggle-product-link-form")[0].click();
+$("#js-toggle-product-link-form")[0].click();
 $("#flash").html("<%=j(render 'layouts/display_flash', flash: flash)%>");
 $(".product-links>.list").append("<%=j(render 'designers/product_links/product_link', product_link: @product_link)%>");
 $("#new_product_link")[0].reset();
