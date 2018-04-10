@@ -68,6 +68,7 @@
         width:300px;
       }
     }
+
     .list-group-item {
       padding: 10px;
       border-left: 0;
@@ -84,20 +85,13 @@
       }
     }
   }
-  .ql-container{
-    overflow-y: visible;
-    max-height: 720px;
-  }
+
   .product-links{
     padding-top: 15px;
     padding-bottom: 15px;
-  }
-
-  .product-links{
     background: white;
     margin: 15px;
   }
-
 }
 
 .posts.show {
@@ -149,7 +143,8 @@
       border: 1px $secondary-text-color;
       background: $lilac;
       margin-bottom: 10px;
-
+      max-height: 345px;
+      overflow-y:scroll;
       ul{
         h5{
           padding-left: 5px;
