@@ -96,27 +96,37 @@
 
 .posts.show {
   article.flatlay{
-    aside{
+    border: solid 2px $primary-color;
+    border-radius: 20px;
+    padding: 10px;
+
+    .header{
+      padding-left: 15px;
+    }
+
+    aside {
       padding-top: 20px;
     }
-    img{
+
+    img {
       max-width: 100%;
       height: auto
     }
-    .row{
-      box-shadow: 0 8px 16px -6px $lilac;
-      border: 1px $primary-color;
-      border-radius: 20px;
-      background: $primary-color;
-      padding: 0px;
-      margin: 0px;
-      margin-bottom:20px;
-      &:child{
-        padding: 0px;
-      }
-    }
 
-    .flatlay-highlight{
+    .row.section {
+        box-shadow: 0 8px 16px -6px $lilac;
+        border: 1px $primary-color;
+        border-radius: 20px;
+        background: $primary-color;
+        padding: 0px;
+        margin: 0px;
+        margin-bottom:20px;
+        &:child {
+          padding: 0px;
+        }
+      }
+
+    .flatlay-highlight {
       background: 'rgb(0, 0, 0, 0.3)';
       z-index: 9;
       display: block;
@@ -124,47 +134,47 @@
       border: 2px dashed rgba(0, 0, 0, 0.8);
     }
 
-    .url-highlight{
+    .url-highlight {
       background: $lilac-light;
       z-index: 9;
-      a{
+      a {
         color: black !important;
       }
     }
 
-    .product-link-url{
+    .product-link-url {
       padding-left: 10px;
     }
 
-    .product-links{
+    .product-links {
       border-radius:  10px;
       padding-top: 10px;
       padding-bottom: 10px;
       border: 1px $secondary-text-color;
       background: $lilac;
       margin-bottom: 10px;
-      max-height: 345px;
+      max-height: 425px;
       overflow-y:scroll;
-      ul{
-        h5{
+      ul {
+        h5 {
           padding-left: 5px;
         }
         padding-left: 0px;
         list-style-type: none;
-        a{
+        a {
           color:  white;
         }
       }
     }
   }
 
-  article.post-body{
+  article.post-body {
     width: 100%;
-    section{
+    section {
       padding: 20px;
     }
 
-    img{
+    img {
       float: right;
       max-width: 50%;
       height: auto;
