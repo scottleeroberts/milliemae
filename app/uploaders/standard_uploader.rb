@@ -39,8 +39,7 @@ module StandardUploader
       return img unless img.mime_type.match /image\/jpeg/
       img.strip
       img.combine_options do |c|
-        c.quality "90"
-        c.depth "8"
+        c.quality "80"
         c.interlace "plane"
       end
       img
