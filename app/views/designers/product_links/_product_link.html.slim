@@ -2,7 +2,7 @@
   = link_to product_link.url do
     .fa.fa-tag
       = product_link.description
-  = link_to edit_designers_post_product_link_path(@post, product_link), remote: true, method: :get do
+  = link_to edit_designers_post_product_link_path(@post, product_link), class: 'js-enable-jcrop', remote: true, method: :get do
     .fa.fa-edit.text-danger.ml-3
   = link_to designers_post_product_link_path(@post, product_link), remote: true, method: :delete, data: {confirm: "Are you sure you want to delete this?"} do
     .fa.fa-trash.text-danger.ml-3

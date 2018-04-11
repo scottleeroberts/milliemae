@@ -4,21 +4,19 @@
       b Adding product links:
       span.thin-text
         =<> post.title
-      button.btn.btn-success.float-right class='js-toggle-product-link-form' aria-controls="collapseProductLinks" aria-expanded="false" data-target="#collapseProductLinks" data-toggle="collapse" type="button"
-        =link_to "javascript:;" do
-          .fa.fa-plus
+      .float-right= link_to new_designers_post_product_link_url(post), class: 'btn btn-warning js-enable-jcrop', remote: true do
+        .fa.fa-plus
+        =<> 'New Product Link'
 
   .card-text
     .container
       .row
         .flatlay-hotspot
-          - if post.showcase_image_url().present?
+          -if post.showcase_image_url().present?
             = image_tag( image_path(post.flatlay_image_url()), id: 'flatlay-hotspot')
           - else
             | NO IMAGE
-        #collapseProductLinks.collapse
-          = form_for([:designers, post, ProductLink.new ], remote: true, html: { id: 'product-links-form' } ) do |form|
-            = render "product_link_form", post: post, form: form
+        #product-link-form
         .product-links
           h4 Product Links in Layflat:
           .list

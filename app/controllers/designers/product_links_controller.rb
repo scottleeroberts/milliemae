@@ -5,7 +5,7 @@ class Designers::ProductLinksController < DesignerController
   end
 
   def new
-    @product_link = ProductLink.new
+    load_post
   end
 
   def edit

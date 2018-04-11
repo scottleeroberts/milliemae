@@ -1,9 +1,5 @@
-$(".js-toggle-product-link-form")[0].click();
-
 $('#flatlay-hotspot').data('Jcrop').destroy()
 $(".product-links>.list").append("<%=j(render 'designers/product_links/product_link', product_link: @product_link)%>");
 $('#<%= dom_id(@product_link) %>').remove();
-
-$("#product_links_form")[0].reset();
-
+$("#product-link-form").html("")
 $("#flash").html("<%=j(render 'layouts/display_flash', flash: flash)%>");
