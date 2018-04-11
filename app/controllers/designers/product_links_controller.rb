@@ -9,6 +9,7 @@ class Designers::ProductLinksController < DesignerController
   end
 
   def edit
+    load_post
     @product_link = ProductLink.find(params.fetch(:id))
   end
 
@@ -26,13 +27,15 @@ class Designers::ProductLinksController < DesignerController
   end
 
   def update
+    load_post
     @product_link = ProductLink.find(params.fetch(:id))
 
     if @product_link.update(product_link_params)
-      render :update
+      flash[:success] = 'Product Link Successfully added'
     else
-      render :edit
+      flash[:danger] = @product_link.pretty_errors
     end
+    render :update
   end
 
   def destroy

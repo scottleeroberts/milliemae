@@ -9,7 +9,6 @@ class Post < ApplicationRecord
   acts_as_taggable
 
   friendly_id :title, use: :slugged
-
   belongs_to :designer
 
   has_many :product_links

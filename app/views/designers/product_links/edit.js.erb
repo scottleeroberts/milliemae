@@ -1,0 +1,2 @@
+$(".js-toggle-product-link-form")[0].click();
+$("#product-links-form").parent().html("<%=j(render partial: 'designers/posts/product_links/update', locals: {post: @post, product_link: @product_link} )%>");
