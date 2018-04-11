@@ -95,12 +95,14 @@
 
 .posts.show {
   article.flatlay{
-    border: solid 2px $primary-color;
+    border: solid 3px $primary-color;
     border-radius: 20px;
     padding: 10px;
+    background: $lilac-lighter;
 
     .header{
       padding-left: 15px;
+      border-bottom: 3px solid $lilac;
     }
 
     aside {
@@ -150,18 +152,21 @@
       padding-top: 10px;
       padding-bottom: 10px;
       border: 1px $secondary-text-color;
-      background: $lilac;
+      background: $beige;
       margin-bottom: 10px;
       max-height: 425px;
-      overflow-y:scroll;
+      overflow-y: auto;
       ul {
+        padding-left: 0px;
+        list-style-type: none;
         h5 {
           padding-left: 5px;
         }
-        padding-left: 0px;
-        list-style-type: none;
         a {
-          color:  white;
+          color:  $primary-text-color;
+          &:hover{
+            text-decoration: underline;
+          }
         }
       }
     }
