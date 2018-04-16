@@ -8,7 +8,7 @@ module StandardUploader
       storage :file
     end
 
-    process resize_to_fit: [1200, 800]
+    process resize_to_fit: [1800, 1200]
     process :optimize
 
     version :mini do
