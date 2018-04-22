@@ -2,15 +2,7 @@
 - provide(:blog_active, "active")
 
 article.flatlay
-  .header
-    .row.new-line
-      h1= @post.title
-    .row.new-line
-      .published= @post.published_date
-    .row.new-line
-      .tags
-        - @post.tags.map do |tag|
-          .badge.badge-info =tag.name
+  = render "header", designer: @post.designer, post: @post
   br
   .row.section
     .col-md-8.col-xs-12.no-padding

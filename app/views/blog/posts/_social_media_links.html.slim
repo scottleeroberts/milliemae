@@ -1,0 +1,22 @@
+.social-media-links
+  ul
+    li
+      - if designer.facebook.present?
+        = link_to designer.facebook, :target => "_blank", class: "social-link" do
+          .fa.fa-facebook-square
+    li
+      - if designer.pinterest.present?
+        = link_to designer.pinterest, :target => "_blank" do
+          .fa.fa-pinterest-square
+    li
+      - if designer.instagram.present?
+        = link_to designer.instagram, :target => "_blank" do
+          .fa.fa-instagram
+    li
+      - if designer.etsy.present?
+        = link_to designer.etsy, :target => "_blank" do
+          .fa.fa-etsy
+    li
+      - if designer.website.present?
+        = link_to designer.website, :target => "_blank" do
+          .fa.fa-link

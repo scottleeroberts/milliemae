@@ -1,9 +1,40 @@
+#designer-profile{
+  img {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    border: 1px solid $primary-color-light;
+  }
+  .social-media-links{
+    ul {
+      text-align: center;
+      list-style: none;
+      padding-left: 0;
+      margin-left: 0;
+      li{
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        text-align: center;
+        vertical-align: middle;
+        background: $lilac;
+        color: #59c0b1;
+        font-size: 16px;
+        line-height: 1.6;
+        margin: 0 2px;
+        letter-spacing: 0;
+      }
+    }
+  }
+}
+
 .posts.index {
   .card {
     box-shadow: 0 8px 16px -6px $lilac;
     border: none;
     border-radius: 15%;
-    height: 425px;
+    height: 4250px;
     margin-bottom: 20px;
     background-color: white;
     a:hover{
