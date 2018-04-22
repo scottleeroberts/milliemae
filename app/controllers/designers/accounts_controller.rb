@@ -15,6 +15,6 @@ class Designers::AccountsController < DesignerController
   private
 
   def designer_info_params
-    params.require(:designer).permit(:name, :email, :bio)
+    params.require(:designer).permit(:name, :email, :bio, :facebook, :website, :pinterest, :instagram, :etsy)
   end
 end
