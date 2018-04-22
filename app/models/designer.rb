@@ -4,7 +4,11 @@ class Designer < ApplicationRecord
   devise :database_authenticatable,
     :recoverable, :rememberable, :trackable, :validatable
 
+  HTTP = "http://"
+
   has_many :posts
+
+  before_validation :smart_add_url_protocol
 
   validates_presence_of :name, :email
 
@@ -22,6 +26,15 @@ class Designer < ApplicationRecord
   end
 
   private
+
+  def smart_add_url_protocol
+    [:facebook, :website, :pinterest, :instagram, :etsy].each do |social_url_attr|
+      unless self.send(social_url_attr)[/\Ahttp:\/\//] || self.send(social_url_attr)[/\Ahttps:\/\//]
+        self.send("#{social_url_attr}=", HTTP + self.send(social_url_attr))
+        binding.pry
+      end
+    end
+  end
 
   def gravatar_hash
     Digest::MD5.hexdigest(self.email.downcase)
