@@ -31,7 +31,6 @@ class Designer < ApplicationRecord
     [:facebook, :website, :pinterest, :instagram, :etsy].each do |social_url_attr|
       unless self.send(social_url_attr)[/\Ahttp:\/\//] || self.send(social_url_attr)[/\Ahttps:\/\//]
         self.send("#{social_url_attr}=", HTTP + self.send(social_url_attr))
-        binding.pry
       end
     end
   end
