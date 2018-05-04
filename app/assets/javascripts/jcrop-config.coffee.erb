@@ -6,7 +6,7 @@ configureJcrop= ->
   $('#flatlay-hotspot').Jcrop({
     onChange: saveCoordsToForm,
     onSelect: saveCoordsToForm,
-    boxWidth: 750
+    boxWidth: <%= STANDARD_IMAGE_WIDTH %>
   })
 saveCoordsToForm = (c) ->
   $('#form-x1').val c.x

@@ -22,11 +22,11 @@ class Blog::ProductLinkHotspotPresenter < Presenter
   private
 
   def image_height
-    post.flatlay_height.to_f
+    STANDARD_IMAGE_HEIGHT
   end
 
   def image_width
-    post.flatlay_width.to_f
+    STANDARD_IMAGE_WIDTH
   end
 end
 
