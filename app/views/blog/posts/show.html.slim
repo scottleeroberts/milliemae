@@ -5,7 +5,7 @@ article.flatlay
   = render "header", designer: @post.designer, post: @post
   br
   .row.section
-    .col-md-8.col-xs-12.no-padding
+    .col-md-8.col-xs-12.no-padding.flatlay-container
       =image_tag(@post.flatlay_image.url.to_s, id: "flatlay_image", class: 'img-fluid')
 
       div
