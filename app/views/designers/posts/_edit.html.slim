@@ -3,15 +3,19 @@ nav
     a#nav-post-tab.nav-item.nav-link.active aria-controls="nav-post" aria-selected="true" data-toggle="tab" href="#nav-post" role="tab"
       | 1. Edit Post
     - if @post.persisted?
-      a#nav-images-tab.nav-item.nav-link aria-controls="nav-product-links" aria-selected="false" data-toggle="tab" href="#nav-images" role="tab"
-        | 2. Images
+      a#nav-pattern-tab.nav-item.nav-link aria-controls="nav-pattern" aria-selected="false" data-toggle="tab" href="#nav-pattern" role="tab"
+        | 2. Pattern
+      a#nav-images-tab.nav-item.nav-link aria-controls="nav-images" aria-selected="false" data-toggle="tab" href="#nav-images" role="tab"
+        | 3. Images
       a#nav-product-links-tab.nav-item.nav-link aria-controls="nav-product-links" aria-selected="false" data-toggle="tab" href="#nav-product-links" role="tab"
-        | 3. Product links
+        | 4. Product links
 
 #nav-tabContent.tab-content
-  #nav-images.tab-pane.fade aria-labelledby="nav-product-links-tab" role="tabpanel"
+  #nav-images.tab-pane.fade aria-labelledby="nav-images-tab" role="tabpanel"
     = render "designers/posts/images", post: @post
   #nav-product-links.tab-pane.fade aria-labelledby="nav-product-links-tab" role="tabpanel"
     = render "designers/posts/product_links", post: @post
+  #nav-pattern.tab-pane.fade.show aria-labelledby="nav-pattern-tab" role="tabpanel"
+    = render "designers/posts/pattern", post: @post
   #nav-post.tab-pane.fade.show.active aria-labelledby="nav-post-tab" role="tabpanel"
     = render "designers/posts/basic_post", post: @post
