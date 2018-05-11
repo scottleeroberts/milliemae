@@ -1,38 +1,38 @@
-.basic-post-info
-= form_for([:designers, post], local: true, multipart: true) do |form|
-  .row
-    .col-md-4
-      |  <div class="card"">
-      .card-body
-        - if post.new_record?
-          h4.card-title
-            | New post
-        - else
-          h4.card-title
-            b Edit:
-            span.thin-text
-              =<> post.title
-      ul.list-group.list-group-flush
-        li.list-group-item
-          .field
-            = form.label :title
-            = form.text_field :title, id: :post_title, class: 'form-control'
-        li.list-group-item
-          .field
-            = form.label :description
-            = form.text_area :description, id: :post_description, class: 'form-control'
-        li.list-group-item
-          .field
-            = form.label 'Tags'
-            = form.text_area :tag_list, id: :tag_list, class: 'form-control'
-        li.list-group-item
-          .actions
-            = form.submit "Save Blog Post", class: 'btn btn-danger btn-block'
-    - if post.persisted?
-      = link_to 'Show', @post
-      |  |
-    = link_to 'Back', designers_posts_path
+div
+  = form_for([:designers, post], multipart: true) do |form|
+    .row
+      .col-md-4
+        |  <div class="card"">
+        .card-body
+          - if post.new_record?
+            h4.card-title
+              | New post
+          - else
+            h4.card-title
+              b Edit:
+              span.thin-text
+                =<> post.title
+        ul.list-group.list-group-flush
+          li.list-group-item
+            .field
+              = form.label :title
+              = form.text_field :title, id: :post_title, class: 'form-control'
+          li.list-group-item
+            .field
+              = form.label :description
+              = form.text_area :description, id: :post_description, class: 'form-control'
+          li.list-group-item
+            .field
+              = form.label 'Tags'
+              = form.text_area :tag_list, id: :tag_list, class: 'form-control'
+          li.list-group-item
+            .actions
+              = form.submit "Save Blog Post", class: 'btn btn-danger btn-block'
+      - if post.persisted?
+        = link_to 'Show', @post
+        |  |
+      = link_to 'Back', designers_posts_path
 
-  .col-md-8
-    .field
-      = form.text_area :body, id: :post_body, class: 'quill_container'
+    .col-md-8
+      .field
+        = form.text_area :body, id: :post_body, class: 'quill_container'

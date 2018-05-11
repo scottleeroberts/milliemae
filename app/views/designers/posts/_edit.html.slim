@@ -1,5 +1,5 @@
 nav
-  #nav-tab.nav.nav-pills srole="tablist"
+  #nav-tab.nav.nav-tabs role="tablist"
     a#nav-post-tab.nav-item.nav-link.active aria-controls="nav-post" aria-selected="true" data-toggle="tab" href="#nav-post" role="tab"
       | 1. Edit Post
     - if @post.persisted?
@@ -11,11 +11,11 @@ nav
         | 4. Product links
 
 #nav-tabContent.tab-content
-  #nav-images.tab-pane.fade aria-labelledby="nav-images-tab" role="tabpanel"
-    = render "designers/posts/images", post: @post
   #nav-product-links.tab-pane.fade aria-labelledby="nav-product-links-tab" role="tabpanel"
     = render "designers/posts/product_links", post: @post
-  #nav-pattern.tab-pane.fade.show aria-labelledby="nav-pattern-tab" role="tabpanel"
+  #nav-images.tab-pane.fade aria-labelledby="nav-images-tab" role="tabpanel"
+    = render "designers/posts/images", post: @post
+  #nav-pattern.tab-pane.fade aria-labelledby="nav-pattern-tab" role="tabpanel"
     = render "designers/posts/pattern", post: @post
   #nav-post.tab-pane.fade.show.active aria-labelledby="nav-post-tab" role="tabpanel"
     = render "designers/posts/basic_post", post: @post

@@ -1,0 +1,21 @@
+= form_for([:designers, post], local: true, id: 'pattern-form') do |form|
+  .card
+    .card-header
+      h3.card-title
+        b Pattern Details:
+        span.thin-text
+          =<> post.title
+      span.pull-right= form.submit "Update Pattern", class: 'btn btn-danger'
+    ul.list-group.list-group-flush
+      li.list-group-item
+        .field
+          = form.label :pattern_name
+          = form.text_field :pattern_name, id: :post_pattern_name, class: 'form-control'
+      li.list-group-item
+        .field
+          = form.label :pattern_url
+          = form.text_field :pattern_url, id: :post_pattern_url, class: 'form-control'
+      li.list-group-item
+        .field
+          = form.label :pattern_description
+          = form.text_area :pattern_description, id: :post_pattern_description, class: 'quill_container'
