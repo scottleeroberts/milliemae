@@ -4,8 +4,6 @@ class Designer < ApplicationRecord
   devise :database_authenticatable,
     :recoverable, :rememberable, :trackable, :validatable
 
-  HTTP = "http://"
-
   has_many :posts
 
   before_validation :smart_add_url_protocol
