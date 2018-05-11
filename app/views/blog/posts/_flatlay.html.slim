@@ -9,13 +9,5 @@
             span.flatlay-hotspot.flatlay-highlight title=product_link.description data={ toggle: 'tooltip', placement: 'top', product_link_id: dom_id(product_link), left: presenter.left, width: presenter.width, top: presenter.top, height: presenter.height }
 
   .col-md-4.col-xs-12
-    h2 Shopping List:
-    .product-links
-      ul
-        - post.product_links.each do |product_link|
-          li
-            .product-link-url data={product_link_id: dom_id(product_link)}
-              = link_to product_link.url, :target => "_blank" do
-                .fa.fa-tag
-                  =<> product_link.description
+    = render "shopping_list", post: @post
 
