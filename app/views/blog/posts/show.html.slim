@@ -3,37 +3,10 @@
 
 article.flatlay
   = render "header", designer: @post.designer, post: @post
-  br
-  .row.section
-    .col-md-8.col-xs-12.no-padding.flatlay-container
-      =image_tag(@post.flatlay_image.url.to_s, id: "flatlay_image", class: 'img-fluid')
+  = render "flatlay", post: @post
+  = render "body", post: @post
 
-      div
-        - @post.product_links.each do |product_link|
-          - present(product_link, presenter_class: Blog::ProductLinkHotspotPresenter) do |presenter|
-            = link_to product_link.url, class: 'hotlink-url', data: {} do
-              span.flatlay-hotspot.flatlay-highlight title=product_link.description data={ toggle: 'tooltip', placement: 'top', product_link_id: dom_id(product_link), left: presenter.left, width: presenter.width, top: presenter.top, height: presenter.height }
-
-    .col-md-4.col-xs-12
-      h2 Shopping List:
-      .product-links
-        ul
-          - @post.product_links.each do |product_link|
-            li
-              .product-link-url data={product_link_id: dom_id(product_link)}
-                = link_to product_link.url, :target => "_blank" do
-                  .fa.fa-tag
-                    =<> product_link.description
-
-  .row.section
-    article.post-body
-      = image_tag(@post.showcase_image.url.to_s, class: "img-fluid col-md-6 col-sm-12 no-padding pull-right")
-      section
-        = @post.body.html_safe
-
-.row
-  section.designer-bio
-    = render "designer_bio", post: @post
+= render "designer_bio", post: @post
 
 .row
   section.comments
