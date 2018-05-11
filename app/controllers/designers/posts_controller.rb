@@ -55,11 +55,12 @@ class Designers::PostsController < DesignerController
   end
 
   private
+
   def set_post
     @post = current_designer.posts.friendly.find(params[:id])
   end
 
   def post_params
-    params.require(:post).permit(:title, :body, :description, :banner_image_url, :tag_list, :flatlay_image, :showcase_image)
+    params.require(:post).permit(:title, :body, :description, :tag_list, :flatlay_image, :showcase_image)
   end
 end
