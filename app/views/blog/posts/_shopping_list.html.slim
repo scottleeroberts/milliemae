@@ -1,9 +1,19 @@
-.shopping-list
-  h3.text-center Shopping List
-  ul
-    - post.product_links.each do |product_link|
+- if post.pattern_name
+  .shopping-list
+    h3.text-center Pattern Details
+    ul
       li
-        .product-link-url data={product_link_id: dom_id(product_link)}
-          = link_to product_link.url, :target => "_blank" do
-            .fa.fa-tag
-              =<> product_link.description
+        .product-link-url= link_to post.pattern_url, :target => "_blank" do
+          .fa.fa-tag
+            =<> post.pattern_name
+
+- if post.product_links.present?
+  .shopping-list
+    h3.text-center Shopping List
+    ul
+      - post.product_links.each do |product_link|
+        li
+          .product-link-url data={ product_link_id: dom_id(product_link) }
+            = link_to product_link.url, :target => "_blank" do
+              .fa.fa-tag
+                =<> product_link.description

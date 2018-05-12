@@ -1,13 +1,10 @@
 .row.section
   .col-md-8.col-xs-12.no-padding.flatlay-container
     =image_tag(post.flatlay_image.url.to_s, id: "flatlay_image", class: 'img-fluid')
-
-    div
-      - post.product_links.each do |product_link|
-        - present(product_link, presenter_class: Blog::ProductLinkHotspotPresenter) do |presenter|
-          = link_to product_link.url, class: 'hotlink-url', data: {} do
-            span.flatlay-hotspot.flatlay-highlight title=product_link.description data={ toggle: 'tooltip', placement: 'top', product_link_id: dom_id(product_link), left: presenter.left, width: presenter.width, top: presenter.top, height: presenter.height }
+    - post.product_links.each do |product_link|
+      - present(product_link, presenter_class: Blog::ProductLinkHotspotPresenter) do |presenter|
+        = link_to product_link.url, class: 'hotlink-url', data: {} do
+          span.flatlay-hotspot.flatlay-highlight title=product_link.description data={ toggle: 'tooltip', placement: 'top', product_link_id: dom_id(product_link), left: presenter.left, width: presenter.width, top: presenter.top, height: presenter.height }
 
   .col-md-4.col-xs-12
-    = render "shopping_list", post: @post
-
+    = render 'shopping_list', post: @post
