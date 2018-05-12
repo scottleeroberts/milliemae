@@ -3,7 +3,10 @@
 
 article.flatlay
   = render "header", designer: @post.designer, post: @post
-  = render "flatlay", post: @post
+
+  -if @post.flatlay_image.present?
+    = render "flatlay", post: @post
+
   = render "body", post: @post
 
 = render "designer_bio", post: @post
