@@ -1,0 +1,35 @@
+footer{
+  &.site-footer{
+    background: $powder;
+    min-height: 230px;
+    padding-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    .container{
+      width: 1000px;
+      clear:both;
+      ul{
+        list-style: none;
+        list-style-type: none;
+        list-style-image: none;
+        list-style-position: outside;
+        padding-left: 0;
+        margin-left: 0;
+        li {
+          a{
+            color: $white !important;
+            text-transform: uppercase;
+          }
+        }
+      }
+
+    }
+    .site-info{
+      clear:both;
+      text-align: center;
+      text-transform: uppercase;
+      color: $white;
+      padding-top: 20px;
+    }
+  }
+}
