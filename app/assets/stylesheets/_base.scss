@@ -3,7 +3,8 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6, p {
-  color: $primary-text-color;
+  font-family: 'Quicksand', sans-serif;
+  color: $bright-pink;
 }
 
 h1, .card-title {
@@ -11,12 +12,8 @@ h1, .card-title {
 }
 
 h6 {
-  color: $secondary-text-color;
+  color: $bright-pink;
   font-weight: 300;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Quicksand', sans-serif;
 }
 
 p, p span {
@@ -29,6 +26,7 @@ p, p span {
 }
 
 a { color: $powder; }
+
 .btn{
   a { color: white !important; }
 }
