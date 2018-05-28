@@ -1,6 +1,7 @@
 - if post.pattern_name
   .shopping-list
-    h3.text-center Pattern Details
+    .title
+      h3.text-center Pattern Details
     ul
       li
         .product-link-url= link_to post.pattern_url, :target => "_blank" do
@@ -9,7 +10,8 @@
 
 - if post.product_links.present?
   .shopping-list
-    h3.text-center Shopping List
+    .title
+      h3.text-center Shopping List
     ul
       - post.product_links.each do |product_link|
         li
