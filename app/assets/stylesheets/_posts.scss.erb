@@ -18,12 +18,17 @@
         border-radius: 50%;
         text-align: center;
         vertical-align: middle;
-        background: $lilac;
-        color: #59c0b1;
+        background: $dark-pink;
         font-size: 16px;
         line-height: 1.6;
         margin: 0 2px;
         letter-spacing: 0;
+        a{
+          color: $white;
+        }
+        a:hover{
+          color: $secondary-text-color;
+        }
       }
     }
   }
@@ -31,7 +36,7 @@
 
 .posts.index {
   .card {
-    box-shadow: 0 8px 16px -6px $lilac;
+    box-shadow: 0 8px 16px -6px $dark-pink;
     border: none;
     border-radius: 15%;
     height: 425px;
@@ -132,11 +137,11 @@
     border: solid 3px $primary-color;
     border-radius: 20px;
     padding: 10px;
-    background: $lilac-lighter;
+    background: $light-pink;
 
     .header{
       padding-left: 15px;
-      border-bottom: 3px solid $lilac;
+      border-bottom: 3px solid $dark-pink;
     }
 
     aside {
@@ -149,20 +154,20 @@
     }
 
     .row.section {
-        box-shadow: 0 8px 16px -6px $lilac;
-        border: 1px $primary-color;
-        border-radius: 20px;
-        background: $primary-color;
+      box-shadow: 0 8px 16px -6px $dark-pink;
+      border: 1px $primary-color;
+      border-radius: 20px;
+      background: $primary-color;
+      padding: 0px;
+      margin: 0px;
+      margin-bottom:20px;
+      &:child {
         padding: 0px;
-        margin: 0px;
-        margin-bottom:20px;
-        &:child {
-          padding: 0px;
-        }
       }
-      .flatlay-container{
-        display: inline-table;
-      }
+    }
+    .flatlay-container{
+      display: inline-table;
+    }
     .flatlay-highlight {
       background: 'rgb(0, 0, 0, 0.3)';
       z-index: 9;
@@ -173,7 +178,7 @@
     }
 
     .url-highlight {
-      background: $lilac-light;
+      background: $light-pink;
       z-index: 9;
       a {
         color: black !important;
@@ -189,7 +194,7 @@
       padding-top: 10px;
       padding-bottom: 10px;
       border: 1px $secondary-text-color;
-      background: $beige;
+      background: $white;
       margin-bottom: 10px;
       max-height: 425px;
       overflow-y: auto;

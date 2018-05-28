@@ -1,8 +1,8 @@
 $powder: #BFD8D2;
 $powder-light: #BFD8D2;
-$lilac: #B4A4B9;
-$lilac-light: #E8DFEB;
-$lilac-lighter: #F1EBF3;
+$bright-pink: #B4A4B9;
+$dark-pink: #EFBCBC;
+$light-pink: #F9E5E5;
 $beige: #EBEBDF;
 $peach: #FEDCD2;
 $warm: #DF744A;
@@ -11,8 +11,8 @@ $white: #FFFFFF;
 
 $light-gray: #f7f7f9;
 
-$primary-color-dark:   $lilac;
-$primary-color:        $lilac-light;
+$primary-color-dark:   $dark-pink;
+$primary-color:        $light-pink;
 $primary-color-light:  $powder;
 $primary-color-text:   #FFFFFF;
 $accent-color:         #CDDC39;
@@ -21,10 +21,10 @@ $secondary-text-color: #757575;
 $divider-color:        #BDBDBD;
 
 $theme-colors: (
-  primary: $lilac-light,
+  primary: $light-pink,
   secondary: $peach,
   success: $powder,
-  info: $lilac,
+  info: $dark-pink,
   warning: $lemon,
   danger: $warm,
 );
