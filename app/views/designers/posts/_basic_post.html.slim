@@ -19,7 +19,15 @@ div
               = form.text_field :title, id: :post_title, class: 'form-control'
           li.list-group-item
             .field
-              = form.label :description
+              = form.label :inspiration
+              = form.text_area :inspiration_description, id: :insiration_description, class: 'form-control'
+          li.list-group-item
+            .field
+              = form.label :fabric
+              = form.text_area :fabric_description, id: :fabric_description, class: 'form-control'
+          li.list-group-item
+            .field
+              = form.label :short_description
               = form.text_area :description, id: :post_description, class: 'form-control'
           li.list-group-item
             .field
