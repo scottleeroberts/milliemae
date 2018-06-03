@@ -28,7 +28,7 @@ class Post < ApplicationRecord
 
   def published_date
     if published_at.present?
-      "Twirled On: #{published_at.strftime('%-b %-d, %-Y')}"
+      "Twirled on #{published_at.strftime('%-b %-d, %-Y')}"
     else
       'Not published yet'
     end
