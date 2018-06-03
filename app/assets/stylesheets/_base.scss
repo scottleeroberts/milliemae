@@ -2,7 +2,7 @@ body {
   background-color: $light-gray;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1, h2, h3, h4, h5, h6{
   font-family: 'Lobster Two', sans-serif;
   color: $bright-pink;
 }
@@ -16,9 +16,10 @@ h6 {
   font-weight: 300;
 }
 
-p, p span {
-  font-family: 'Cormorant Garamond', serif !important;
+p, span, p span{
+  font-family: 'Quicksand', serif !important;
   font-size: 20px;
+  color: $secondary-text-color
 }
 
 .badge{
@@ -29,4 +30,10 @@ a { color: $powder; }
 
 .btn{
   a { color: white !important; }
+}
+
+.fancy{
+  font-family: 'Tangerine', cursive;
+  font-size: 2em;
+  color: $secondary-text-color
 }
