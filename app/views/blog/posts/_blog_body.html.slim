@@ -1,4 +1,5 @@
-article.post-body
-  section
-      .post-item.middle
-        = @post.body.html_safe
+- if post.body.present?
+  article.post-body
+    section
+        .post-item.middle
+          = post.body.html_safe
