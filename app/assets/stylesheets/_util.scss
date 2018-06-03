@@ -33,3 +33,9 @@ text-decoration: underline; }
 .no-padding{
   padding: 0;
 }
+
+.center-vertical{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}

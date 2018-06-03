@@ -4,7 +4,7 @@
       .row.new-line
         h1= post.title
       .row.new-line
-        .published= post.published_date
+        .fancy= post.published_date
       .row.new-line
         .tags
           - post.tags.map do |tag|
@@ -14,8 +14,8 @@
         .row
           .mx-auto= image_tag(designer.gravatar_image_url)
         .row
-          .mx-auto.small
-            = designer.display_name
+          .mx-auto
+            .fancy= designer.display_name
         .row
           .mx-auto= render "social_media_links", designer: designer
 br
