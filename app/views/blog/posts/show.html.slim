@@ -3,12 +3,7 @@
 
 article.flatlay
   = render "header", designer: @post.designer, post: @post
-
-  -if @post.flatlay_image.present?
-    = render "flatlay", post: @post
-
-  = render "body", post: @post
-
-= render "designer_bio", post: @post
-
+  = render 'flatlay', post: @post
+  = render 'showcase_with_additional_sections', post: @post
+= render 'designer_bio', post: @post
 = render 'layouts/disqus'

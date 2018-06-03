@@ -1,0 +1,13 @@
+.row.section
+  .col-lg-4.col-md-12.col-sm-12.col-xs-12.no-padding
+    .center-vertical
+      = render 'pattern', post: post
+      = render 'inspiration', post: post
+      = render 'fabric', post: post
+
+  .col-lg-8.col-md-12.col-sm-12.col-xs-12.no-padding
+    .flatlay-container.center-vertical
+      =image_tag(post.showcase_image.url.to_s, id: "showcase_image", class: 'img-fluid')
+
+.row.section
+  = render 'blog_body', post: post
