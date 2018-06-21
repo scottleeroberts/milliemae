@@ -18,11 +18,12 @@
               i.fa.fa-comment
             = link_to post_path(id: post.friendly_id, anchor: 'disqus_thread'), :data=> { :disqus_identifier => post.slug } do
               | Comments
-        .row.tags
-          - post.tags.map do |tag|
-            = link_to posts_path(tag:  tag.name) do
-              .badge.badge-info
-                =tag.name
+        .row
+          .tags
+            - post.tags.map do |tag|
+              = link_to posts_path(tag:  tag.name) do
+                .badge.badge-info
+                  =tag.name
 
         .row
           = link_to post do
