@@ -1,18 +1,19 @@
+@font-face{
+  font-family: 'BeautifulCursive';
+  src: asset-url('fonts/BeautifulCursive.ttf') format('truetype')
+}
+
+
 body {
   background-color: $light-gray;
 }
 
 h1, h2, h3, h4, h5, h6{
-  font-family: 'Lobster Two', sans-serif;
+  font-family: 'BeautifulCursive';
   color: $bright-pink;
-}
-
-h1, .card-title {
-  font-weight: bold;
 }
 
 h6 {
-  color: $bright-pink;
   font-weight: 300;
 }
 
@@ -35,5 +36,5 @@ a { color: $powder; }
 .fancy{
   font-family: 'Tangerine', cursive;
   font-size: 2em;
-  color: $secondary-text-color
+  color: $secondary-text-color;
 }
