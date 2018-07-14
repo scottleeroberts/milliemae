@@ -1,46 +1,55 @@
+@mixin background-opacity($color, $opacity: 0.3) {
+    background: $color; /* The Fallback */
+    background: rgba($color, $opacity);
+}
+
+.banner-img {
+  position:relative;
+  img{
+    min-width: 1600px;
+    width: 100%;
+    right:0;
+  }
+}
+.posts{
+  top: -25px;
+  position:relative;
+}
+
 .navbar {
-  .logo {
-    height: 45px;
-    padding: 5px;
-    padding-left: 15px;
-  }
-  max-height: 55px;
+  @include background-opacity($white, 0.4);
+  top: -50px;
+  max-height: 50px;
   height: 100%;
-  border-radius: 0;
-  margin-bottom: 20px;
-  padding: 4px;
-  background-color: white;
-  border: 1px solid  $dark-pink;
-  .navbar-brand {
-    padding: 0px;
-    font-family: 'Euphoria Script';
-    font-size: 30px;
-    color: $dark-pink;
-    .light {
-      font-weight: 300;
-      color: $primary-color-text;
-    }
-  }
+  padding: 0px;
   .navbar-toggler {
     outline: none;
   }
+  .navbar-collapse{
+    &.show{
+      z-index: 100;
+      li>a{
+        opacity: 0.8 !important;
+        border: 5px;
+      }
+    }
+  }
+  ul{
+    li>a{
+      padding-right: 1.5em !important;
+      padding-left: 1.5em !important;
+    }
+  }
   .nav-link {
-    color: $primary-color-light !important;
+    color: $grey !important;
     &.active {
-      color: $primary-color-text !important;
+      color: $pink !important;
     }
   }
   .nav-item{
     .dropdown-menu{
       left: -65px;
     }
-    &.designer-nav {
-      img {
-        height: 30px;
-        width: 30px;
-        border-radius: 50%;
-        border: 1px solid $primary-color-light;
-      }
-    }
   }
+
 }
