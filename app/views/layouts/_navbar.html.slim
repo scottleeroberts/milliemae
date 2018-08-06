@@ -1,5 +1,6 @@
-.banner-img[href="/"]
-  =image_tag("header_banner.jpg")
+= link_to root_path do
+  .banner-img[href="/"]
+    =image_tag("header_banner.jpg")
 nav.navbar.navbar-expand-md.navbar-light.justify-content-center
   a.navbar-brand.d-flex
   button.navbar-toggler[type="button" data-toggle="collapse" data-target="#navbarSupportedContent" ]
