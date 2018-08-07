@@ -2,7 +2,7 @@ class Designers::PostsController < DesignerController
   before_action :set_post, only: [:show, :edit, :update, :destroy, :publish, :unpublish]
 
   def index
-    @posts = current_designer.posts
+    @posts = current_designer.posts.order(:created_at)
   end
 
   def publish
@@ -62,7 +62,6 @@ class Designers::PostsController < DesignerController
 
   def post_params
     params.require(:post).permit(:title, :body, :description, :tag_list, :flatlay_image, :showcase_image,
-                                :pattern_name, :pattern_url, :pattern_description, :inspiration_description,
-                                :fabric_description)
+                                :pattern_name, :pattern_url, :pattern_description)
   end
 end
