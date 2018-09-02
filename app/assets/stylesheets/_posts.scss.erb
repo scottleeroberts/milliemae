@@ -38,8 +38,8 @@
   .card {
     box-shadow: 0 8px 16px -6px $dark-gray;
     border: none;
-    border-radius: 15%;
-    height: 425px;
+    height: 450px;
+    border-radius: 50px;
     margin-bottom: 20px;
     background-color: white;
     a:hover{
@@ -56,7 +56,9 @@
       background-position: center;
     }
     .card-block {
-      padding: 10px;
+      padding-left: 20px;
+      padding-right: 20px;
+      height: 300px;
       .card-title {
         font-size: 1.3rem;
         margin-bottom: 0;
@@ -309,23 +311,55 @@
   margin-bottom: 0.3rem;
 }
 
-
-@media screen and (min-width: 34em) {
+@media (min-width: 1281px) {
   .posts.index .card {
-    height: 465px;
   }
 }
 
-/* Medium. Above 48em (768px) */
-@media screen and (min-width: 48em) {
+/*
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px to 1280px
+*/
+
+@media (min-width: 1025px) and (max-width: 1281px) {
   .posts.index .card {
-    height: 465px;
+    height: 500px;
   }
 }
 
-/* Extra large. Above 75em (1200px) */
-@media screen and (min-width: 75em) {
+/*
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+@media (min-width: 768px) and (max-width: 1024px) {
+}
+
+/*
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
   .posts.index .card {
-    height: 465px;
+    height: 500px;
+  }
+}
+
+/*
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+@media (min-width: 481px) and (max-width: 767px) {
+  .posts.index .card {
+    height: 550px;
+  }
+}
+
+/*
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+@media (min-width: 320px) and (max-width: 480px) {
+  .posts.index .card {
+    height: 475px;
   }
 }
