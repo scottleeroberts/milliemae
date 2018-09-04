@@ -11,7 +11,7 @@ ul.navbar-nav.ml-auto.w-100.justify-content-end
       .dropdown-menu[aria-labelledby="navbarDropdownMenuLink"]
         = link_to 'My posts', designers_posts_path, class: "fancy menu dropdown-item"
         = link_to 'Account', edit_designers_account_path, class: "fancy menu dropdown-item"
-        = link_to 'Logout', destroy_designer_session_path, method: :delete, class: "fancy bold dropdown-item"
+        = link_to 'Logout', destroy_designer_session_path, method: :delete, class: "fancy menu dropdown-item"
   - else
     li.nav-item
       = link_to 'Sign In', designers_posts_path, class: "fancy menu nav-link #{yield(:designer)}"
