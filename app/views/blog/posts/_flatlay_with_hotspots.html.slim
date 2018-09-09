@@ -1,8 +1,10 @@
 =image_tag(post.flatlay_image.url.to_s, id: "flatlay_image", class: 'img-fluid')
-- post.product_links.each do |product_link|
-  - present(product_link, presenter_class: Blog::ProductLinkHotspotPresenter) do |presenter|
-    = link_to product_link.url, class: 'hotlink-url', data: {} do
-      span.flatlay-hotspot.flatlay-highlight title=presenter.tooltip data={ toggle: 'tooltip', placement: 'top', product_link_id: dom_id(product_link), left: presenter.left, width: presenter.width, top: presenter.top, height: presenter.height, html: "true" }
-        .flaylay-icon.center.opacity-50
-          .fa.fa-tag.small
+- post.product_links.each.with_index(1) do |product_link, index|
+  .hotspot
+    - present(product_link, presenter_class: Blog::ProductLinkHotspotPresenter) do |presenter|
+      = link_to product_link.url, class: 'hotlink-url', data: {} do
+        span.flatlay-hotspot.flatlay-highlight title=presenter.tooltip data={ toggle: 'tooltip', placement: 'top', product_link_id: dom_id(product_link), left: presenter.left, width: presenter.width, top: presenter.top, height: presenter.height, html: "true" }
+          .center.opacity-50
+            .badge.badge-danger.hotspot-counter
+              .small= index
 

@@ -3,10 +3,11 @@
     .title
       h3.text-center Shopping List
     ul
-      - post.product_links.each do |product_link|
+      - post.product_links.each.with_index(1) do |product_link, index|
         li
           .product-link-url data={ product_link_id: dom_id(product_link) }
             = link_to product_link.url, :target => "_blank" do
-              .fa.fa-tag
-                =<> product_link.description
+              .badge.badge-danger.hotspot-counter.opacity-50
+                .small= index
+              =<> product_link.description
 
