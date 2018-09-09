@@ -4,7 +4,7 @@
     - present(product_link, presenter_class: Blog::ProductLinkHotspotPresenter) do |presenter|
       = link_to product_link.url, class: 'hotlink-url', data: {} do
         span.flatlay-hotspot.flatlay-highlight title=presenter.tooltip data={ toggle: 'tooltip', placement: 'top', product_link_id: dom_id(product_link), left: presenter.left, width: presenter.width, top: presenter.top, height: presenter.height, html: "true" }
-          .center.opacity-80
+          .center.opacity-65
             .badge.badge-danger.hotspot-counter
-              .small= index
+              = index
 
