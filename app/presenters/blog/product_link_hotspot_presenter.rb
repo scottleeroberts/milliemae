@@ -20,7 +20,7 @@ class Blog::ProductLinkHotspotPresenter < Presenter
   end
 
   def tooltip
-    "Click me! <br> "+ product_link.description
+    '<i>Click me!</i> <br> ' + product_link.description
   end
 
   private
