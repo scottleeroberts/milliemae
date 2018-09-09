@@ -5,6 +5,13 @@ $(document).on 'turbolinks:load', ->
   $('#flatlay_image').hover(showHotspots, hideHotspots)
   $('.flatlay-hotspot').tooltip()
 
+mobileDefaults = ->
+  if isMobile()
+    showHotspots()
+
+isMobile = ->
+  return ($('.display-hotspots').length is 1)
+
 setupFlatlayHotspots = ->
   $('.product-link-url').each( ->
     flatlay_hotspot = getFlatLayHotspot(@)
@@ -20,6 +27,7 @@ setupFlatlayHotspots = ->
     flatlay_hotspot.css('width', "#{width}%")
     flatlay_hotspot.css('height', "#{height}%")
   )
+  mobileDefaults();
 
 showHotspots =  ->
   $('.flatlay-hotspot').each( ->
@@ -30,6 +38,7 @@ showHotspots =  ->
 
 hideHotspots =  ->
   $('.flatlay-hotspot').each( -> getFlatLayHotspot(@).invisible() )
+  mobileDefaults()
 
 showHighlight =  ->
   getFlatLayHotspot(@).visible()
@@ -40,6 +49,7 @@ showHighlight =  ->
 hideHighlight= ->
   getFlatLayHotspot(@).invisible()
   getProductLinkUrl(@).removeClass('url-highlight')
+  mobileDefaults()
 
 getProductLinkUrl = (flatlay_hotspot_element) ->
   product_link_id = $(flatlay_hotspot_element).data('productLinkId')

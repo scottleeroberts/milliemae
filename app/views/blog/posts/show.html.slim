@@ -1,7 +1,7 @@
 - provide(:page_title, @post.title)
 - provide(:blog_active, "active")
 
-article.flatlay
+article.flatlay class="#{mobile? ? 'display-hotspots': ''}"
   = render 'header', designer: @post.designer, post: @post
   = render 'flatlay', post: @post
   = render 'showcase_with_additional_sections', post: @post
