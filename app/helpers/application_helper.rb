@@ -6,5 +6,13 @@ module ApplicationHelper
     yield presented_model if block_given?
     presented_model
   end
+
+  def mobile?
+    browser &&
+      (
+        browser.device.mobile? ||
+        browser.device.tablet?
+      )
+  end
 end
 
