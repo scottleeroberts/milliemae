@@ -19,6 +19,10 @@ class Blog::ProductLinkHotspotPresenter < Presenter
     ( (y2.to_f - y1.to_f) / image_height ) * 100
   end
 
+  def tooltip
+    "Click me! <br> "+ product_link.description
+  end
+
   private
 
   def image_height
