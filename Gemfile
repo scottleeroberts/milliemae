@@ -7,7 +7,7 @@ end
 
 gem 'acts-as-taggable-on', '~> 5.0'
 gem 'bcrypt'
-gem 'bootstrap', '~> 4.0.0'
+gem 'bootstrap', '~> 4.3.1'
 gem 'browser'
 gem 'carrierwave', '~> 1.0'
 gem 'coffee-rails', '~> 4.2'
