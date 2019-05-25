@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if ! gem list -i "^bundler$"; then
+  gem install bundler
+fi
+
+bundle check || bundle install

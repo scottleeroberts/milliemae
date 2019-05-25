@@ -1,0 +1,29 @@
+#!/bin/bash
+
+rm -f /app/tmp/pids/server.pid
+
+if ! gem list -i "^bundler$"; then
+  gem install bundler
+fi
+
+bundle check || bundle install
+
+yarn check || yarn install
+
+echo "Checking for postgres"
+until psql -h db -U "postgres" -c '\q' 2>/dev/null; do
+  >&2 echo "Postgres is unavailable - sleeping"
+  sleep 1
+done
+echo "Postgres is available: continuing with database setup"
+
+init_dev=$(psql -lqt -h db -U "postgres" | cut -d \| -f 1 | grep -w milliemae)
+
+if $init_dev; then
+  echo "Initializing databases"
+  bundle exec rake db:setup
+else
+  echo "Databases already exists; skipping setup"
+fi
+
+bundle exec rails s -p 3000 -b '0.0.0.0'
