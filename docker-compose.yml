@@ -23,3 +23,17 @@ services:
     environment:
       - 'BUNDLE_PATH=/bundle'
       - 'GEM_HOME=/bundle'
+  webpacker:
+    tty: true
+    stdin_open: true
+    image: milliemae_web
+    command: .docker/webpacker/startup
+    volumes:
+      - .:/app
+      - ./bundle:/bundle
+    depends_on:
+      - db
+      - web
+    environment:
+      - 'BUNDLE_PATH=/bundle'
+      - 'GEM_HOME=/bundle'

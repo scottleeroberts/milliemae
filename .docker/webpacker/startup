@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# we only want this to run if the app server is running.
+# this gives us the added benefit of knowing all deps are resolved and it is
+# safe to run webpack.
+
+echo "Checking for running app server"
+until [ -f /app/tmp/pids/server.pid ]; do
+  >&2 echo "app server is unavailable - sleeping"
+  sleep 5
+done
+
+echo "app server is available"
+bundle exec ruby ./bin/webpack --watch --colors --progress
+
