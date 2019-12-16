@@ -87,7 +87,7 @@ GEM
       warden (~> 1.2.3)
     erubi (1.8.0)
     erubis (2.7.0)
-    excon (0.61.0)
+    excon (0.71.0)
     execjs (2.7.0)
     ffi (1.10.0)
     fog-aws (2.0.1)
