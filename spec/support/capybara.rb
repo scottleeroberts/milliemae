@@ -17,13 +17,12 @@ end
 
 Capybara.default_driver = :rack_test
 Capybara.javascript_driver = :remote_chrome
+Capybara.server_host = "0.0.0.0"
 
 RSpec.configure do |config|
   config.before(:each, type: :system) do
     driven_by :remote_chrome
-    Capybara.server_host = "0.0.0.0"
-    Capybara.server_port = 3001
     ip = IPSocket.getaddress(Socket.gethostname)
-    Capybara.app_host = "http://#{ip}:3001"
+    Capybara.app_host = "http://#{ip}:#{Capybara.server_port}"
   end
 end
