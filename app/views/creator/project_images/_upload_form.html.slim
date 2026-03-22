@@ -1,0 +1,4 @@
+= form_with scope: :project_image, url: creator_project_project_images_path(project), multipart: true do |f|
+  .flex.items-center.gap-3
+    = f.file_field :image, accept: "image/*", class: "text-sm text-gray-600 file:mr-2 file:py-1 file:px-3 file:rounded file:border-0 file:text-sm file:bg-pink-50 file:text-pink-700 hover:file:bg-pink-100"
+    = f.submit "Upload", class: "bg-pink-500 text-white text-sm px-4 py-1.5 rounded hover:bg-pink-600 cursor-pointer"

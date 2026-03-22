@@ -10,9 +10,98 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_22_190923) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_22_202001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "action_text_rich_texts", force: :cascade do |t|
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.bigint "record_id", null: false
+    t.string "record_type", null: false
+    t.datetime "updated_at", null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.bigint "record_id", null: false
+    t.string "record_type", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.string "content_type"
+    t.datetime "created_at", null: false
+    t.string "filename", null: false
+    t.string "key", null: false
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "product_links", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "label", null: false
+    t.bigint "project_image_id", null: false
+    t.datetime "updated_at", null: false
+    t.string "url", null: false
+    t.float "x", null: false
+    t.float "y", null: false
+    t.index ["project_image_id"], name: "index_product_links_on_project_image_id"
+  end
+
+  create_table "project_images", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "image_height"
+    t.integer "image_width"
+    t.integer "position", default: 0, null: false
+    t.bigint "project_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id", "position"], name: "index_project_images_on_project_id_and_position"
+    t.index ["project_id"], name: "index_project_images_on_project_id"
+  end
+
+  create_table "project_tags", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "project_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id", "tag_id"], name: "index_project_tags_on_project_id_and_tag_id", unique: true
+    t.index ["project_id"], name: "index_project_tags_on_project_id"
+    t.index ["tag_id"], name: "index_project_tags_on_tag_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.boolean "published", default: false, null: false
+    t.datetime "published_at"
+    t.string "slug", null: false
+    t.string "title", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["slug"], name: "index_projects_on_slug", unique: true
+    t.index ["user_id"], name: "index_projects_on_user_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_tags_on_name", unique: true
+  end
 
   create_table "users", force: :cascade do |t|
     t.text "bio"
@@ -33,4 +122,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_22_190923) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "product_links", "project_images"
+  add_foreign_key "project_images", "projects"
+  add_foreign_key "project_tags", "projects"
+  add_foreign_key "project_tags", "tags"
+  add_foreign_key "projects", "users"
 end

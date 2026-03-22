@@ -1,0 +1,2 @@
+= turbo_stream.replace "project_image_#{@project_image.id}" do
+  = render "creator/project_images/project_image", project: @project, project_image: @project_image.reload

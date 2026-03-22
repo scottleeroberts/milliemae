@@ -5,7 +5,12 @@
       "Bash(docker:*)",
       "Bash(sudo rm:*)",
       "Bash(docker-compose build:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(bin/rspec spec/system --format documentation 2>&1)",
+      "Bash(bin/rspec --format documentation 2>&1)",
+      "Bash(git commit:*)",
+      "Bash(git rm:*)",
+      "Skill(run-ruby-specs)"
     ]
   }
 }
