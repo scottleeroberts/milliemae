@@ -1,0 +1,17 @@
+- content_for :title, "#{@creator.display_name} — Sew Twirly"
+- content_for :description, "Sewing projects by #{@creator.display_name} on Sew Twirly."
+
+.mb-8
+  h1.text-3xl.font-bold = @creator.display_name
+  - if @creator.bio.present?
+    p.text-gray-600.mt-2.max-w-prose = @creator.bio
+
+hr.mb-8
+
+- if @projects.any?
+  h2.text-lg.font-semibold.mb-4 Projects
+  .grid.grid-cols-1.gap-6 style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));"
+    - @projects.each do |project|
+      = render "projects/card", project: project
+- else
+  p.text-gray-400 #{@creator.display_name} hasn't published any projects yet.

@@ -1,0 +1,30 @@
+- content_for :title, "#{@project.title} — Sew Twirly"
+- content_for :description, "#{@project.title} by #{@project.user.display_name} on Sew Twirly."
+- content_for :head do
+  meta property="og:title" content="#{@project.title} — Sew Twirly"
+  meta property="og:type" content="article"
+  meta property="og:description" content="#{@project.title} by #{@project.user.display_name} on Sew Twirly."
+
+.mb-6
+  = link_to "← All Projects", projects_path, class: "text-sm text-gray-400 hover:underline"
+
+h1.text-3xl.font-bold.leading-tight = @project.title
+
+.flex.items-center.gap-2.mt-2.mb-4
+  = link_to @project.user.display_name, creator_path(@project.user), class: "text-sm text-gray-600 hover:underline font-medium"
+  span.text-gray-300 ·
+  span.text-sm.text-gray-400 = @project.published_date
+
+- if @project.tags.any?
+  .flex.flex-wrap.gap-2.mb-6
+    - @project.tags.each do |tag|
+      span.bg-gray-100.text-gray-600.text-xs.px-2.py-1.rounded = tag.name
+
+- if @project.body.present?
+  .prose.max-w-none.mb-10
+    = @project.body
+
+- if @project.project_images.any?
+  .space-y-10
+    - @project.project_images.each do |project_image|
+      = render "hotspot_image", project_image: project_image

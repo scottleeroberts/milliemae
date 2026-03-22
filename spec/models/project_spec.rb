@@ -141,6 +141,37 @@ RSpec.describe Project, type: :model do
     it "scopes to draft" do
       expect(Project.draft).to contain_exactly(draft)
     end
+
+    describe ".for_feed" do
+      it "returns only published projects" do
+        expect(Project.for_feed).to contain_exactly(published)
+      end
+
+      it "orders by published_at descending" do
+        older = create(:project, :published, published_at: 3.days.ago)
+        newer = create(:project, :published, published_at: 1.day.ago)
+        expect(Project.for_feed.to_a).to eq([ newer, published, older ])
+      end
+
+      it "places published projects before drafts (NULLS LAST — opposite of .recent)" do
+        # .recent puts NULLs first (drafts on top for creator dashboard).
+        # .for_feed uses NULLS LAST so only published records appear anyway.
+        expect(Project.for_feed).not_to include(draft)
+      end
+    end
+  end
+
+  describe "#cover_image" do
+    it "returns nil when there are no images" do
+      expect(create(:project).cover_image).to be_nil
+    end
+
+    it "returns the image with the lowest position" do
+      project = create(:project)
+      second  = create(:project_image, project: project, position: 1)
+      first   = create(:project_image, project: project, position: 0)
+      expect(project.reload.cover_image).to eq(first)
+    end
   end
 
   describe "associations" do

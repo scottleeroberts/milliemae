@@ -13,7 +13,10 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :projects, only: [:index, :show]
+  resources :creators, only: [:show]
+
   get "up" => "rails/health#show", as: :rails_health_check
 
-  root "home#index"
+  root "projects#index"
 end

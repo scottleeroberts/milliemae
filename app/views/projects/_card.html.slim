@@ -1,0 +1,23 @@
+article.bg-white.rounded-lg.shadow.overflow-hidden.flex.flex-col
+  - cover = project.cover_image
+  - if cover&.image&.attached?
+    = link_to project_path(project), class: "block"
+      = image_tag cover.image, class: "w-full h-52 object-cover"
+  - else
+    .w-full.h-52.bg-gray-100.flex.items-center.justify-center
+      span.text-gray-300.text-sm No image yet
+
+  .p-4.flex.flex-col.flex-1
+    h2.font-semibold.text-base.leading-snug
+      = link_to project.title, project_path(project), class: "hover:text-pink-600"
+
+    .flex.items-center.gap-1.mt-1
+      span.text-xs.text-gray-400 by
+      = link_to project.user.display_name, creator_path(project.user), class: "text-xs text-gray-600 hover:underline"
+
+    - if project.tags.any?
+      .flex.flex-wrap.gap-1.mt-2
+        - project.tags.each do |tag|
+          span.bg-gray-100.text-gray-500.text-xs.px-2.py-0.5.rounded = tag.name
+
+    p.text-xs.text-gray-300.mt-auto.pt-3 = project.published_date

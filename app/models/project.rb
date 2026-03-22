@@ -13,9 +13,14 @@ class Project < ApplicationRecord
   scope :published, -> { where(published: true) }
   scope :draft, -> { where(published: false) }
   scope :recent, -> { order(published_at: :desc, created_at: :desc) }
+  scope :for_feed, -> { published.order(Arel.sql("published_at DESC NULLS LAST"), created_at: :desc) }
 
   def to_param
     slug
+  end
+
+  def cover_image
+    project_images.first
   end
 
   def tag_list

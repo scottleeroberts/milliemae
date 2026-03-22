@@ -1,0 +1,15 @@
+/ Read-only hotspot image — no Stimulus, no annotation controls.
+.mb-8
+  .relative.inline-block.max-w-full
+    = image_tag project_image.image, class: "block max-w-full rounded"
+
+    - project_image.product_links.each.with_index(1) do |pl, idx|
+      a.absolute.flex.items-center.justify-center.bg-pink-500.text-white.text-xs.font-bold.rounded-full.w-6.h-6.shadow-lg.-translate-x-3.-translate-y-3.hover:bg-pink-600.transition-colors href=pl.url target="_blank" rel="noopener noreferrer" title=pl.label style="left: #{(pl.x * 100).round(2)}%; top: #{(pl.y * 100).round(2)}%;"
+        = idx
+
+  - if project_image.product_links.any?
+    ol.mt-3.space-y-1
+      - project_image.product_links.each.with_index(1) do |pl, idx|
+        li.flex.items-center.gap-2.text-sm
+          span.flex.items-center.justify-center.bg-pink-500.text-white.text-xs.font-bold.rounded-full.w-5.h-5.shrink-0 = idx
+          = link_to pl.label, pl.url, class: "text-blue-600 hover:underline truncate", target: "_blank", rel: "noopener noreferrer"

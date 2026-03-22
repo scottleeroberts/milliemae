@@ -14,6 +14,27 @@ RSpec.describe User, type: :model do
       expect(user.errors[:name]).to include("can't be blank")
     end
 
+    it "requires a username" do
+      # Use a persisted user so the on: :create callback doesn't regenerate it.
+      persisted = create(:user)
+      persisted.username = ""
+      expect(persisted).not_to be_valid
+      expect(persisted.errors[:username]).to include("can't be blank")
+    end
+
+    it "requires a unique username" do
+      create(:user, username: "taken-name")
+      user.username = "taken-name"
+      expect(user).not_to be_valid
+      expect(user.errors[:username]).to include("has already been taken")
+    end
+
+    it "rejects usernames with special characters" do
+      user.username = "bad name!"
+      expect(user).not_to be_valid
+      expect(user.errors[:username]).to be_present
+    end
+
     it "requires an email" do
       user.email = ""
       expect(user).not_to be_valid
@@ -69,6 +90,38 @@ RSpec.describe User, type: :model do
       it "scopes by admin" do
         expect(User.admin).to contain_exactly(admin_user)
       end
+    end
+  end
+
+  describe "username generation" do
+    it "generates a username from the name on create" do
+      user = create(:user, name: "Jane Doe")
+      expect(user.username).to eq("jane-doe")
+    end
+
+    it "does not overwrite a username set explicitly" do
+      user = create(:user, name: "Jane Doe", username: "custom-handle")
+      expect(user.username).to eq("custom-handle")
+    end
+
+    it "appends a counter to avoid collisions" do
+      create(:user, name: "Jane Doe")
+      second = create(:user, name: "Jane Doe")
+      expect(second.username).to eq("jane-doe-2")
+    end
+
+    it "does not regenerate username on update" do
+      user = create(:user, name: "Jane Doe")
+      original = user.username
+      user.update!(name: "Jane Smith")
+      expect(user.username).to eq(original)
+    end
+  end
+
+  describe "#to_param" do
+    it "returns the username" do
+      user = build(:user, username: "jane-doe")
+      expect(user.to_param).to eq("jane-doe")
     end
   end
 

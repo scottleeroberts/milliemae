@@ -1,0 +1,12 @@
+- content_for :title, "Discover Projects — Sew Twirly"
+- content_for :description, "Browse handmade sewing projects from talented makers on Sew Twirly."
+
+h1.text-3xl.font-bold.mb-8 Discover Projects
+
+- if @projects.any?
+  .grid.grid-cols-1.gap-6 style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));"
+    - @projects.each do |project|
+      = render "card", project: project
+- else
+  .text-center.py-16
+    p.text-gray-400.text-lg No projects published yet. Check back soon!
