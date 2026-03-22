@@ -24,8 +24,14 @@ services:
     environment:
       DATABASE_URL: postgres://sew_twirly:password@db:5432/sew_twirly_development
       RAILS_ENV: development
+      SELENIUM_URL: http://chrome:4444/wd/hub
     tty: true
     stdin_open: true
+
+  chrome:
+    image: selenium/standalone-chromium:latest
+    ports:
+      - "4444:4444"
 
 volumes:
   postgres_data:
