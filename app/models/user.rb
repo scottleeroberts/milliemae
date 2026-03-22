@@ -7,6 +7,6 @@ class User < ApplicationRecord
   validates :name, presence: true
 
   def display_name
-    name.presence || "User"
+    name
   end
 end

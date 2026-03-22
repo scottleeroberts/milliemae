@@ -73,13 +73,8 @@ RSpec.describe User, type: :model do
   end
 
   describe "#display_name" do
-    it "returns the name when present" do
+    it "returns the name" do
       expect(build(:user, name: "Jane Doe").display_name).to eq("Jane Doe")
-    end
-
-    it "returns 'User' when name is nil" do
-      user = User.new(name: nil)
-      expect(user.display_name).to eq("User")
     end
   end
 end
