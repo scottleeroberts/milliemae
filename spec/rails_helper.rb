@@ -1,4 +1,5 @@
 require "spec_helper"
+require "base64"
 ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 abort("The Rails environment is running in production mode!") if Rails.env.production?
@@ -13,11 +14,25 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
+  config.before(:suite) do
+    fixture_dir = Rails.root.join("spec/fixtures/files")
+    FileUtils.mkdir_p(fixture_dir)
+    png_path = fixture_dir.join("test_image.png")
+    unless png_path.exist?
+      # Minimal 1x1 white PNG
+      png_bytes = Base64.decode64(
+        "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+      )
+      File.binwrite(png_path, png_bytes)
+    end
+  end
+
   config.use_transactional_fixtures = true
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
 
   config.include FactoryBot::Syntax::Methods
+  config.include ActiveSupport::Testing::TimeHelpers
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Devise::Test::IntegrationHelpers, type: :system
 end

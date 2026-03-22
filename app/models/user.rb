@@ -4,6 +4,8 @@ class User < ApplicationRecord
 
   enum :role, { audience: 0, creator: 1, admin: 2 }
 
+  has_many :projects, dependent: :destroy
+
   validates :name, presence: true
 
   def display_name

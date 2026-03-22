@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title = content_for(:title) || "Sew Twirly"
+    title = yield(:title).presence || "Sew Twirly"
     meta name="viewport" content="width=device-width,initial-scale=1"
     meta name="apple-mobile-web-app-capable" content="yes"
     meta name="application-name" content="Sew Twirly"
@@ -12,6 +12,7 @@ html
     link rel="icon" href="/icon.svg" type="image/svg+xml"
     link rel="apple-touch-icon" href="/icon.png"
     = stylesheet_link_tag :app, "data-turbo-track": "reload"
+    = stylesheet_link_tag "actiontext"
     = javascript_importmap_tags
 
   body.bg-white.text-gray-900
@@ -20,6 +21,8 @@ html
         = link_to "Sew Twirly", root_path, class: "text-xl font-bold"
         .flex.items-center.gap-4
           - if user_signed_in?
+            - if current_user.creator? || current_user.admin?
+              = link_to "My Projects", creator_projects_path, class: "text-sm text-gray-600 hover:text-gray-900"
             span.text-sm.text-gray-600 = current_user.display_name
             = link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "text-sm text-gray-600 hover:text-gray-900"
           - else

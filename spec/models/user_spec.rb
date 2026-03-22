@@ -77,4 +77,12 @@ RSpec.describe User, type: :model do
       expect(build(:user, name: "Jane Doe").display_name).to eq("Jane Doe")
     end
   end
+
+  describe "associations" do
+    it "destroys associated projects when the user is destroyed" do
+      user = create(:user, :creator)
+      create_list(:project, 2, user: user)
+      expect { user.destroy }.to change(Project, :count).by(-2)
+    end
+  end
 end

@@ -48,9 +48,6 @@ gem "devise"
 # Slim templates [https://github.com/slim-template/slim-rails]
 gem "slim-rails"
 
-# URL slugs [https://github.com/norman/friendly_id]
-gem "friendly_id", "~> 5.5"
-
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "bundler-audit", require: false

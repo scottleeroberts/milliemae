@@ -49,6 +49,27 @@ RSpec.describe "Authentication", type: :request do
     end
   end
 
+  describe "account update" do
+    let!(:user) { create(:user, name: "Old Name", email: "user@example.com", password: "password123") }
+
+    it "updates the user's name" do
+      sign_in user
+      put user_registration_path, params: {
+        user: { name: "New Name", current_password: "password123" }
+      }
+      expect(user.reload.name).to eq("New Name")
+    end
+
+    it "rejects update with wrong current password" do
+      sign_in user
+      put user_registration_path, params: {
+        user: { name: "New Name", current_password: "wrongpassword" }
+      }
+      expect(user.reload.name).to eq("Old Name")
+      expect(response).to have_http_status(:unprocessable_content)
+    end
+  end
+
   describe "sign out" do
     it "redirects to root when signed in" do
       sign_in create(:user)
