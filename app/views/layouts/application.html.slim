@@ -1,0 +1,37 @@
+doctype html
+html
+  head
+    title = content_for(:title) || "Sew Twirly"
+    meta name="viewport" content="width=device-width,initial-scale=1"
+    meta name="apple-mobile-web-app-capable" content="yes"
+    meta name="application-name" content="Sew Twirly"
+    = csrf_meta_tags
+    = csp_meta_tag
+    = yield :head
+    link rel="icon" href="/icon.png" type="image/png"
+    link rel="icon" href="/icon.svg" type="image/svg+xml"
+    link rel="apple-touch-icon" href="/icon.png"
+    = stylesheet_link_tag :app, "data-turbo-track": "reload"
+    = javascript_importmap_tags
+
+  body.bg-white.text-gray-900
+    nav.bg-white.shadow
+      .container.mx-auto.px-4.py-3.flex.items-center.justify-between
+        = link_to "Sew Twirly", root_path, class: "text-xl font-bold"
+        .flex.items-center.gap-4
+          - if user_signed_in?
+            span.text-sm.text-gray-600 = current_user.display_name
+            = link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "text-sm text-gray-600 hover:text-gray-900"
+          - else
+            = link_to "Sign in", new_user_session_path, class: "text-sm text-gray-600 hover:text-gray-900"
+            = link_to "Sign up", new_user_registration_path, class: "text-sm bg-pink-500 text-white px-3 py-1 rounded hover:bg-pink-600"
+
+    - if notice.present?
+      .container.mx-auto.px-4.mt-4
+        p.bg-green-100.text-green-800.p-3.rounded = notice
+    - if alert.present?
+      .container.mx-auto.px-4.mt-4
+        p.bg-red-100.text-red-800.p-3.rounded = alert
+
+    main.container.mx-auto.px-4.mt-8
+      = yield
