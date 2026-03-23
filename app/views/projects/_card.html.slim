@@ -2,7 +2,7 @@ article.bg-white.rounded-lg.shadow.overflow-hidden.flex.flex-col
   - cover = project.cover_image
   - if cover&.image&.attached?
     = link_to project_path(project), class: "block"
-      = image_tag cover.image, class: "w-full h-52 object-cover"
+      = image_tag cover.image, class: "w-full h-52 object-cover", alt: project.title
   - else
     .w-full.h-52.bg-gray-100.flex.items-center.justify-center
       span.text-gray-300.text-sm No image yet

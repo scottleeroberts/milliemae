@@ -1,9 +1,9 @@
 - content_for :title, "#{@project.title} — Sew Twirly"
 - content_for :description, "#{@project.title} by #{@project.user.display_name} on Sew Twirly."
 - content_for :head do
-  meta property="og:title" content="#{@project.title} — Sew Twirly"
+  meta property="og:title" content=("#{@project.title} — Sew Twirly")
   meta property="og:type" content="article"
-  meta property="og:description" content="#{@project.title} by #{@project.user.display_name} on Sew Twirly."
+  meta property="og:description" content=("#{@project.title} by #{@project.user.display_name} on Sew Twirly.")
 
 .mb-6
   = link_to "← All Projects", projects_path, class: "text-sm text-gray-400 hover:underline"
@@ -27,4 +27,4 @@ h1.text-3xl.font-bold.leading-tight = @project.title
 - if @project.project_images.any?
   .space-y-10
     - @project.project_images.each do |project_image|
-      = render "hotspot_image", project_image: project_image
+      = render "hotspot_image", project_image: project_image, image_alt: @project.title
