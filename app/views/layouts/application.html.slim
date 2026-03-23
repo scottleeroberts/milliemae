@@ -21,10 +21,11 @@ html
 
   body.bg-stone-50.text-gray-900
     a.sr-only.focus:not-sr-only.focus:absolute.focus:z-50.focus:p-4.focus:bg-pink-600.focus:text-white.focus:font-medium href="#main-content" Skip to content
-    nav.bg-white.shadow.border-b-2.border-pink-200 aria-label="Main navigation"
+    nav.bg-white.shadow.border-b-2.border-pink-200 aria-label="Main navigation" data-controller="mobile-nav"
       .container.mx-auto.px-4.py-3.flex.items-center.justify-between
         = link_to "Sew Twirly", root_path, class: "text-2xl font-bold font-display text-pink-600 hover:text-pink-700 transition-colors"
-        .flex.items-center.gap-4
+        / Desktop nav
+        .hidden.sm:flex.items-center.gap-4
           = link_to "About", about_path, class: "text-sm text-gray-600 hover:text-pink-600"
           - if user_signed_in?
             - if current_user.admin?
@@ -36,6 +37,34 @@ html
           - else
             = link_to "Sign in", new_user_session_path, class: "text-sm text-gray-600 hover:text-gray-900"
             = link_to "Sign up", new_user_registration_path, class: "text-sm bg-pink-600 text-white px-3 py-1 rounded hover:bg-pink-700"
+        / Hamburger button (mobile only)
+        button.sm:hidden.flex.items-center.justify-center.w-10.h-10.rounded.text-gray-600.hover:text-pink-600.transition-colors type="button" data-action="mobile-nav#toggle" aria-label="Open menu"
+          svg.w-6.h-6 fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+            path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"
+      / Mobile overlay
+      .fixed.inset-0.bg-black/50.z-40.hidden data-mobile-nav-target="overlay" data-action="click->mobile-nav#close"
+      / Mobile drawer
+      .fixed.top-0.left-0.h-full.w-64.bg-white.shadow-xl.z-50.hidden data-mobile-nav-target="menu"
+        .flex.items-center.justify-between.p-4.border-b.border-pink-100
+          span.text-lg.font-bold.font-display.text-pink-600 Sew Twirly
+          button.text-gray-500.hover:text-gray-700 type="button" data-action="mobile-nav#close" aria-label="Close menu"
+            svg.w-6.h-6 fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+              path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"
+        nav.p-4.space-y-1
+          = link_to "Discover", root_path, class: "block py-3 text-gray-700 hover:text-pink-600 font-medium transition-colors", data: { action: "click->mobile-nav#closeOnLink" }
+          = link_to "About", about_path, class: "block py-3 text-gray-700 hover:text-pink-600 font-medium transition-colors", data: { action: "click->mobile-nav#closeOnLink" }
+          - if user_signed_in?
+            - if current_user.admin?
+              = link_to "Admin", admin_root_path, class: "block py-3 text-pink-600 font-medium hover:text-pink-800 transition-colors", data: { action: "click->mobile-nav#closeOnLink" }
+            - if current_user.creator? || current_user.admin?
+              = link_to "My Projects", creator_projects_path, class: "block py-3 text-gray-700 hover:text-pink-600 font-medium transition-colors", data: { action: "click->mobile-nav#closeOnLink" }
+            = link_to current_user.display_name, creator_path(current_user), class: "block py-3 text-gray-700 hover:text-pink-600 font-medium transition-colors", data: { action: "click->mobile-nav#closeOnLink" }
+            .pt-3.border-t.border-gray-100.mt-3
+              = link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete, action: "click->mobile-nav#closeOnLink" }, class: "block py-3 text-gray-500 hover:text-gray-700 transition-colors"
+          - else
+            .pt-3.border-t.border-gray-100.mt-3
+              = link_to "Sign in", new_user_session_path, class: "block py-3 text-gray-700 hover:text-pink-600 font-medium transition-colors", data: { action: "click->mobile-nav#closeOnLink" }
+              = link_to "Sign up", new_user_registration_path, class: "block py-3 text-center bg-pink-600 text-white rounded-lg font-medium hover:bg-pink-700 transition-colors mt-2", data: { action: "click->mobile-nav#closeOnLink" }
 
     - if notice.present?
       .container.mx-auto.px-4.mt-4 data-controller="flash"
