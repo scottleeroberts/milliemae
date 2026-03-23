@@ -1,7 +1,7 @@
 class ProductLink < ApplicationRecord
   belongs_to :project_image
 
-  URL_PATTERN = /\Ahttps?:\/\/[^\s]+\.[^\s]{2,}/i
+  URL_PATTERN = /\Ahttps?:\/\/[^\s]+\.[^\s]{2,}\z/i
 
   validates :label, presence: true
   validates :url, presence: true, format: { with: URL_PATTERN, message: "must start with http:// or https://" }

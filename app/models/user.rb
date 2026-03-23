@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :trackable
+         :recoverable, :rememberable, :validatable, :trackable,
+         :lockable, :timeoutable
 
   enum :role, { audience: 0, creator: 1, admin: 2 }
 
@@ -16,9 +17,15 @@ class User < ApplicationRecord
   has_many :sent_invitations, class_name: "Invitation", foreign_key: :invited_by_id,
                               dependent: :destroy, inverse_of: :invited_by
 
+  SOCIAL_URL_PATTERN = /\Ahttps?:\/\/[^\s]+\z/i
+
   validates :name, presence: true
   validates :username, presence: true, uniqueness: { case_sensitive: false },
                        format: { with: /\A[\w-]+\z/, message: "can only contain letters, numbers, hyphens, and underscores" }
+
+  %i[instagram etsy pinterest website facebook].each do |field|
+    validates field, format: { with: SOCIAL_URL_PATTERN, message: "must start with http:// or https://" }, allow_blank: true
+  end
 
   before_validation :generate_username, on: :create
 

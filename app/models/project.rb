@@ -52,7 +52,13 @@ class Project < ApplicationRecord
     "Twirled on #{published_at.strftime('%-b %-d, %-Y')}"
   end
 
+  validate :tag_limit
+
   private
+
+  def tag_limit
+    errors.add(:tags, "maximum of 10 tags allowed") if tags.size > 10
+  end
 
   def generate_slug
     self.slug ||= title&.parameterize

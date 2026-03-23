@@ -30,6 +30,25 @@ RSpec.describe ProjectImage, type: :model do
       project_image = build(:project_image)
       expect(project_image).to be_valid
     end
+
+    it "rejects non-image content types" do
+      project_image = build(:project_image)
+      project_image.image.attach(
+        io: StringIO.new("<html>evil</html>"),
+        filename: "evil.html",
+        content_type: "text/html"
+      )
+      expect(project_image).not_to be_valid
+      expect(project_image.errors[:image]).to include("must be a JPEG, PNG, WebP, or GIF")
+    end
+
+    it "rejects files larger than 10 MB" do
+      project_image = build(:project_image)
+      blob = project_image.image.blob
+      allow(blob).to receive(:byte_size).and_return(11.megabytes)
+      expect(project_image).not_to be_valid
+      expect(project_image.errors[:image]).to include("must be less than 10 MB")
+    end
   end
 
   describe "#analyze_image_dimensions" do

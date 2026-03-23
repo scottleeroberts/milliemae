@@ -38,5 +38,13 @@ RSpec.describe "Admin::Users", type: :request do
       patch admin_user_path(admin.id), params: { user: { role: "audience" } }
       expect(response).to redirect_to(root_path)
     end
+
+    it "prevents admin from changing own role" do
+      patch admin_user_path(admin.id), params: { user: { role: "audience" } }
+      expect(admin.reload.role).to eq("admin")
+      expect(response).to redirect_to(admin_users_path)
+      follow_redirect!
+      expect(response.body).to include("Cannot change your own role")
+    end
   end
 end

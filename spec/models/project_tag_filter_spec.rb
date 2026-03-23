@@ -37,6 +37,21 @@ RSpec.describe Project, type: :model do
     end
   end
 
+  describe "tag limit" do
+    it "rejects more than 10 tags" do
+      p = create(:project, user: creator, published: true, published_at: 1.day.ago)
+      p.tag_list = (1..11).map { |n| "tag#{n}" }.join(", ")
+      expect(p).not_to be_valid
+      expect(p.errors[:tags]).to include("maximum of 10 tags allowed")
+    end
+
+    it "accepts 10 tags" do
+      p = create(:project, user: creator, published: true, published_at: 1.day.ago)
+      p.tag_list = (1..10).map { |n| "tag#{n}" }.join(", ")
+      expect(p).to be_valid
+    end
+  end
+
   describe "PER_PAGE" do
     it "is defined" do
       expect(Project::PER_PAGE).to eq(12)

@@ -25,6 +25,29 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "social link URL validation" do
+    it "rejects javascript: URLs" do
+      user = build(:user, :creator, website: "javascript:alert(1)")
+      expect(user).not_to be_valid
+      expect(user.errors[:website]).to include("must start with http:// or https://")
+    end
+
+    it "rejects data: URLs" do
+      user = build(:user, :creator, instagram: "data:text/html,<script>alert(1)</script>")
+      expect(user).not_to be_valid
+    end
+
+    it "accepts valid https URLs" do
+      user = build(:user, :creator, website: "https://example.com")
+      expect(user).to be_valid
+    end
+
+    it "allows blank social links" do
+      user = build(:user, :creator, website: "", instagram: nil)
+      expect(user).to be_valid
+    end
+  end
+
   describe "#gravatar_url" do
     it "returns a gravatar URL based on email" do
       user = create(:user, :creator, email: "test@example.com")

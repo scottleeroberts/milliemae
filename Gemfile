@@ -48,6 +48,9 @@ gem "devise"
 # Slim templates [https://github.com/slim-template/slim-rails]
 gem "slim-rails"
 
+# Rate limiting and request throttling [https://github.com/rack/rack-attack]
+gem "rack-attack"
+
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "bundler-audit", require: false

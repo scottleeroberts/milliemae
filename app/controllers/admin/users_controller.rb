@@ -5,6 +5,9 @@ class Admin::UsersController < Admin::BaseController
 
   def update
     @user = User.find(params[:id])
+    if @user == current_user
+      return redirect_to admin_users_path, alert: "Cannot change your own role."
+    end
     if @user.update(user_params)
       redirect_to admin_users_path, notice: "#{@user.display_name}'s role updated to #{@user.role}."
     else

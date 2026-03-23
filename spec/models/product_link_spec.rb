@@ -48,6 +48,11 @@ RSpec.describe ProductLink, type: :model do
       expect(product_link).to be_valid
     end
 
+    it "rejects urls with trailing content after newline" do
+      product_link.url = "https://evil.com\njavascript:alert(1)"
+      expect(product_link).not_to be_valid
+    end
+
     it "requires x coordinate" do
       product_link.x = nil
       expect(product_link).not_to be_valid

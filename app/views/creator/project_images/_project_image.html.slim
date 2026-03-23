@@ -4,7 +4,7 @@
       = image_tag project_image.image, class: "block max-w-full", data: { hotspot_annotator_target: "image", action: "click->hotspot-annotator#placeHotspot" }
 
       - project_image.product_links.each.with_index(1) do |pl, idx|
-        a.absolute.flex.items-center.justify-center.bg-red-500.text-white.text-xs.font-bold.rounded-full.w-6.h-6.shadow-lg.-translate-x-3.-translate-y-3 href=pl.url target="_blank" title=pl.label style="left: #{(pl.x * 100).round(2)}%; top: #{(pl.y * 100).round(2)}%;"
+        a.absolute.flex.items-center.justify-center.bg-red-500.text-white.text-xs.font-bold.rounded-full.w-6.h-6.shadow-lg.-translate-x-3.-translate-y-3 href=pl.url target="_blank" rel="noopener noreferrer" title=pl.label style="left: #{(pl.x * 100).round(2)}%; top: #{(pl.y * 100).round(2)}%;"
           = idx
 
       - annotation_product_link = local_assigns.fetch(:errored_product_link, nil)
@@ -42,5 +42,5 @@
             li.flex.items-center.justify-between.text-sm id="product_link_#{pl.id}"
               .flex.items-center.gap-2.min-w-0
                 span.flex.items-center.justify-center.bg-red-500.text-white.text-xs.font-bold.rounded-full.w-5.h-5.shrink-0 = idx
-                = link_to pl.label, pl.url, class: "text-blue-600 hover:underline truncate", target: "_blank"
+                = link_to pl.label, pl.url, class: "text-blue-600 hover:underline truncate", target: "_blank", rel: "noopener noreferrer"
               = button_to "Remove", creator_project_project_image_product_link_path(project, project_image, pl), method: :delete, data: { turbo_confirm: "Remove \"#{pl.label}\"?" }, class: "text-xs text-red-500 hover:underline bg-transparent border-0 p-0 cursor-pointer"

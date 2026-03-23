@@ -12,6 +12,17 @@ RSpec.describe Comment, type: :model do
       expect(comment.errors[:body]).to include("can't be blank")
     end
 
+    it "rejects body longer than 2000 characters" do
+      comment = build(:comment, body: "a" * 2001)
+      expect(comment).not_to be_valid
+      expect(comment.errors[:body]).to be_present
+    end
+
+    it "accepts body of exactly 2000 characters" do
+      comment = build(:comment, body: "a" * 2000)
+      expect(comment).to be_valid
+    end
+
     it "requires a user" do
       comment = build(:comment, user: nil)
       expect(comment).not_to be_valid
