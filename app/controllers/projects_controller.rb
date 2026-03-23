@@ -1,7 +1,13 @@
 class ProjectsController < ApplicationController
   def index
-    @projects = Project.for_feed
-                       .includes(:user, :tags, project_images: { image_attachment: :blob })
+    @tag = params[:tag].presence
+    @page = [params[:page].to_i, 1].max
+    base = Project.for_feed.with_tag(@tag)
+    @total_pages = [(base.count.to_f / Project::PER_PAGE).ceil, 1].max
+    @projects = base
+                  .includes(:user, :tags, project_images: { image_attachment: :blob })
+                  .limit(Project::PER_PAGE)
+                  .offset((@page - 1) * Project::PER_PAGE)
   end
 
   def show

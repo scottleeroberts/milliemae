@@ -21,6 +21,7 @@ html
       .container.mx-auto.px-4.py-3.flex.items-center.justify-between
         = link_to "Sew Twirly", root_path, class: "text-xl font-bold"
         .flex.items-center.gap-4
+          = link_to "About", about_path, class: "text-sm text-gray-600 hover:text-pink-600"
           - if user_signed_in?
             - if current_user.admin?
               = link_to "Admin", admin_root_path, class: "text-sm text-pink-600 font-medium hover:text-pink-800"
@@ -41,3 +42,5 @@ html
 
     main.container.mx-auto.px-4.mt-8
       = yield
+
+    = render "layouts/footer"

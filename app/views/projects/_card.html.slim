@@ -18,6 +18,6 @@ article.bg-white.rounded-lg.shadow.overflow-hidden.flex.flex-col
     - if project.tags.any?
       .flex.flex-wrap.gap-1.mt-2
         - project.tags.each do |tag|
-          span.bg-gray-100.text-gray-500.text-xs.px-2.py-0.5.rounded = tag.name
+          = link_to tag.name, projects_path(tag: tag.name), class: "bg-gray-100 text-gray-500 text-xs px-2 py-0.5 rounded hover:bg-pink-100 hover:text-pink-600"
 
     p.text-xs.text-gray-300.mt-auto.pt-3 = project.published_date

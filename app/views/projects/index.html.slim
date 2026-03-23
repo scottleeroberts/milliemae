@@ -3,6 +3,12 @@
 
 h1.text-3xl.font-bold.mb-8 Discover Projects
 
+- if @tag.present?
+  .flex.items-center.gap-2.mb-6
+    span.text-sm.text-gray-600 Showing:
+    span.bg-pink-100.text-pink-700.text-sm.px-3.py-1.rounded-full = @tag
+    = link_to "Clear", projects_path, class: "text-xs text-gray-400 hover:underline"
+
 - if @projects.any?
   .grid.grid-cols-1.gap-6 style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));"
     - @projects.each do |project|
@@ -10,3 +16,11 @@ h1.text-3xl.font-bold.mb-8 Discover Projects
 - else
   .text-center.py-16
     p.text-gray-400.text-lg No projects published yet. Check back soon!
+
+- if @total_pages > 1
+  .flex.items-center.justify-center.gap-4.mt-10
+    - if @page > 1
+      = link_to "← Previous", projects_path(page: @page - 1, tag: @tag), class: "text-sm text-pink-600 hover:underline"
+    span.text-sm.text-gray-400 Page #{@page} of #{@total_pages}
+    - if @page < @total_pages
+      = link_to "Next →", projects_path(page: @page + 1, tag: @tag), class: "text-sm text-pink-600 hover:underline"

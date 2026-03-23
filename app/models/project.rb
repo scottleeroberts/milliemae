@@ -16,6 +16,9 @@ class Project < ApplicationRecord
   scope :draft, -> { where(published: false) }
   scope :recent, -> { order(published_at: :desc, created_at: :desc) }
   scope :for_feed, -> { published.order(Arel.sql("published_at DESC NULLS LAST"), created_at: :desc) }
+  scope :with_tag, ->(tag) { tag.present? ? joins(:tags).where(tags: { name: tag }) : all }
+
+  PER_PAGE = 12
 
   def to_param
     slug
