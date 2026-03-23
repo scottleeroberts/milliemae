@@ -38,11 +38,15 @@ html
             = link_to "Sign up", new_user_registration_path, class: "text-sm bg-pink-600 text-white px-3 py-1 rounded hover:bg-pink-700"
 
     - if notice.present?
-      .container.mx-auto.px-4.mt-4
-        p.bg-green-100.text-green-800.p-3.rounded role="alert" = notice
+      .container.mx-auto.px-4.mt-4 data-controller="flash"
+        .bg-green-100.text-green-800.p-3.rounded.flex.items-center.justify-between role="alert"
+          span = notice
+          button.text-green-600.hover:text-green-800.text-lg.font-bold.leading-none.ml-4 type="button" data-action="flash#close" aria-label="Dismiss" ×
     - if alert.present?
-      .container.mx-auto.px-4.mt-4
-        p.bg-red-100.text-red-800.p-3.rounded role="alert" = alert
+      .container.mx-auto.px-4.mt-4 data-controller="flash"
+        .bg-red-100.text-red-800.p-3.rounded.flex.items-center.justify-between role="alert"
+          span = alert
+          button.text-red-600.hover:text-red-800.text-lg.font-bold.leading-none.ml-4 type="button" data-action="flash#close" aria-label="Dismiss" ×
 
     main.container.mx-auto.px-4.mt-8 id="main-content"
       = yield

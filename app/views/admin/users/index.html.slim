@@ -21,5 +21,5 @@ table.w-full.text-sm
         td.py-3.text-gray-500 @#{user.username}
         td.py-3
           = form_with url: admin_user_path(user.id), method: :patch do |f|
-            = select_tag "user[role]", options_for_select(User.roles.keys.map { |r| [r.capitalize, r] }, user.role), onchange: "this.form.submit()", class: "text-sm border rounded px-2 py-1 cursor-pointer"
+            = select_tag "user[role]", options_for_select(User.roles.keys.map { |r| [r.capitalize, r] }, user.role), onchange: "if(confirm('Change role to ' + this.value + '?')) this.form.submit(); else this.value = '#{user.role}';", class: "text-sm border rounded px-2 py-1 cursor-pointer"
         td.py-3.text-gray-500 = user.created_at.strftime("%b %d, %Y")
