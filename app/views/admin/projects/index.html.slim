@@ -1,0 +1,33 @@
+- content_for :title, "Projects — Admin — Sew Twirly"
+
+.flex.items-center.justify-between.mb-6
+  h1.text-2xl.font-bold All Projects
+  = link_to "← Dashboard", admin_root_path, class: "text-sm text-gray-500 hover:underline"
+
+- if @projects.empty?
+  p.text-gray-500 No projects yet.
+- else
+  table.w-full.text-sm
+    thead
+      tr.border-b.text-left
+        th.pb-2.font-medium Title
+        th.pb-2.font-medium Creator
+        th.pb-2.font-medium Status
+        th.pb-2.font-medium Created
+        th.pb-2
+    tbody
+      - @projects.each do |project|
+        tr.border-b.last:border-0
+          td.py-3
+            = link_to project.title, project_path(project), class: "hover:underline text-blue-600", target: "_blank"
+          td.py-3.text-gray-600 = project.user.display_name
+          td.py-3
+            - if project.published?
+              span.text-green-600.text-xs.font-medium Published
+            - else
+              span.text-yellow-600.text-xs.font-medium Draft
+          td.py-3.text-gray-500 = project.created_at.strftime("%b %d, %Y")
+          td.py-3.text-right.flex.items-center.justify-end.gap-3
+            - if project.published?
+              = button_to "Unpublish", unpublish_admin_project_path(project.id), method: :patch, data: { turbo_confirm: "Unpublish \"#{project.title}\"?" }, class: "text-xs text-yellow-600 hover:underline bg-transparent border-0 p-0 cursor-pointer"
+            = button_to "Delete", admin_project_path(project.id), method: :delete, data: { turbo_confirm: "Delete \"#{project.title}\"? This cannot be undone." }, class: "text-xs text-red-500 hover:underline bg-transparent border-0 p-0 cursor-pointer"

@@ -1,0 +1,15 @@
+p
+  | Hi there! You've been invited to join Sew Twirly as a creator.
+
+p
+  | Click the link below to set up your creator account:
+
+p
+  = link_to "Accept invitation", @accept_url
+
+p
+  small
+    | Or copy this link: #{@accept_url}
+
+p
+  | This invitation is for #{@invitation.email}.

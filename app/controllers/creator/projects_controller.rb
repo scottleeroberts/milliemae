@@ -5,6 +5,9 @@ class Creator::ProjectsController < ApplicationController
 
   def index
     @projects = current_user.projects.includes(:tags).recent
+    @published_count = @projects.count(&:published?)
+    @total_likes = Like.joins(:project).where(projects: { user_id: current_user.id }).count
+    @follower_count = current_user.followers.count
   end
 
   def show; end

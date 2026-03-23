@@ -1,5 +1,16 @@
 - content_for :title, "My Projects — Sew Twirly"
 
+.grid.grid-cols-3.gap-4.mb-6
+  .bg-gray-50.border.rounded-lg.p-3.text-center
+    p.text-2xl.font-bold = @published_count
+    p.text-xs.text-gray-500.mt-1 Published projects
+  .bg-gray-50.border.rounded-lg.p-3.text-center
+    p.text-2xl.font-bold = @total_likes
+    p.text-xs.text-gray-500.mt-1 Total likes
+  .bg-gray-50.border.rounded-lg.p-3.text-center
+    p.text-2xl.font-bold = @follower_count
+    p.text-xs.text-gray-500.mt-1 Followers
+
 .flex.items-center.justify-between.mb-6
   h1.text-2xl.font-bold My Projects
   = link_to "New Project", new_creator_project_path, class: "bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600"

@@ -1,0 +1,40 @@
+- content_for :title, "Invitations — Admin — Sew Twirly"
+
+.flex.items-center.justify-between.mb-6
+  h1.text-2xl.font-bold Invitations
+  = link_to "← Dashboard", admin_root_path, class: "text-sm text-gray-500 hover:underline"
+
+.bg-gray-50.border.rounded-lg.p-4.mb-8
+  h2.text-sm.font-semibold.text-gray-700.mb-3 Send a new invitation
+  = form_with model: @new_invitation, url: admin_invitations_path, class: "flex gap-3 items-start" do |f|
+    div.flex-1
+      = f.email_field :email, placeholder: "creator@example.com", class: "w-full border rounded px-3 py-2 text-sm"
+      - if @new_invitation&.errors&.any?
+        p.text-red-500.text-xs.mt-1 = @new_invitation.errors.full_messages.first
+    = f.submit "Send Invitation", class: "bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600 text-sm cursor-pointer whitespace-nowrap"
+
+- if @invitations.empty?
+  p.text-gray-500 No invitations sent yet.
+- else
+  table.w-full.text-sm
+    thead
+      tr.border-b.text-left
+        th.pb-2.font-medium Email
+        th.pb-2.font-medium Status
+        th.pb-2.font-medium Invited by
+        th.pb-2.font-medium Sent
+        th.pb-2
+    tbody
+      - @invitations.each do |invitation|
+        tr.border-b.last:border-0
+          td.py-3 = invitation.email
+          td.py-3
+            - if invitation.accepted?
+              span.text-green-600.text-xs.font-medium Accepted
+            - else
+              span.text-yellow-600.text-xs.font-medium Pending
+          td.py-3 = invitation.invited_by.display_name
+          td.py-3.text-gray-500 = invitation.created_at.strftime("%b %d, %Y")
+          td.py-3.text-right
+            - unless invitation.accepted?
+              = button_to "Cancel", admin_invitation_path(invitation), method: :delete, data: { turbo_confirm: "Cancel this invitation?" }, class: "text-xs text-red-500 hover:underline bg-transparent border-0 p-0 cursor-pointer"

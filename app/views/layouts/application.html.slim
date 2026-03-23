@@ -22,6 +22,8 @@ html
         = link_to "Sew Twirly", root_path, class: "text-xl font-bold"
         .flex.items-center.gap-4
           - if user_signed_in?
+            - if current_user.admin?
+              = link_to "Admin", admin_root_path, class: "text-sm text-pink-600 font-medium hover:text-pink-800"
             - if current_user.creator? || current_user.admin?
               = link_to "My Projects", creator_projects_path, class: "text-sm text-gray-600 hover:text-gray-900"
             = link_to current_user.display_name, creator_path(current_user), class: "text-sm text-gray-600 hover:text-gray-900"

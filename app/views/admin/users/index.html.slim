@@ -1,0 +1,25 @@
+- content_for :title, "Users — Admin — Sew Twirly"
+
+.flex.items-center.justify-between.mb-6
+  h1.text-2xl.font-bold Users
+  = link_to "← Dashboard", admin_root_path, class: "text-sm text-gray-500 hover:underline"
+
+table.w-full.text-sm
+  thead
+    tr.border-b.text-left
+      th.pb-2.font-medium Name
+      th.pb-2.font-medium Email
+      th.pb-2.font-medium Username
+      th.pb-2.font-medium Role
+      th.pb-2.font-medium Joined
+  tbody
+    - @users.each do |user|
+      tr.border-b.last:border-0
+        td.py-3
+          = link_to user.display_name, creator_path(user), class: "hover:underline text-blue-600", target: "_blank"
+        td.py-3.text-gray-600 = user.email
+        td.py-3.text-gray-500 @#{user.username}
+        td.py-3
+          = form_with url: admin_user_path(user.id), method: :patch do |f|
+            = select_tag "user[role]", options_for_select(User.roles.keys.map { |r| [r.capitalize, r] }, user.role), onchange: "this.form.submit()", class: "text-sm border rounded px-2 py-1 cursor-pointer"
+        td.py-3.text-gray-500 = user.created_at.strftime("%b %d, %Y")

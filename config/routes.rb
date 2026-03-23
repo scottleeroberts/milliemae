@@ -1,6 +1,21 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  namespace :admin do
+    root to: "dashboard#index"
+    resources :invitations, only: [:index, :create, :destroy]
+    resources :users, only: [:index, :update]
+    resources :projects, only: [:index, :destroy] do
+      member do
+        patch :unpublish
+      end
+    end
+  end
+
+  resources :invitations, only: [:show], param: :token do
+    post :accept, on: :member
+  end
+
   namespace :creator do
     resources :projects do
       member do

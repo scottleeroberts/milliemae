@@ -13,6 +13,8 @@ class User < ApplicationRecord
                               dependent: :destroy, inverse_of: :following
   has_many :followers, through: :follower_follows, source: :follower
   has_many :comments, dependent: :destroy
+  has_many :sent_invitations, class_name: "Invitation", foreign_key: :invited_by_id,
+                              dependent: :destroy, inverse_of: :invited_by
 
   validates :name, presence: true
   validates :username, presence: true, uniqueness: { case_sensitive: false },
