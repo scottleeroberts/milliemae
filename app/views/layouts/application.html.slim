@@ -20,7 +20,8 @@ html
     = javascript_importmap_tags
 
   body.bg-stone-50.text-gray-900
-    nav.bg-white.shadow.border-b-2.border-pink-200
+    a.sr-only.focus:not-sr-only.focus:absolute.focus:z-50.focus:p-4.focus:bg-pink-600.focus:text-white.focus:font-medium href="#main-content" Skip to content
+    nav.bg-white.shadow.border-b-2.border-pink-200 aria-label="Main navigation"
       .container.mx-auto.px-4.py-3.flex.items-center.justify-between
         = link_to "Sew Twirly", root_path, class: "text-2xl font-bold font-display text-pink-600 hover:text-pink-700 transition-colors"
         .flex.items-center.gap-4
@@ -34,16 +35,16 @@ html
             = link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "text-sm text-gray-600 hover:text-gray-900"
           - else
             = link_to "Sign in", new_user_session_path, class: "text-sm text-gray-600 hover:text-gray-900"
-            = link_to "Sign up", new_user_registration_path, class: "text-sm bg-pink-500 text-white px-3 py-1 rounded hover:bg-pink-600"
+            = link_to "Sign up", new_user_registration_path, class: "text-sm bg-pink-600 text-white px-3 py-1 rounded hover:bg-pink-700"
 
     - if notice.present?
       .container.mx-auto.px-4.mt-4
-        p.bg-green-100.text-green-800.p-3.rounded = notice
+        p.bg-green-100.text-green-800.p-3.rounded role="alert" = notice
     - if alert.present?
       .container.mx-auto.px-4.mt-4
-        p.bg-red-100.text-red-800.p-3.rounded = alert
+        p.bg-red-100.text-red-800.p-3.rounded role="alert" = alert
 
-    main.container.mx-auto.px-4.mt-8
+    main.container.mx-auto.px-4.mt-8 id="main-content"
       = yield
 
     = render "layouts/footer"

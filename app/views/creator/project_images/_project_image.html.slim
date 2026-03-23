@@ -1,7 +1,7 @@
 = turbo_frame_tag "project_image_#{project_image.id}" do
   .mb-8 data-controller="hotspot-annotator"
     .relative.inline-block.max-w-full
-      = image_tag project_image.image, class: "block max-w-full", data: { hotspot_annotator_target: "image", action: "click->hotspot-annotator#placeHotspot" }
+      = image_tag project_image.image, class: "block max-w-full", loading: "lazy", data: { hotspot_annotator_target: "image", action: "click->hotspot-annotator#placeHotspot" }
 
       - project_image.product_links.each.with_index(1) do |pl, idx|
         a.absolute.flex.items-center.justify-center.bg-red-500.text-white.text-xs.font-bold.rounded-full.w-6.h-6.shadow-lg.-translate-x-3.-translate-y-3 href=pl.url target="_blank" rel="noopener noreferrer" title=pl.label style="left: #{(pl.x * 100).round(2)}%; top: #{(pl.y * 100).round(2)}%;"
@@ -24,7 +24,7 @@
             = f.label :url, "Link URL", class: "block text-xs font-medium text-gray-700 mb-1"
             = f.text_field :url, class: "w-full border border-gray-300 rounded px-2 py-1 text-sm", placeholder: "https://..."
           .flex.gap-2.mt-3
-            = f.submit "Save", class: "bg-pink-500 text-white text-xs px-3 py-1.5 rounded cursor-pointer hover:bg-pink-600"
+            = f.submit "Save", class: "bg-pink-600 text-white text-xs px-3 py-1.5 rounded cursor-pointer hover:bg-pink-700"
             button.text-xs.text-gray-500.hover:underline type="button" data-action="hotspot-annotator#cancelAnnotating" Cancel
 
     .mt-3.flex.items-center.gap-4

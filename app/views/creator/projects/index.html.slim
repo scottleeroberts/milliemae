@@ -13,7 +13,7 @@
 
 .flex.items-center.justify-between.mb-6
   h1.text-2xl.font-bold My Projects
-  = link_to "New Project", new_creator_project_path, class: "bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600"
+  = link_to "New Project", new_creator_project_path, class: "bg-pink-600 text-white px-4 py-2 rounded hover:bg-pink-700"
 
 - if @projects.empty?
   p.text-gray-500 You haven't created any projects yet.
@@ -27,7 +27,7 @@
           p.text-sm.text-gray-500.mt-1
             - if project.published?
               span.text-green-600 Published
-              span.text-gray-400 ·
+              span.text-gray-500 ·
               = project.published_date
             - else
               span.text-yellow-600 Draft

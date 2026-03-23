@@ -28,4 +28,4 @@
       - if @user.errors[:password_confirmation].any?
         p.text-red-500.text-xs.mt-1 = @user.errors[:password_confirmation].first
 
-    = submit_tag "Create my account", class: "w-full bg-pink-500 text-white py-2 px-4 rounded hover:bg-pink-600 cursor-pointer font-medium text-sm"
+    = submit_tag "Create my account", class: "w-full bg-pink-600 text-white py-2 px-4 rounded hover:bg-pink-700 cursor-pointer font-medium text-sm"

@@ -37,4 +37,4 @@ hr.mb-8.border-rose-100
     - @projects.each do |project|
       = render "projects/card", project: project
 - else
-  p.text-gray-400 #{@creator.display_name} hasn't published any projects yet.
+  p.text-gray-500 #{@creator.display_name} hasn't published any projects yet.
