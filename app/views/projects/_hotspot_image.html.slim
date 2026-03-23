@@ -7,7 +7,7 @@
       = image_tag project_image.image, class: "block w-full rounded-lg shadow", alt: local_assigns.fetch(:image_alt, "")
 
       - project_image.product_links.each.with_index(1) do |pl, idx|
-        a.absolute.flex.items-center.justify-center.bg-pink-500.text-white.text-xs.font-bold.rounded-full.w-7.h-7.shadow-lg.-translate-x-3.5.-translate-y-3.5.hover:bg-pink-600.hover:scale-110.transition-all.duration-200.animate-hotspot-pulse href=pl.url target="_blank" rel="noopener noreferrer" title=pl.label aria-label="Product #{idx}: #{pl.label}" style="left: #{(pl.x * 100).round(2)}%; top: #{(pl.y * 100).round(2)}%;"
+        a.absolute.flex.items-center.justify-center.bg-pink-500.text-white.text-xs.font-bold.rounded-full.w-9.h-9.sm:w-7.sm:h-7.shadow-lg.-translate-x-4.sm:-translate-x-3.5.-translate-y-4.sm:-translate-y-3.5.hover:bg-pink-600.hover:scale-110.transition-all.duration-200.animate-hotspot-pulse href=pl.url target="_blank" rel="noopener noreferrer" title=pl.label aria-label="Product #{idx}: #{pl.label}" style="left: #{(pl.x * 100).round(2)}%; top: #{(pl.y * 100).round(2)}%;"
           = idx
 
     - if has_products
