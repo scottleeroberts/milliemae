@@ -2,16 +2,16 @@ footer.bg-teal-50.border-t.border-teal-100.mt-12
   .container.mx-auto.px-4.py-8
     .flex.flex-col.sm:flex-row.justify-between.gap-8.mb-8
       div
-        h3.text-sm.font-semibold.text-gray-900.uppercase.tracking-wider.mb-3 Explore
+        h3.font-display.text-base.font-semibold.text-gray-900.mb-3 Explore
         ul.space-y-2
-          li = link_to "Discover Projects", root_path, class: "text-sm text-gray-600 hover:text-pink-600"
-          li = link_to "About", about_path, class: "text-sm text-gray-600 hover:text-pink-600"
-          li = link_to "Privacy Policy", privacy_path, class: "text-sm text-gray-600 hover:text-pink-600"
+          li = link_to "Discover Projects", root_path, class: "text-sm text-gray-600 hover:text-pink-600 transition-colors"
+          li = link_to "About", about_path, class: "text-sm text-gray-600 hover:text-pink-600 transition-colors"
+          li = link_to "Privacy Policy", privacy_path, class: "text-sm text-gray-600 hover:text-pink-600 transition-colors"
       div
-        h3.text-sm.font-semibold.text-gray-900.uppercase.tracking-wider.mb-3 Connect
-        ul.space-y-2
-          li = link_to "Facebook", "https://www.facebook.com/groups/sewtwirly/", target: "_blank", rel: "noopener noreferrer", class: "text-sm text-gray-600 hover:text-pink-600"
-          li = link_to "Instagram", "https://www.instagram.com/sewtwirlycreativecommunity", target: "_blank", rel: "noopener noreferrer", class: "text-sm text-gray-600 hover:text-pink-600"
-          li = link_to "Pinterest", "https://pinterest.com/sewtwirly/", target: "_blank", rel: "noopener noreferrer", class: "text-sm text-gray-600 hover:text-pink-600"
-    .border-t.pt-6
-      p.text-xs.text-gray-500.text-center © #{Time.current.year} Sew Twirly Creative Community. All rights reserved.
+        h3.font-display.text-base.font-semibold.text-gray-900.mb-3 Connect
+        .flex.gap-3
+          = link_to "Fb", "https://www.facebook.com/groups/sewtwirly/", target: "_blank", rel: "noopener noreferrer", class: "flex items-center justify-center w-8 h-8 rounded-full bg-pink-500 text-white text-xs font-bold hover:bg-pink-600 transition-colors", title: "Facebook"
+          = link_to "Ig", "https://www.instagram.com/sewtwirlycreativecommunity", target: "_blank", rel: "noopener noreferrer", class: "flex items-center justify-center w-8 h-8 rounded-full bg-pink-500 text-white text-xs font-bold hover:bg-pink-600 transition-colors", title: "Instagram"
+          = link_to "Pi", "https://pinterest.com/sewtwirly/", target: "_blank", rel: "noopener noreferrer", class: "flex items-center justify-center w-8 h-8 rounded-full bg-pink-500 text-white text-xs font-bold hover:bg-pink-600 transition-colors", title: "Pinterest"
+    .border-t.border-teal-100.pt-6
+      p.text-xs.text-gray-500.text-center.font-display © #{Time.current.year} Sew Twirly Creative Community. All rights reserved.

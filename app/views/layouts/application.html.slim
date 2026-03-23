@@ -20,9 +20,9 @@ html
     = javascript_importmap_tags
 
   body.bg-stone-50.text-gray-900
-    nav.bg-white.shadow
+    nav.bg-white.shadow.border-b-2.border-pink-200
       .container.mx-auto.px-4.py-3.flex.items-center.justify-between
-        = link_to "Sew Twirly", root_path, class: "text-xl font-bold font-display text-pink-600"
+        = link_to "Sew Twirly", root_path, class: "text-2xl font-bold font-display text-pink-600 hover:text-pink-700 transition-colors"
         .flex.items-center.gap-4
           = link_to "About", about_path, class: "text-sm text-gray-600 hover:text-pink-600"
           - if user_signed_in?
