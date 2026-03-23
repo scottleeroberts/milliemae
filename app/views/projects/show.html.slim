@@ -5,22 +5,22 @@
   meta property="og:type" content="article"
   meta property="og:description" content=("#{@project.title} by #{@project.user.display_name} on Sew Twirly.")
 
-.mb-6
-  = link_to "← All Projects", projects_path, class: "text-sm text-gray-400 hover:underline"
+.bg-rose-50.rounded-xl.p-6.mb-8.-mx-4
+  .mb-4
+    = link_to "← All Projects", projects_path, class: "text-sm text-gray-400 hover:underline"
 
-h1.text-3xl.font-bold.leading-tight = @project.title
+  h1.text-3xl.font-bold.leading-tight = @project.title
 
-.flex.items-center.gap-2.mt-2.mb-4
-  = link_to @project.user.display_name, creator_path(@project.user), class: "text-sm text-gray-600 hover:underline font-medium"
-  span.text-gray-300 ·
-  span.text-sm.text-gray-400 = @project.published_date
+  .flex.items-center.gap-2.mt-2.mb-4
+    = link_to @project.user.display_name, creator_path(@project.user), class: "text-sm text-gray-600 hover:underline font-medium"
+    span.text-gray-300 ·
+    span.text-sm.text-gray-400 = @project.published_date
 
-- if @project.tags.any?
-  .flex.flex-wrap.gap-2.mb-6
-    - @project.tags.each do |tag|
-      = link_to tag.name, projects_path(tag: tag.name), class: "bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded hover:bg-pink-100 hover:text-pink-600"
+  - if @project.tags.any?
+    .flex.flex-wrap.gap-2.mb-4
+      - @project.tags.each do |tag|
+        = link_to tag.name, projects_path(tag: tag.name), class: "bg-teal-50 text-teal-700 text-xs px-2 py-1 rounded hover:bg-pink-100 hover:text-pink-600"
 
-.my-4
   = render "likes/button", project: @project
 
 - if @project.body.present?
