@@ -4,6 +4,8 @@ class Project < ApplicationRecord
   has_many :project_tags, dependent: :destroy
   has_many :tags, through: :project_tags
   has_many :project_images, -> { order(:position) }, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :comments, -> { order(created_at: :desc) }, dependent: :destroy
 
   validates :title, presence: true
   validates :slug, presence: true, uniqueness: { message: "has already been taken — try a slightly different title" }

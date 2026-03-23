@@ -1,0 +1,12 @@
+div id=dom_id(project, :like) class="flex items-center gap-3"
+  span.text-sm.text-gray-500 = pluralize(project.likes.size, "like")
+  - if user_signed_in?
+    - if current_user.liked?(project)
+      = button_to project_like_path(project), method: :delete, class: "text-pink-500 hover:text-pink-700 text-sm font-medium transition-colors"
+        | ♥ Unlike
+    - else
+      = button_to project_like_path(project), method: :post, class: "text-gray-400 hover:text-pink-500 text-sm font-medium transition-colors"
+        | ♥ Like
+  - else
+    = link_to new_user_session_path, class: "text-gray-400 hover:text-pink-500 text-sm font-medium"
+      | ♥ Like

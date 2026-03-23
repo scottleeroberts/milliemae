@@ -20,6 +20,9 @@ h1.text-3xl.font-bold.leading-tight = @project.title
     - @project.tags.each do |tag|
       span.bg-gray-100.text-gray-600.text-xs.px-2.py-1.rounded = tag.name
 
+.my-4
+  = render "likes/button", project: @project
+
 - if @project.body.present?
   .prose.max-w-none.mb-10
     = @project.body
@@ -28,3 +31,17 @@ h1.text-3xl.font-bold.leading-tight = @project.title
   .space-y-10
     - @project.project_images.each do |project_image|
       = render "hotspot_image", project_image: project_image, image_alt: @project.title
+
+section.mt-12
+  h2.text-xl.font-semibold.mb-4 Comments
+  - if user_signed_in?
+    .mb-6
+      = render "comments/form", project: @project, comment: Comment.new
+  - else
+    p.text-sm.text-gray-500.mb-6
+      | = link_to "Sign in", new_user_session_path, class: "text-pink-500 hover:underline"
+      |  to leave a comment.
+  div id=dom_id(@project, :comments) class="space-y-4 divide-y divide-gray-100"
+    - @project.comments.includes(:user).each do |comment|
+      .py-3
+        = render "comments/comment", comment: comment, project: @project

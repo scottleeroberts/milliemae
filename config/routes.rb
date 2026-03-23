@@ -13,8 +13,14 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :projects, only: [:index, :show]
-  resources :creators, only: [:show]
+  resources :projects, only: [:index, :show] do
+    resource :like, only: [:create, :destroy]
+    resources :comments, only: [:create, :destroy]
+  end
+
+  resources :creators, only: [:show] do
+    resource :follow, only: [:create, :destroy]
+  end
 
   get "up" => "rails/health#show", as: :rails_health_check
 

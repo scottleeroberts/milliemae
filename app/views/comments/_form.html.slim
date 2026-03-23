@@ -1,0 +1,6 @@
+div id=dom_id(project, :comment_form)
+  = form_with model: [project, comment], class: "space-y-2" do |f|
+    = f.text_area :body, placeholder: "Share your thoughts...", rows: 3, class: "w-full border border-gray-200 rounded p-2 text-sm focus:outline-none focus:ring-2 focus:ring-pink-300 resize-none"
+    - if comment.errors[:body].any?
+      p.text-red-500.text-xs = comment.errors[:body].first
+    = f.submit "Post comment", class: "px-4 py-2 bg-pink-500 text-white text-sm font-medium rounded hover:bg-pink-600 cursor-pointer transition-colors"

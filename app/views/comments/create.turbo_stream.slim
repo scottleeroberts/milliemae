@@ -1,0 +1,4 @@
+= turbo_stream.prepend dom_id(@project, :comments) do
+  = render "comments/comment", comment: @comment, project: @project
+= turbo_stream.replace dom_id(@project, :comment_form) do
+  = render "comments/form", project: @project, comment: Comment.new

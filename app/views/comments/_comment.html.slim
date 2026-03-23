@@ -1,0 +1,8 @@
+article.flex.flex-col.gap-1 id=dom_id(comment)
+  .flex.items-center.gap-2
+    span.font-medium.text-sm = comment.user.display_name
+    span.text-gray-400.text-xs = "#{time_ago_in_words(comment.created_at)} ago"
+    - if user_signed_in? && (current_user == comment.user || current_user.admin?)
+      = button_to project_comment_path(project, comment), method: :delete, class: "ml-auto text-xs text-gray-300 hover:text-red-500 transition-colors", data: { turbo_confirm: "Delete this comment?" }
+        | ×
+  p.text-sm.text-gray-800 = comment.body

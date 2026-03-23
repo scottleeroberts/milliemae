@@ -6,7 +6,8 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.published
-                      .includes(:user, :tags, project_images: [:product_links, { image_attachment: :blob }])
+                      .includes(:user, :tags, :likes,
+                                project_images: [:product_links, { image_attachment: :blob }])
                       .find_by!(slug: params[:id])
   end
 end
