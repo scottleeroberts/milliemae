@@ -1,15 +1,21 @@
 / Read-only hotspot image — no Stimulus, no annotation controls.
-.mb-8
-  .relative.inline-block.max-w-full
-    = image_tag project_image.image, class: "block max-w-full rounded", alt: local_assigns.fetch(:image_alt, "")
+/ Side-by-side layout: flatlay image (left) + shopping list card (right)
+.mb-10
+  - has_products = project_image.product_links.any?
+  div class=(has_products ? "grid grid-cols-1 lg:grid-cols-3 gap-6 items-start" : "")
+    .relative.lg:col-span-2
+      = image_tag project_image.image, class: "block w-full rounded-lg shadow", alt: local_assigns.fetch(:image_alt, "")
 
-    - project_image.product_links.each.with_index(1) do |pl, idx|
-      a.absolute.flex.items-center.justify-center.bg-pink-500.text-white.text-xs.font-bold.rounded-full.w-6.h-6.shadow-lg.-translate-x-3.-translate-y-3.hover:bg-pink-600.transition-colors href=pl.url target="_blank" rel="noopener noreferrer" title=pl.label style="left: #{(pl.x * 100).round(2)}%; top: #{(pl.y * 100).round(2)}%;"
-        = idx
-
-  - if project_image.product_links.any?
-    ol.mt-3.space-y-1
       - project_image.product_links.each.with_index(1) do |pl, idx|
-        li.flex.items-center.gap-2.text-sm
-          span.flex.items-center.justify-center.bg-pink-500.text-white.text-xs.font-bold.rounded-full.w-5.h-5.shrink-0 = idx
-          = link_to pl.label, pl.url, class: "text-blue-600 hover:underline truncate", target: "_blank", rel: "noopener noreferrer"
+        a.absolute.flex.items-center.justify-center.bg-pink-500.text-white.text-xs.font-bold.rounded-full.w-7.h-7.shadow-lg.-translate-x-3.5.-translate-y-3.5.hover:bg-pink-600.hover:scale-110.transition-all.duration-200 href=pl.url target="_blank" rel="noopener noreferrer" title=pl.label aria-label="Product #{idx}: #{pl.label}" style="left: #{(pl.x * 100).round(2)}%; top: #{(pl.y * 100).round(2)}%;"
+          = idx
+
+    - if has_products
+      .bg-white.rounded-xl.shadow-md.p-5.lg:col-span-1
+        h3.font-display.text-lg.font-semibold.text-pink-600.mb-4 Shopping List
+        ol.space-y-3
+          - project_image.product_links.each.with_index(1) do |pl, idx|
+            li
+              = link_to pl.url, class: "flex items-center gap-3 group/item", target: "_blank", rel: "noopener noreferrer"
+                span.flex.items-center.justify-center.bg-pink-500.text-white.text-xs.font-bold.rounded-full.w-6.h-6.shrink-0.group-hover/item:bg-pink-600.transition-colors = idx
+                span.text-sm.text-gray-700.group-hover/item:text-pink-600.transition-colors = pl.label
