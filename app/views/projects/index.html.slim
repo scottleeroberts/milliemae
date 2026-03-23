@@ -1,22 +1,34 @@
 - content_for :title, "Discover Projects — Sew Twirly"
 - content_for :description, "Browse handmade sewing projects from talented makers on Sew Twirly."
 
-h1.text-3xl.font-bold.mb-8 Discover Projects
+/ Hero section
+.bg-rose-50.rounded-xl.p-8.mb-8.-mx-4.text-center
+  h1.text-4xl.font-bold.text-gray-900.mb-3 Discover Handmade Creations
+  p.text-gray-600.max-w-xl.mx-auto Explore sewing projects from talented makers — each one featuring shoppable product links so you can recreate the look.
 
+/ Popular tags bar
+- if @popular_tags.any? && @tag.blank?
+  .flex.flex-wrap.justify-center.gap-2.mb-8
+    - @popular_tags.each do |tag|
+      = link_to tag.name, projects_path(tag: tag.name), class: "bg-teal-50 text-teal-700 text-sm px-3 py-1 rounded-full border border-teal-100 hover:bg-pink-100 hover:text-pink-600 hover:border-pink-200 transition-colors"
+
+/ Active tag filter
 - if @tag.present?
   .flex.items-center.gap-2.mb-6
     span.text-sm.text-gray-600 Showing:
-    span.bg-teal-100.text-teal-700.text-sm.px-3.py-1.rounded-full = @tag
+    span.bg-teal-100.text-teal-700.text-sm.font-medium.px-3.py-1.rounded-full = @tag
     = link_to "Clear", projects_path, class: "text-xs text-gray-400 hover:underline"
 
+/ Project grid
 - if @projects.any?
-  .grid.grid-cols-1.gap-6 style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));"
+  .grid.grid-cols-1.gap-6 style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));"
     - @projects.each do |project|
       = render "card", project: project
 - else
   .text-center.py-16
     p.text-gray-400.text-lg No projects published yet. Check back soon!
 
+/ Pagination
 - if @total_pages > 1
   .flex.items-center.justify-center.gap-4.mt-10
     - if @page > 1

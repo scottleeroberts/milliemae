@@ -9,6 +9,7 @@ class ProjectsController < ApplicationController
                             project_images: { image_attachment: :blob })
                   .limit(Project::PER_PAGE)
                   .offset((@page - 1) * Project::PER_PAGE)
+    @popular_tags = Tag.joins(:project_tags).group(:id).order(Arel.sql("count(*) DESC")).limit(12)
   end
 
   def show
