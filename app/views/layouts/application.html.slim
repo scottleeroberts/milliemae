@@ -9,6 +9,9 @@ html
     = csrf_meta_tags
     = csp_meta_tag
     = yield :head
+    link rel="preconnect" href="https://fonts.googleapis.com"
+    link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""
+    link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Quicksand:wght@400;500;600&display=swap"
     link rel="icon" href="/icon.png" type="image/png"
     link rel="icon" href="/icon.svg" type="image/svg+xml"
     link rel="apple-touch-icon" href="/icon.png"
@@ -19,7 +22,7 @@ html
   body.bg-white.text-gray-900
     nav.bg-white.shadow
       .container.mx-auto.px-4.py-3.flex.items-center.justify-between
-        = link_to "Sew Twirly", root_path, class: "text-xl font-bold"
+        = link_to "Sew Twirly", root_path, class: "text-xl font-bold font-display text-pink-600"
         .flex.items-center.gap-4
           = link_to "About", about_path, class: "text-sm text-gray-600 hover:text-pink-600"
           - if user_signed_in?
