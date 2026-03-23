@@ -5,14 +5,14 @@ RSpec.describe "Creator project image management", type: :system do
   let(:project) { create(:project, user: creator) }
   let(:image_path) { Rails.root.join("spec/fixtures/files/test_image.png") }
 
-  before { sign_in creator }
+  before { sign_in_via_form creator }
 
   it "uploads a project image and displays it on the project show page" do
     visit creator_project_path(project)
 
     expect(page).to have_content("No image yet")
 
-    attach_file "image", image_path
+    attach_file "project_image[image]", image_path
     click_button "Upload"
 
     expect(page).to have_css("img[src*='test']", wait: 5)

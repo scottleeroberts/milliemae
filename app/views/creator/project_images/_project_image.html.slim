@@ -32,12 +32,13 @@
         | + Add hotspot
       = button_to "Remove image", creator_project_project_image_path(project, project_image), method: :delete, data: { turbo_confirm: "Remove this image and all its hotspots?" }, class: "text-sm text-red-500 hover:underline bg-transparent border-0 p-0 cursor-pointer"
 
-    - if project_image.product_links.any?
+    - persisted_links = project_image.product_links.to_a.select(&:persisted?)
+    - if persisted_links.any?
       .mt-4
         h4.text-sm.font-medium.text-gray-700.mb-2
-          | Hotspots (#{project_image.product_links.size})
+          | Hotspots (#{persisted_links.size})
         ul.space-y-2
-          - project_image.product_links.each.with_index(1) do |pl, idx|
+          - persisted_links.each.with_index(1) do |pl, idx|
             li.flex.items-center.justify-between.text-sm id="product_link_#{pl.id}"
               .flex.items-center.gap-2.min-w-0
                 span.flex.items-center.justify-center.bg-red-500.text-white.text-xs.font-bold.rounded-full.w-5.h-5.shrink-0 = idx
