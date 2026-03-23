@@ -25,6 +25,7 @@ services:
       DATABASE_URL: postgres://sew_twirly:password@db:5432/sew_twirly_development
       RAILS_ENV: development
       SELENIUM_URL: http://chrome:4444/wd/hub
+      BINDING: 0.0.0.0
     tty: true
     stdin_open: true
 
