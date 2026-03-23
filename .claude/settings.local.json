@@ -10,7 +10,12 @@
       "Bash(bin/rspec --format documentation 2>&1)",
       "Bash(git commit:*)",
       "Bash(git rm:*)",
-      "Skill(run-ruby-specs)"
+      "Skill(run-ruby-specs)",
+      "Bash(bin/rspec spec/models/like_spec.rb spec/models/follow_spec.rb spec/models/comment_spec.rb spec/requests/likes_spec.rb spec/requests/follows_spec.rb spec/requests/comments_spec.rb 2>&1)",
+      "Bash(bin/rspec --exclude-pattern \"spec/system/**/*\" 2>&1)",
+      "Bash(bin/rspec spec/system/social/ 2>&1)",
+      "Bash(bin/rspec 2>&1)",
+      "Bash(bin/rspec spec/system/creator/project_images_spec.rb 2>&1)"
     ]
   }
 }
