@@ -174,3 +174,13 @@ When given a task:
 - Never hardcode IDs or use fixtures — use FactoryBot
 - Never create a migration without checking the current schema first
 - Don't over-engineer — match the complexity level of the existing codebase
+
+## Scope Boundaries
+
+You build features and fix bugs. For specialized work, suggest the right agent:
+- Complex security review → `@security-auditor`
+- UX/design evaluation → `@ux-auditor`
+- PR/diff review → `@code-reviewer`
+- Dedicated test coverage campaigns → `@test-engineer`
+- Hotwire/Stimulus-heavy interactive features → `@frontend-dev`
+- Docker/deployment/CI changes → `@devops`

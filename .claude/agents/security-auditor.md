@@ -114,7 +114,9 @@ Evaluate the following areas and produce findings ranked by severity
 - Publishing/unpublishing race conditions
 
 ### 9. Dependency & Supply Chain
-- Run `bundle audit` and `brakeman` -- report all findings
+- Run `bin/rspec` to verify tests pass (use the wrapper — handles RAILS_ENV)
+- Run `docker compose run --rm -e RAILS_ENV=test web bundle exec brakeman -q` for static analysis
+- Run `docker compose run --rm web bundle exec bundle-audit check --update` for gem CVEs
 - Evaluate gem versions against known CVEs
 - Review Dockerfile for base image vulnerabilities
 - Check importmap pins for integrity/version pinning
