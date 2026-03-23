@@ -23,6 +23,7 @@
         th.pb-2.font-medium Status
         th.pb-2.font-medium Invited by
         th.pb-2.font-medium Sent
+        th.pb-2.font-medium Expires
         th.pb-2
     tbody
       - @invitations.each do |invitation|
@@ -31,10 +32,17 @@
           td.py-3
             - if invitation.accepted?
               span.text-green-600.text-xs.font-medium Accepted
+            - elsif invitation.expired?
+              span.text-red-600.text-xs.font-medium Expired
             - else
               span.text-yellow-600.text-xs.font-medium Pending
           td.py-3 = invitation.invited_by.display_name
           td.py-3.text-gray-500 = invitation.created_at.strftime("%b %d, %Y")
+          td.py-3.text-gray-500
+            - if invitation.expires_at.present?
+              = invitation.expires_at.strftime("%b %d, %Y")
+            - else
+              | —
           td.py-3.text-right
             - unless invitation.accepted?
               = button_to "Cancel", admin_invitation_path(invitation), method: :delete, data: { turbo_confirm: "Cancel this invitation?" }, class: "text-xs text-red-500 hover:underline bg-transparent border-0 p-0 cursor-pointer"

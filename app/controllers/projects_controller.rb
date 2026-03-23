@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
     @tag = params[:tag].presence
     @page = [params[:page].to_i, 1].max
     base = Project.for_feed.with_tag(@tag)
-    @total_pages = [(base.count.to_f / Project::PER_PAGE).ceil, 1].max
+    @total_pages = [(base.count(:all).to_f / Project::PER_PAGE).ceil, 1].max
     @projects = base
                   .includes(:user, :tags, project_images: { image_attachment: :blob })
                   .limit(Project::PER_PAGE)

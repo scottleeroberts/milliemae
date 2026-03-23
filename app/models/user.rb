@@ -30,6 +30,11 @@ class User < ApplicationRecord
     name
   end
 
+  def gravatar_url(size: 80)
+    hash = Digest::MD5.hexdigest(email.to_s.strip.downcase)
+    "https://www.gravatar.com/avatar/#{hash}?s=#{size}&d=mp"
+  end
+
   def liked?(project)
     likes.exists?(project: project)
   end

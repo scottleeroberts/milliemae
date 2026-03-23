@@ -30,6 +30,11 @@ RSpec.describe Project, type: :model do
     it "returns none for an unused tag" do
       expect(Project.for_feed.with_tag("quilts")).to be_empty
     end
+
+    it "is case-insensitive" do
+      result = Project.for_feed.with_tag("Dresses")
+      expect(result).to include(dress_project)
+    end
   end
 
   describe "PER_PAGE" do

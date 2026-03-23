@@ -24,4 +24,18 @@ RSpec.describe User, type: :model do
       expect(user.etsy).to be_nil
     end
   end
+
+  describe "#gravatar_url" do
+    it "returns a gravatar URL based on email" do
+      user = create(:user, :creator, email: "test@example.com")
+      expected_hash = Digest::MD5.hexdigest("test@example.com")
+      expect(user.gravatar_url).to include(expected_hash)
+      expect(user.gravatar_url).to include("gravatar.com/avatar")
+    end
+
+    it "accepts a custom size" do
+      user = create(:user, :creator, email: "test@example.com")
+      expect(user.gravatar_url(size: 200)).to include("s=200")
+    end
+  end
 end

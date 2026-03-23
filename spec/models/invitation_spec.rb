@@ -88,4 +88,56 @@ RSpec.describe Invitation, type: :model do
       expect(build(:invitation, :accepted).accepted?).to be true
     end
   end
+
+  describe "expiry" do
+    it "sets expires_at automatically on create" do
+      invitation = create(:invitation)
+      expect(invitation.expires_at).to be_within(5.seconds).of(7.days.from_now)
+    end
+
+    it "does not overwrite an explicit expires_at" do
+      custom_expiry = 30.days.from_now
+      invitation = create(:invitation, expires_at: custom_expiry)
+      expect(invitation.expires_at).to be_within(1.second).of(custom_expiry)
+    end
+
+    describe "#expired?" do
+      it "returns true when expires_at is in the past" do
+        invitation = build(:invitation, expires_at: 1.hour.ago)
+        expect(invitation.expired?).to be true
+      end
+
+      it "returns false when expires_at is in the future" do
+        invitation = build(:invitation, expires_at: 1.hour.from_now)
+        expect(invitation.expired?).to be false
+      end
+
+      it "returns false when invitation is accepted even if past expiry" do
+        invitation = build(:invitation, :accepted, expires_at: 1.hour.ago)
+        expect(invitation.expired?).to be false
+      end
+    end
+
+    describe ".pending scope excludes expired" do
+      let!(:expired_invite) { create(:invitation, expires_at: 1.hour.ago) }
+      let!(:valid_invite) { create(:invitation, expires_at: 1.day.from_now) }
+
+      it "excludes expired invitations from pending" do
+        expect(Invitation.pending).to include(valid_invite)
+        expect(Invitation.pending).not_to include(expired_invite)
+      end
+    end
+
+    describe ".expired scope" do
+      let!(:expired_invite) { create(:invitation, expires_at: 1.hour.ago) }
+      let!(:valid_invite) { create(:invitation, expires_at: 1.day.from_now) }
+      let!(:accepted_invite) { create(:invitation, :accepted, expires_at: 1.hour.ago) }
+
+      it "returns only expired unaccepted invitations" do
+        expect(Invitation.expired).to include(expired_invite)
+        expect(Invitation.expired).not_to include(valid_invite)
+        expect(Invitation.expired).not_to include(accepted_invite)
+      end
+    end
+  end
 end

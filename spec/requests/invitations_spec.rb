@@ -34,6 +34,17 @@ RSpec.describe "Invitations", type: :request do
         expect(response).to redirect_to(root_path)
       end
     end
+
+    context "with an expired token" do
+      let!(:expired) { create(:invitation, expires_at: 1.hour.ago) }
+
+      it "redirects to root with alert" do
+        get invitation_path(expired.token)
+        expect(response).to redirect_to(root_path)
+        follow_redirect!
+        expect(response.body).to include("invalid or has already been used")
+      end
+    end
   end
 
   describe "POST /invitations/:token/accept" do
