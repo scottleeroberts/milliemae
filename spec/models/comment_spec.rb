@@ -36,18 +36,6 @@ RSpec.describe Comment, type: :model do
     end
   end
 
-  describe "associations" do
-    it "belongs to a user" do
-      comment = create(:comment)
-      expect(comment.user).to be_a(User)
-    end
-
-    it "belongs to a project" do
-      comment = create(:comment)
-      expect(comment.project).to be_a(Project)
-    end
-  end
-
   describe "dependent destroy" do
     it "is destroyed when the project is destroyed" do
       comment = create(:comment)

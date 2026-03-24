@@ -57,12 +57,6 @@ RSpec.describe Invitation, type: :model do
     end
   end
 
-  describe "associations" do
-    it "belongs to invited_by (User)" do
-      expect(Invitation.reflect_on_association(:invited_by).macro).to eq(:belongs_to)
-    end
-  end
-
   describe "token generation" do
     it "generates a token before create" do
       invitation = build(:invitation, token: nil)

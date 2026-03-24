@@ -64,6 +64,47 @@ RSpec.describe "Projects", type: :request do
     end
   end
 
+  describe "GET /projects?tag= (tag filtering)" do
+    let!(:tagged_project) do
+      p = create(:project, :published, user: creator, title: "Red Dress", published_at: 2.days.ago)
+      p.tag_list = "dresses"
+      p.save!
+      p
+    end
+    let!(:other_project) do
+      p = create(:project, :published, user: creator, title: "Blue Skirt", published_at: 1.day.ago)
+      p.tag_list = "skirts"
+      p.save!
+      p
+    end
+
+    it "filters to matching projects" do
+      get projects_path(tag: "dresses")
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include("Red Dress")
+      expect(response.body).not_to include("Blue Skirt")
+    end
+
+    it "shows the active filter indicator" do
+      get projects_path(tag: "dresses")
+      expect(response.body).to include("dresses")
+      expect(response.body).to include("Clear")
+    end
+  end
+
+  describe "pagination" do
+    it "respects page param" do
+      get projects_path(page: 1)
+      expect(response).to have_http_status(:ok)
+    end
+
+    it "does not show pagination when only one page" do
+      get projects_path
+      expect(response.body).not_to include("Previous")
+      expect(response.body).not_to include("Next →")
+    end
+  end
+
   describe "GET / (root)" do
     it "renders the project feed" do
       get root_path

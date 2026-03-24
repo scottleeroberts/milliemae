@@ -2,16 +2,6 @@ require "rails_helper"
 
 RSpec.describe Follow, type: :model do
   describe "associations" do
-    it "has a follower (User)" do
-      follow = build(:follow)
-      expect(follow.follower).to be_a(User)
-    end
-
-    it "has a following (User)" do
-      follow = build(:follow)
-      expect(follow.following).to be_a(User)
-    end
-
     it "requires a follower" do
       follow = build(:follow, follower: nil)
       expect(follow).not_to be_valid

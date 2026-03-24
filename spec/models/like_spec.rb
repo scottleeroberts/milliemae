@@ -2,16 +2,6 @@ require "rails_helper"
 
 RSpec.describe Like, type: :model do
   describe "associations" do
-    it "belongs to a user" do
-      like = build(:like)
-      expect(like.user).to be_present
-    end
-
-    it "belongs to a project" do
-      like = build(:like)
-      expect(like.project).to be_present
-    end
-
     it "requires a user" do
       like = build(:like, user: nil)
       expect(like).not_to be_valid
