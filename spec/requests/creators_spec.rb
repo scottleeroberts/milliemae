@@ -2,6 +2,8 @@ require "rails_helper"
 
 RSpec.describe "Creators", type: :request do
   let(:creator) { create(:user, :creator) }
+  let(:audience_user) { create(:user, username: "audience-user") }
+  let(:admin) { create(:user, :admin, username: "admin-user") }
 
   describe "GET /creators/:id" do
     it "is accessible to anonymous visitors" do
@@ -45,6 +47,16 @@ RSpec.describe "Creators", type: :request do
 
     it "returns 404 for a non-existent username" do
       get creator_path("ghost-user")
+      expect(response).to have_http_status(:not_found)
+    end
+
+    it "returns 404 for an audience user" do
+      get creator_path(audience_user)
+      expect(response).to have_http_status(:not_found)
+    end
+
+    it "returns 404 for an admin user" do
+      get creator_path(admin)
       expect(response).to have_http_status(:not_found)
     end
   end

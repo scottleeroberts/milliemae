@@ -52,6 +52,16 @@ RSpec.describe "Projects", type: :request do
       get projects_path
       expect(response.body).to include("No projects published yet")
     end
+
+    it "does not show popular tags that only exist on draft projects" do
+      draft_project = create(:project, user: creator, title: "Draft Tag Source")
+      draft_project.tag_list = "private-tag"
+      draft_project.save!
+
+      get projects_path
+
+      expect(response.body).not_to include("private-tag")
+    end
   end
 
   describe "GET / (root)" do

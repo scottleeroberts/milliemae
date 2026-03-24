@@ -25,6 +25,6 @@ class FollowsController < ApplicationController
   private
 
   def set_creator
-    @creator = User.find_by!(username: params[:creator_id])
+    @creator = User.creator.find_by!(username: params[:creator_id])
   end
 end

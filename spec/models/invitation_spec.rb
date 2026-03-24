@@ -36,11 +36,24 @@ RSpec.describe Invitation, type: :model do
         expect(duplicate.errors[:email]).to include("already has a pending invitation")
       end
 
+      it "rejects duplicate email with different casing when a pending invitation exists" do
+        create(:invitation, email: "Creator@Example.com")
+        duplicate = build(:invitation, email: "creator@example.com")
+        expect(duplicate).not_to be_valid
+        expect(duplicate.errors[:email]).to include("already has a pending invitation")
+      end
+
       it "allows same email if previous invitation is accepted" do
         create(:invitation, :accepted, email: "creator@example.com")
         new_invite = build(:invitation, email: "creator@example.com")
         expect(new_invite).to be_valid
       end
+    end
+
+    it "normalizes email before validation" do
+      invitation.email = " Creator@Example.com "
+      invitation.valid?
+      expect(invitation.email).to eq("creator@example.com")
     end
   end
 

@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Follows", type: :request do
   let(:creator) { create(:user, :creator) }
+  let(:audience_user) { create(:user, username: "audience-user") }
   let(:user) { create(:user) }
   let(:turbo_headers) { { "Accept" => "text/vnd.turbo-stream.html, text/html" } }
 
@@ -37,6 +38,11 @@ RSpec.describe "Follows", type: :request do
 
       it "returns 404 for a non-existent creator" do
         post creator_follow_path("ghost-user")
+        expect(response).to have_http_status(:not_found)
+      end
+
+      it "returns 404 for a non-creator user" do
+        post creator_follow_path(audience_user)
         expect(response).to have_http_status(:not_found)
       end
     end
@@ -88,6 +94,11 @@ RSpec.describe "Follows", type: :request do
       it "is a no-op when not following" do
         delete creator_follow_path(creator)
         expect { delete creator_follow_path(creator) }.not_to change(Follow, :count)
+      end
+
+      it "returns 404 for a non-creator user" do
+        delete creator_follow_path(audience_user)
+        expect(response).to have_http_status(:not_found)
       end
     end
   end

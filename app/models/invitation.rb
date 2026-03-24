@@ -16,6 +16,7 @@ class Invitation < ApplicationRecord
 
   before_validation :generate_token, on: :create
   before_validation :set_expiry, on: :create
+  before_validation :normalize_email
 
   def accepted?
     accepted_at.present?
@@ -33,5 +34,9 @@ class Invitation < ApplicationRecord
 
   def set_expiry
     self.expires_at ||= EXPIRY_PERIOD.from_now
+  end
+
+  def normalize_email
+    self.email = email.to_s.strip.downcase.presence
   end
 end
