@@ -91,6 +91,21 @@ RSpec.describe "Invitations", type: :request do
       end
     end
 
+    context "with an email that already has an account" do
+      before { create(:user, email: "creator@example.com") }
+
+      it "does not create a duplicate user" do
+        expect {
+          post accept_invitation_path(invitation.token), params: valid_params
+        }.not_to change(User, :count)
+      end
+
+      it "re-renders the form with unprocessable_content" do
+        post accept_invitation_path(invitation.token), params: valid_params
+        expect(response).to have_http_status(:unprocessable_content)
+      end
+    end
+
     context "with an already-accepted invitation" do
       let!(:accepted) { create(:invitation, :accepted) }
 

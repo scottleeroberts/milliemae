@@ -49,6 +49,22 @@ RSpec.describe "Creator::ProjectImages", type: :request do
         headers: { "Accept" => "text/html" }
       expect(response).to redirect_to(creator_project_path(project))
     end
+
+    it "responds with turbo_stream on successful upload" do
+      post creator_project_project_images_path(project),
+        params: { project_image: { image: image_file } },
+        headers: { "Accept" => "text/vnd.turbo-stream.html" }
+      expect(response).to have_http_status(:ok)
+      expect(response.content_type).to include("text/vnd.turbo-stream.html")
+    end
+
+    it "responds with turbo_stream error on failed upload" do
+      post creator_project_project_images_path(project),
+        params: { project_image: { image: nil } },
+        headers: { "Accept" => "text/vnd.turbo-stream.html" }
+      expect(response).to have_http_status(:unprocessable_content)
+      expect(response.content_type).to include("text/vnd.turbo-stream.html")
+    end
   end
 
   describe "DELETE /creator/projects/:project_id/project_images/:id" do

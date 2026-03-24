@@ -27,31 +27,56 @@ RSpec.describe "Admin::Projects", type: :request do
   end
 
   describe "DELETE /admin/projects/:id" do
-    before { sign_in admin }
-
-    it "destroys the project" do
-      expect {
-        delete admin_project_path(project.id)
-      }.to change(Project, :count).by(-1)
+    it "prevents unauthenticated visitors" do
+      expect { delete admin_project_path(project.id) }.not_to change(Project, :count)
     end
 
-    it "redirects with notice" do
+    it "redirects creators" do
+      sign_in creator
       delete admin_project_path(project.id)
-      expect(response).to redirect_to(admin_projects_path)
+      expect(response).to redirect_to(root_path)
+    end
+
+    context "as admin" do
+      before { sign_in admin }
+
+      it "destroys the project" do
+        expect {
+          delete admin_project_path(project.id)
+        }.to change(Project, :count).by(-1)
+      end
+
+      it "redirects with notice" do
+        delete admin_project_path(project.id)
+        expect(response).to redirect_to(admin_projects_path)
+      end
     end
   end
 
   describe "PATCH /admin/projects/:id/unpublish" do
-    before { sign_in admin }
-
-    it "unpublishes the project" do
+    it "prevents unauthenticated visitors" do
       patch unpublish_admin_project_path(project.id)
-      expect(project.reload.published).to be false
+      expect(project.reload.published).to be true
     end
 
-    it "redirects with notice" do
+    it "redirects creators" do
+      sign_in creator
       patch unpublish_admin_project_path(project.id)
-      expect(response).to redirect_to(admin_projects_path)
+      expect(response).to redirect_to(root_path)
+    end
+
+    context "as admin" do
+      before { sign_in admin }
+
+      it "unpublishes the project" do
+        patch unpublish_admin_project_path(project.id)
+        expect(project.reload.published).to be false
+      end
+
+      it "redirects with notice" do
+        patch unpublish_admin_project_path(project.id)
+        expect(response).to redirect_to(admin_projects_path)
+      end
     end
   end
 end

@@ -28,6 +28,12 @@ RSpec.describe "Admin::Dashboard", type: :request do
         expect(response).to redirect_to(root_path)
       end
 
+      it "redirects a creator" do
+        sign_in create(:user, :creator)
+        get admin_root_path
+        expect(response).to redirect_to(root_path)
+      end
+
       it "redirects an unauthenticated visitor" do
         get admin_root_path
         expect(response).to redirect_to(new_user_session_path)

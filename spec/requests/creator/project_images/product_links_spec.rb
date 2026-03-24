@@ -14,6 +14,12 @@ RSpec.describe "Creator::ProjectImages::ProductLinks", type: :request do
       post creator_project_project_image_product_links_path(project, project_image), params: valid_params
       expect(response).to redirect_to(new_user_session_path)
     end
+
+    it "redirects audience users" do
+      sign_in create(:user)
+      post creator_project_project_image_product_links_path(project, project_image), params: valid_params
+      expect(response).to redirect_to(root_path)
+    end
   end
 
   describe "POST /creator/projects/:project_id/project_images/:project_image_id/product_links" do
@@ -70,6 +76,22 @@ RSpec.describe "Creator::ProjectImages::ProductLinks", type: :request do
         headers: { "Accept" => "text/html" }
       expect(link.reload.label).to eq("Updated Label")
     end
+
+    it "redirects with alert on invalid params (html format)" do
+      link = create(:product_link, project_image: project_image)
+      patch creator_project_project_image_product_link_path(project, project_image, link),
+        params: { product_link: { label: "", url: "" } },
+        headers: { "Accept" => "text/html" }
+      expect(response).to redirect_to(creator_project_path(project))
+    end
+
+    it "returns 404 when product link belongs to another creator" do
+      other_image = create(:project_image)
+      link = create(:product_link, project_image: other_image)
+      patch creator_project_project_image_product_link_path(other_image.project, other_image, link),
+        params: { product_link: { label: "Hacked" } }
+      expect(response).to have_http_status(:not_found)
+    end
   end
 
   describe "DELETE /creator/projects/:project_id/project_images/:project_image_id/product_links/:id" do
@@ -81,6 +103,13 @@ RSpec.describe "Creator::ProjectImages::ProductLinks", type: :request do
         delete creator_project_project_image_product_link_path(project, project_image, link),
           headers: { "Accept" => "text/html" }
       }.to change(ProductLink, :count).by(-1)
+    end
+
+    it "returns 404 when product link belongs to another creator" do
+      other_image = create(:project_image)
+      link = create(:product_link, project_image: other_image)
+      delete creator_project_project_image_product_link_path(other_image.project, other_image, link)
+      expect(response).to have_http_status(:not_found)
     end
   end
 end
