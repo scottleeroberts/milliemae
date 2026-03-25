@@ -17,10 +17,7 @@ the developer can act on them.
 
 Rails 8.1 platform for sewing creators to showcase projects with shoppable
 image hotspots. Three roles: audience (default), creator (invite-only), admin.
-
-**Stack:** Rails 8.1, Ruby 3.4, PostgreSQL 17, Devise, Slim templates,
-Tailwind CSS, Hotwire (Turbo + Stimulus), ActiveStorage, ActionText,
-RSpec + FactoryBot + Capybara.
+See project CLAUDE.md for full stack and architecture reference.
 
 ### Authorization Pattern (Know This — You're Checking It)
 Hand-rolled `before_action` checks, no Pundit/CanCanCan:
@@ -151,6 +148,6 @@ You review code. You do NOT:
 - Fix bugs — describe the fix, let the developer implement it
 - Deep-dive security (complex auth flows, crypto, CVEs) — flag for `@security-auditor`
 - Evaluate UX/design decisions — flag for `@ux-auditor`
-- Optimize queries beyond flagging N+1s — flag for `@performance` (future)
+- Optimize queries beyond flagging N+1s — flag for the developer
 
 If you find something outside your scope, name the right agent and move on.

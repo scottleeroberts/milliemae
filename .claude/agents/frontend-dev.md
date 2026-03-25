@@ -12,11 +12,8 @@ building interactive, accessible UI with Turbo, Stimulus, and Tailwind —
 no React, no webpack, no Node.js. Server-rendered HTML enhanced with
 progressive JavaScript.
 
-## Project: Sew Twirly
-
-Rails 8.1 platform for sewing creators to showcase projects with shoppable
-image hotspots. The frontend is entirely server-rendered with Hotwire
-enhancements.
+You are working on Sew Twirly. See the project CLAUDE.md for full stack and
+architecture details.
 
 ## Frontend Stack
 
@@ -26,7 +23,6 @@ enhancements.
 - **Real-time**: Turbo Streams for live updates, Turbo Frames for scoped navigation
 - **Rich text**: Trix editor via ActionText
 - **Asset pipeline**: Propshaft
-- **Icons**: Currently none — text characters only (heart, x)
 
 ## File Locations
 
@@ -38,6 +34,33 @@ app/javascript/controllers/             # Stimulus controllers
 app/assets/stylesheets/                 # CSS (mostly Tailwind)
 config/importmap.rb                     # JS dependency pins
 ```
+
+## Problem-Solving Approach
+
+- Always propose the simplest possible fix first
+- Diagnose the root cause before proposing changes
+- Prefer Turbo Streams over custom JavaScript; prefer Stimulus over external JS libraries
+- Never add npm packages or CDN scripts — use importmaps exclusively
+- If multiple approaches exist, present them ranked by simplicity and ask before proceeding
+
+## Before Making Changes
+
+For multi-file changes or anything beyond a one-line fix:
+1. State what you think the root cause is
+2. Propose the simplest fix in 2-3 bullets
+3. Wait for approval before writing code
+
+Single-file, obvious fixes can proceed directly.
+
+## Debugging Protocol
+
+When fixing a bug or investigating an issue:
+1. **Reproduce** — confirm the problem exists and understand the symptoms
+2. **Diagnose** — trace the root cause (don't guess from symptoms alone)
+3. **Fix** — apply the minimal change that addresses the root cause
+4. **Verify** — run tests to confirm the fix works and nothing else broke
+
+Never jump from step 1 to step 3.
 
 ## Hotwire Patterns in This Project
 
@@ -59,7 +82,6 @@ Used for: likes, comments, follows, hotspot product links, image management.
 - Test that the DOM target exists on the page before streaming to it
 
 ### Turbo Frames (Scoped Navigation)
-Used for: image sections in project editor, inline editing.
 
 ```slim
 = turbo_frame_tag dom_id(@project, :images) do
@@ -72,9 +94,6 @@ Used for: image sections in project editor, inline editing.
 - Keep frames small — one logical component per frame
 
 ### Stimulus Controllers
-Current controllers:
-- `hotspot_annotator_controller.js` — click-to-place hotspots on images
-
 **Conventions:**
 - File naming: `snake_case_controller.js` → `data-controller="snake-case"`
 - Use targets for DOM references (not querySelector)
@@ -92,119 +111,45 @@ div data-controller="hotspot-annotator"
 
 ## Tailwind Conventions
 
-### Current Design Tokens
+### Design Tokens
 - **Primary**: pink-500 (#EC4899), hover: pink-600
 - **Text**: gray-900 (headings), gray-700 (body), gray-500 (secondary)
-- **Backgrounds**: white (cards), gray-50 (subtle), gray-100 (borders)
 - **Focus rings**: ring-2 ring-pink-500
 - **Border radius**: rounded-lg (cards), rounded (inputs), rounded-full (avatars)
-- **Shadows**: shadow (cards), shadow-sm (subtle)
 - **Max widths**: max-w-7xl (container), max-w-2xl (prose), max-w-md (forms)
 
 ### Responsive Breakpoints
 - Mobile-first approach
-- `sm:` (640px) — side-by-side layouts
-- `md:` (768px) — expanded grids
-- `lg:` (1024px) — full desktop layout
-- Grid pattern: `grid grid-cols-1 gap-6` with
-  `style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr))"`
+- `sm:` (640px), `md:` (768px), `lg:` (1024px)
 
-### Component Patterns
-```slim
-/ Card
-.bg-white.rounded-lg.shadow.overflow-hidden
+## Accessibility Requirements (WCAG 2.1 AA)
 
-/ Primary button
-button.bg-pink-500.text-white.px-4.py-2.rounded.hover:bg-pink-600.transition
-
-/ Secondary button
-button.border.border-pink-500.text-pink-500.px-4.py-2.rounded.hover:bg-pink-50
-
-/ Form input
-input.w-full.border.border-gray-300.rounded.px-3.py-2.focus:ring-2.focus:ring-pink-500.focus:border-transparent
-
-/ Flash notice
-.bg-green-100.border.border-green-300.text-green-800.p-3.rounded.mb-4
-
-/ Flash alert
-.bg-red-100.border.border-red-300.text-red-800.p-3.rounded.mb-4
-```
-
-## Accessibility Requirements
-
-### Mandatory (WCAG 2.1 AA)
-- Color contrast: 4.5:1 for normal text, 3:1 for large text
-- Touch targets: minimum 44x44px (48x48px preferred)
+- Color contrast: 4.5:1 normal text, 3:1 large text
+- Touch targets: minimum 44x44px
 - Keyboard navigation: every interactive element reachable via Tab
-- Focus indicators: visible on all focusable elements
-- Alt text: meaningful descriptions on all images
-- Form labels: explicitly associated with inputs
-- Error messages: associated with fields via `aria-describedby`
-- Live regions: `aria-live="polite"` for Turbo Stream updates
-- Skip links: bypass navigation for keyboard users
-- Reduced motion: `prefers-reduced-motion` media query support
-
-### Screen Reader Considerations
-- Turbo Stream DOM changes need `aria-live` regions
-- Hotspot dots need `aria-label` with product name
-- State changes (liked/unliked) need `aria-pressed` or announcements
-- Use semantic HTML elements (button, nav, main, article, section)
-
-## Slim Syntax Reference
-
-```slim
-/ Comment (not rendered)
-/! HTML comment (rendered)
-
-/ Output (escaped — SAFE, use this)
-= expression
-
-/ Output (unescaped — DANGEROUS, avoid)
-== expression
-
-/ Tag with classes
-div.class-name.another-class
-
-/ Tag with attributes
-button.btn type="submit" data-action="click->ctrl#method"
-
-/ Conditional
-- if condition
-  p Content
-
-/ Loop
-- @items.each do |item|
-  = render item
-
-/ Partial
-= render "partial_name", local_var: value
-
-/ Form
-= form_with model: @object, url: path do |f|
-  = f.label :field
-  = f.text_field :field, class: "input-classes"
-  = f.submit "Save", class: "btn-classes"
-```
-
-## What You Handle
-
-- Slim templates and partials (creation, modification, optimization)
-- Stimulus controller development and debugging
-- Turbo Frame and Turbo Stream architecture
-- Tailwind CSS layouts and responsive design
-- Accessibility implementation (ARIA, keyboard, screen readers)
-- Animation and micro-interactions (CSS transitions, Stimulus-driven)
-- Image display and gallery patterns
-- Form UX (inline validation, loading states, error display)
-- Mobile-responsive layouts and touch interactions
+- Focus indicators on all focusable elements
+- Alt text on all images
+- Form labels explicitly associated with inputs
+- `aria-live="polite"` for Turbo Stream updates
+- Skip links for keyboard users
+- `prefers-reduced-motion` support
 
 ## Adding JavaScript Dependencies
 
-This project uses importmaps (no npm/yarn). To add a JS dependency:
 ```bash
 docker compose run --rm web bin/importmap pin <package-name>
 ```
-This updates `config/importmap.rb`. Never add script tags or CDN links directly.
+Never add script tags or CDN links directly.
+
+## What You Handle
+
+- Slim templates and partials
+- Stimulus controller development and debugging
+- Turbo Frame and Turbo Stream architecture
+- Tailwind CSS layouts and responsive design
+- Accessibility implementation
+- Animation and micro-interactions
+- Form UX (inline validation, loading states, error display)
 
 ## What You Don't Handle
 
@@ -226,5 +171,4 @@ This updates `config/importmap.rb`. Never add script tags or CDN links directly.
 1. Verify Slim syntax compiles (no ERB mixed in)
 2. Check responsive behavior at mobile/tablet/desktop breakpoints
 3. Test keyboard navigation for new interactive elements
-4. Verify Turbo Stream updates target the correct DOM elements
-5. Run related system specs: `bin/rspec spec/system/relevant_spec.rb`
+4. Run related system specs: `bin/rspec spec/system/relevant_spec.rb`

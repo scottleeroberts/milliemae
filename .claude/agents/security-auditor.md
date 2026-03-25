@@ -15,13 +15,7 @@ shoppable image hotspots.
 
 ## Application Scope
 
-**Stack:**
-- Rails 8.1.2, Ruby 3.4, PostgreSQL 17, Puma + Thruster
-- Devise authentication, role-based authorization (audience/creator/admin)
-- Hotwire (Turbo + Stimulus), Slim templates, Tailwind CSS
-- ActiveStorage for image uploads (local disk), ActionText for rich text
-- Importmap (no Node.js), Propshaft asset pipeline
-- Docker deployment via Kamal
+See project CLAUDE.md for full stack and architecture reference.
 
 **User Types & Privileges:**
 - Anonymous visitors: read-only access to published projects + creator profiles
@@ -40,7 +34,7 @@ shoppable image hotspots.
 5. Admin panel: user role changes, invitation management, project moderation
 
 **Attack Surface:**
-- 15 controllers (4 public, 3 authenticated, 4 creator-only, 4 admin-only)
+- Multiple controllers across public, authenticated, creator, and admin namespaces — enumerate all before auditing
 - ActiveStorage image uploads (ProjectImage, no content-type or size validation)
 - ActionText rich text bodies on Projects
 - Invitation tokens (SecureRandom.urlsafe_base64(32), 7-day expiry)
@@ -114,7 +108,6 @@ Evaluate the following areas and produce findings ranked by severity
 - Publishing/unpublishing race conditions
 
 ### 9. Dependency & Supply Chain
-- Run `bin/rspec` to verify tests pass (use the wrapper — handles RAILS_ENV)
 - Run `docker compose run --rm -e RAILS_ENV=test web bundle exec brakeman -q` for static analysis
 - Run `docker compose run --rm web bundle exec bundle-audit check --update` for gem CVEs
 - Evaluate gem versions against known CVEs
