@@ -2,6 +2,6 @@ FactoryBot.define do
   factory :comment do
     association :user
     association :project, factory: [:project, :published]
-    body { "A lovely project!" }
+    sequence(:body) { |n| "A lovely project comment #{n}!" }
   end
 end

@@ -4,7 +4,7 @@ RSpec.describe "Follows", type: :request do
   let(:creator) { create(:user, :creator) }
   let(:audience_user) { create(:user, username: "audience-user") }
   let(:user) { create(:user) }
-  let(:turbo_headers) { { "Accept" => "text/vnd.turbo-stream.html, text/html" } }
+  let(:turbo_headers) { turbo_stream_headers }
 
   describe "POST /creators/:creator_id/follow" do
     context "when not signed in" do

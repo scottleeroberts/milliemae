@@ -5,7 +5,7 @@ RSpec.describe "Comments", type: :request do
   let(:project) { create(:project, :published, user: creator) }
   let(:user) { create(:user) }
   let(:other_user) { create(:user) }
-  let(:turbo_headers) { { "Accept" => "text/vnd.turbo-stream.html, text/html" } }
+  let(:turbo_headers) { turbo_stream_headers }
 
   describe "POST /projects/:project_id/comments" do
     context "when not signed in" do

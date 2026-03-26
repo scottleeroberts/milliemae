@@ -36,7 +36,7 @@ RSpec.describe "Invitations", type: :request do
     end
 
     context "with an expired token" do
-      let!(:expired) { create(:invitation, expires_at: 1.hour.ago) }
+      let!(:expired) { create(:invitation, :expired) }
 
       it "redirects to root with alert" do
         get invitation_path(expired.token)

@@ -1,16 +1,16 @@
 FactoryBot.define do
   factory :user do
-    name { "Test User" }
+    sequence(:name) { |n| "Test User #{n}" }
     sequence(:email) { |n| "user#{n}@example.com" }
     password { "password123" }
 
     trait :creator do
-      name { "Test Creator" }
+      sequence(:name) { |n| "Test Creator #{n}" }
       role { :creator }
     end
 
     trait :admin do
-      name { "Test Admin" }
+      sequence(:name) { |n| "Test Admin #{n}" }
       role { :admin }
     end
   end

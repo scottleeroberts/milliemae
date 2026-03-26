@@ -110,7 +110,7 @@ RSpec.describe Invitation, type: :model do
 
     describe "#expired?" do
       it "returns true when expires_at is in the past" do
-        invitation = build(:invitation, expires_at: 1.hour.ago)
+        invitation = build(:invitation, :expired)
         expect(invitation.expired?).to be true
       end
 
@@ -120,13 +120,13 @@ RSpec.describe Invitation, type: :model do
       end
 
       it "returns false when invitation is accepted even if past expiry" do
-        invitation = build(:invitation, :accepted, expires_at: 1.hour.ago)
+        invitation = build(:invitation, :accepted, :expired)
         expect(invitation.expired?).to be false
       end
     end
 
     describe ".pending scope excludes expired" do
-      let!(:expired_invite) { create(:invitation, expires_at: 1.hour.ago) }
+      let!(:expired_invite) { create(:invitation, :expired) }
       let!(:valid_invite) { create(:invitation, expires_at: 1.day.from_now) }
 
       it "excludes expired invitations from pending" do
@@ -136,9 +136,9 @@ RSpec.describe Invitation, type: :model do
     end
 
     describe ".expired scope" do
-      let!(:expired_invite) { create(:invitation, expires_at: 1.hour.ago) }
+      let!(:expired_invite) { create(:invitation, :expired) }
       let!(:valid_invite) { create(:invitation, expires_at: 1.day.from_now) }
-      let!(:accepted_invite) { create(:invitation, :accepted, expires_at: 1.hour.ago) }
+      let!(:accepted_invite) { create(:invitation, :accepted, :expired) }
 
       it "returns only expired unaccepted invitations" do
         expect(Invitation.expired).to include(expired_invite)

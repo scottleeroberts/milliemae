@@ -4,7 +4,7 @@ RSpec.describe "Likes", type: :request do
   let(:creator) { create(:user, :creator) }
   let(:project) { create(:project, :published, user: creator) }
   let(:user) { create(:user) }
-  let(:turbo_headers) { { "Accept" => "text/vnd.turbo-stream.html, text/html" } }
+  let(:turbo_headers) { turbo_stream_headers }
 
   describe "POST /projects/:project_id/like" do
     context "when not signed in" do
