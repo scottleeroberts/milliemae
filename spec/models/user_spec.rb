@@ -135,6 +135,26 @@ RSpec.describe User, type: :model do
       create_list(:invitation, 2, invited_by: admin)
       expect { admin.destroy }.to change(Invitation, :count).by(-2)
     end
+
+    it "destroys associated comments when the user is destroyed" do
+      user = create(:user)
+      create_list(:comment, 2, user: user)
+      expect { user.destroy }.to change(Comment, :count).by(-2)
+    end
+
+    it "destroys associated likes when the user is destroyed" do
+      user = create(:user)
+      project = create(:project, :published)
+      create(:like, user: user, project: project)
+      expect { user.destroy }.to change(Like, :count).by(-1)
+    end
+
+    it "destroys associated follows when the user is destroyed" do
+      follower = create(:user)
+      creator = create(:user, :creator)
+      create(:follow, follower: follower, following: creator)
+      expect { follower.destroy }.to change(Follow, :count).by(-1)
+    end
   end
 
   describe "social link columns" do
@@ -155,7 +175,7 @@ RSpec.describe User, type: :model do
     end
 
     it "allows all social links to be nil" do
-      user = create(:user, :creator)
+      user = build(:user, :creator)
       expect(user.instagram).to be_nil
       expect(user.etsy).to be_nil
     end
@@ -186,14 +206,14 @@ RSpec.describe User, type: :model do
 
   describe "#gravatar_url" do
     it "returns a gravatar URL based on email" do
-      user = create(:user, :creator, email: "test@example.com")
+      user = build(:user, :creator, email: "test@example.com")
       expected_hash = Digest::MD5.hexdigest("test@example.com")
       expect(user.gravatar_url).to include(expected_hash)
       expect(user.gravatar_url).to include("gravatar.com/avatar")
     end
 
     it "accepts a custom size" do
-      user = create(:user, :creator, email: "test@example.com")
+      user = build(:user, :creator, email: "test@example.com")
       expect(user.gravatar_url(size: 200)).to include("s=200")
     end
   end

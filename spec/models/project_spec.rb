@@ -180,6 +180,24 @@ RSpec.describe Project, type: :model do
       expect { project.destroy }.to change(ProjectTag, :count).by(-2)
     end
 
+    it "destroys associated project_images when destroyed" do
+      project = create(:project)
+      create_list(:project_image, 2, project: project)
+      expect { project.destroy }.to change(ProjectImage, :count).by(-2)
+    end
+
+    it "destroys associated likes when destroyed" do
+      project = create(:project, :published)
+      create(:like, project: project)
+      expect { project.destroy }.to change(Like, :count).by(-1)
+    end
+
+    it "destroys associated comments when destroyed" do
+      project = create(:project, :published)
+      create_list(:comment, 2, project: project)
+      expect { project.destroy }.to change(Comment, :count).by(-2)
+    end
+
     it "requires a user" do
       project = build(:project, user: nil)
       expect(project).not_to be_valid
