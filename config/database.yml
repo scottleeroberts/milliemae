@@ -70,7 +70,3 @@ production:
     <<: *primary_production
     database: sew_twirly_production_queue
     migrations_paths: db/queue_migrate
-  cable:
-    <<: *primary_production
-    database: sew_twirly_production_cable
-    migrations_paths: db/cable_migrate
