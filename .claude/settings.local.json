@@ -25,7 +25,12 @@
       "Bash(bin/rspec spec/models/product_link_spec.rb spec/models/user_social_links_spec.rb 2>&1)",
       "Bash(bin/rspec spec/models/user_spec.rb spec/models/user_social_links_spec.rb spec/requests/invitations_spec.rb 2>&1)",
       "Bash(bin/rspec spec/system/public/projects_spec.rb:7)",
-      "Bash(bin/rspec spec/system/authentication_spec.rb:19)"
+      "Bash(bin/rspec spec/system/authentication_spec.rb:19)",
+      "Bash(bin/rspec -e \"redirects an unauthenticated visitor\" --format documentation)",
+      "Bash(cp /tmp/admin_auth_debug_spec.rb /home/sroberts/Development/milliemae/spec/requests/admin_auth_debug_spec.rb)",
+      "Bash(bin/rspec spec/requests/admin_auth_debug_spec.rb --format documentation)",
+      "Bash(docker compose:*)",
+      "Bash(bin/rspec)"
     ]
   }
 }
