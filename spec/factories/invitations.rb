@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :invitation do
-    sequence(:email) { |n| "invitee#{n}@example.com" }
+    sequence(:email) { |n| "invitee#{n}-#{SecureRandom.hex(4)}@example.com" }
     association :invited_by, factory: [:user, :admin]
 
     trait :accepted do

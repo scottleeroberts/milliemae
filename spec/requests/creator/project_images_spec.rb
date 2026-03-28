@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe "Creator::ProjectImages", type: :request do
-  let(:creator) { create(:user, :creator) }
-  let(:project) { create(:project, user: creator) }
+  let(:creator) { create(:user, :creator, email: "project-image-creator@example.com", name: "Project Image Creator") }
+  let(:project) { create(:project, user: creator, title: "Project Image Request Project") }
   let(:image_file) { fixture_file_upload(Rails.root.join("spec/fixtures/files/test_image.png"), "image/png") }
 
   describe "authentication and authorization" do

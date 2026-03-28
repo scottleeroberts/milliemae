@@ -14,7 +14,16 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
+  config.filter_run_excluding factory_lint: true
+
   config.before(:suite) do
+    connection = ActiveRecord::Base.connection
+    connection.disable_referential_integrity do
+      (connection.tables - %w[ar_internal_metadata schema_migrations]).each do |table|
+        connection.execute("TRUNCATE TABLE #{connection.quote_table_name(table)} RESTART IDENTITY CASCADE")
+      end
+    end
+
     fixture_dir = Rails.root.join("spec/fixtures/files")
     FileUtils.mkdir_p(fixture_dir)
     png_path = fixture_dir.join("test_image.png")

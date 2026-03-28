@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe "Admin::Invitations", type: :request do
-  let(:admin) { create(:user, :admin) }
-  let(:audience) { create(:user) }
+  let(:admin) { create(:user, :admin, email: "admin-invitations@example.com", name: "Admin Invitations") }
+  let(:audience) { create(:user, email: "audience-invitations@example.com", name: "Audience Invitations") }
 
   describe "GET /admin/invitations" do
     it "returns 200 for admin" do
@@ -18,7 +18,7 @@ RSpec.describe "Admin::Invitations", type: :request do
     end
 
     it "redirects creators" do
-      sign_in create(:user, :creator)
+      sign_in create(:user, :creator, email: "creator-invitations@example.com", name: "Creator Invitations")
       get admin_invitations_path
       expect(response).to redirect_to(root_path)
     end
@@ -37,7 +37,7 @@ RSpec.describe "Admin::Invitations", type: :request do
     end
 
     it "redirects creators" do
-      sign_in create(:user, :creator)
+      sign_in create(:user, :creator, email: "creator-delete-invitations@example.com", name: "Creator Delete Invitations")
       post admin_invitations_path, params: { invitation: { email: "new@example.com" } }
       expect(response).to redirect_to(root_path)
     end

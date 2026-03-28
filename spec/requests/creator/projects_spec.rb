@@ -181,7 +181,7 @@ RSpec.describe "Creator::Projects", type: :request do
     before { sign_in creator }
 
     it "replaces existing tags with the new tag_list" do
-      project = create(:project, user: creator)
+      project = create(:project, user: creator, title: "Tag Replacement Project")
       project.update!(tag_list: "cotton")
 
       patch creator_project_path(project), params: { project: { tag_list: "silk, linen" } }

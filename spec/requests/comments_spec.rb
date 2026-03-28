@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Comments", type: :request do
   let(:creator) { create(:user, :creator) }
-  let(:project) { create(:project, :published, user: creator) }
+  let(:project) { create(:project, :published, user: creator, title: "Commented Project") }
   let(:user) { create(:user) }
   let(:other_user) { create(:user) }
   let(:turbo_headers) { turbo_stream_headers }
@@ -54,7 +54,7 @@ RSpec.describe "Comments", type: :request do
       end
 
       it "returns 404 for a draft project" do
-        draft = create(:project, user: creator)
+        draft = create(:project, user: creator, title: "Draft Comment Project")
         post project_comments_path(draft), params: { comment: { body: "Nice!" } }
         expect(response).to have_http_status(:not_found)
       end

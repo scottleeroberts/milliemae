@@ -1,9 +1,9 @@
 require "rails_helper"
 
 RSpec.describe "Follows", type: :request do
-  let(:creator) { create(:user, :creator) }
-  let(:audience_user) { create(:user, username: "audience-user") }
-  let(:user) { create(:user) }
+  let(:creator) { create(:user, :creator, email: "request-creator@example.com", name: "Request Creator") }
+  let(:audience_user) { create(:user, email: "request-audience@example.com", name: "Request Audience", username: "audience-user") }
+  let(:user) { create(:user, email: "request-user@example.com", name: "Request User") }
   let(:turbo_headers) { turbo_stream_headers }
 
   describe "POST /creators/:creator_id/follow" do

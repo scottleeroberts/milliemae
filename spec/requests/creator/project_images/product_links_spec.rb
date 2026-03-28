@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Creator::ProjectImages::ProductLinks", type: :request do
   let(:creator) { create(:user, :creator) }
-  let(:project) { create(:project, user: creator) }
+  let(:project) { create(:project, user: creator, title: "Product Link Project") }
   let(:project_image) { create(:project_image, project: project) }
 
   let(:valid_params) do

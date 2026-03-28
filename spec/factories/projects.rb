@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :project do
     association :user, factory: [ :user, :creator ]
-    sequence(:title) { |n| "Project #{n}" }
+    sequence(:title) { |n| "Project #{n}-#{SecureRandom.hex(3)}" }
     published { false }
 
     trait :published do
