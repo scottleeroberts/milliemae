@@ -69,6 +69,7 @@ bin/rspec spec/models
 bin/rspec spec/requests
 bin/rspec spec/system                      # requires chrome container
 bin/rspec spec/models/user_spec.rb:42      # single test by line
+bin/lint_factories                         # isolated FactoryBot lint run
 ```
 
 ## Architecture
