@@ -3,7 +3,7 @@ class LikesController < ApplicationController
   before_action :set_project
 
   def create
-    @project.likes.find_or_create_by!(user: current_user)
+    Likes::Create.call(project: @project, user: current_user)
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to project_path(@project) }
@@ -11,7 +11,7 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    @project.likes.find_by(user: current_user)&.destroy
+    Likes::Destroy.call(project: @project, user: current_user)
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to project_path(@project) }

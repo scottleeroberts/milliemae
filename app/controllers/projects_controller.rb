@@ -1,25 +1,14 @@
 class ProjectsController < ApplicationController
   def index
-    @tag = params[:tag].presence
-    @page = [params[:page].to_i, 1].max
-    base = Project.for_feed.with_tag(@tag)
-    @total_pages = [(base.count(:all).to_f / Project::PER_PAGE).ceil, 1].max
-    @projects = base
-                  .includes(:user, :tags, :likes, :comments, :rich_text_body,
-                            project_images: { image_attachment: :blob })
-                  .limit(Project::PER_PAGE)
-                  .offset((@page - 1) * Project::PER_PAGE)
-    @popular_tags = Tag.joins(:projects)
-                       .merge(Project.published)
-                       .group(:id)
-                       .order(Arel.sql("COUNT(DISTINCT projects.id) DESC"))
-                       .limit(12)
+    actor = Projects::Index.call(requested_tag: params[:tag], requested_page: params[:page].to_i)
+    @tag = actor.tag
+    @page = actor.page
+    @total_pages = actor.total_pages
+    @projects = actor.projects
+    @popular_tags = actor.popular_tags
   end
 
   def show
-    @project = Project.published
-                      .includes(:user, :tags, :likes,
-                                project_images: [:product_links, { image_attachment: :blob }])
-                      .find_by!(slug: params[:id])
+    @project = Projects::Show.call(slug: params[:id]).project
   end
 end

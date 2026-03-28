@@ -4,11 +4,13 @@ class Creator::ProjectImagesController < ApplicationController
   before_action :set_project
 
   def create
-    @project_image = @project.project_images.new(position: @project.project_images.count)
-    @project_image.image.attach(params.dig(:project_image, :image))
+    actor = Creator::ProjectImages::Create.result(
+      project: @project,
+      image: params.dig(:project_image, :image)
+    )
+    @project_image = actor.project_image
 
-    if @project_image.save
-      @project_image.analyze_image_dimensions
+    if actor.success?
       respond_to do |format|
         format.turbo_stream
         format.html { redirect_to creator_project_path(@project), notice: "Image uploaded." }
@@ -23,7 +25,7 @@ class Creator::ProjectImagesController < ApplicationController
 
   def destroy
     @project_image = @project.project_images.find(params[:id])
-    @project_image.destroy
+    Creator::ProjectImages::Destroy.call(project_image: @project_image)
 
     respond_to do |format|
       format.turbo_stream

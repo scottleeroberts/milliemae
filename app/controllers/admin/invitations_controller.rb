@@ -1,23 +1,29 @@
 class Admin::InvitationsController < Admin::BaseController
   def index
-    @invitations = Invitation.includes(:invited_by).order(created_at: :desc)
-    @new_invitation = Invitation.new
+    actor = Admin::Invitations::Index.call
+    @invitations = actor.invitations
+    @new_invitation = actor.new_invitation
   end
 
   def create
-    @new_invitation = Invitation.new(invitation_params.merge(invited_by: current_user))
-    if @new_invitation.save
-      InvitationMailer.invite(@new_invitation).deliver_later
+    actor = Admin::Invitations::Create.result(
+      invited_by: current_user,
+      attributes: invitation_params.to_h.symbolize_keys
+    )
+    @new_invitation = actor.invitation
+
+    if actor.success?
       redirect_to admin_invitations_path, notice: "Invitation sent to #{@new_invitation.email}."
     else
-      @invitations = Invitation.includes(:invited_by).order(created_at: :desc)
+      index_actor = Admin::Invitations::Index.call
+      @invitations = index_actor.invitations
       render :index, status: :unprocessable_content
     end
   end
 
   def destroy
     @invitation = Invitation.find(params[:id])
-    @invitation.destroy
+    Admin::Invitations::Destroy.call(invitation: @invitation)
     redirect_to admin_invitations_path, notice: "Invitation removed."
   end
 

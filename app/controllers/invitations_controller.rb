@@ -8,15 +8,13 @@ class InvitationsController < ApplicationController
 
   def accept
     @invitation = Invitation.pending.find_by!(token: params[:token])
-    @user = User.new(
-      email: @invitation.email,
-      name: user_params[:name],
-      password: user_params[:password],
-      password_confirmation: user_params[:password_confirmation],
-      role: :creator
+    actor = Invitations::Accept.result(
+      invitation: @invitation,
+      attributes: user_params.to_h.symbolize_keys
     )
-    if @user.save
-      @invitation.update!(accepted_at: Time.current)
+    @user = actor.user
+
+    if actor.success?
       sign_in @user
       redirect_to creator_projects_path, notice: "Welcome to Sew Twirly! Your creator account is ready."
     else

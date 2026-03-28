@@ -1,21 +1,25 @@
 class Admin::UsersController < Admin::BaseController
   def index
-    @users = User.order(created_at: :desc)
+    @users = Admin::Users::Index.call.users
   end
 
   def update
     @user = User.find(params[:id])
-    if @user == current_user
-      return redirect_to admin_users_path, alert: "Cannot change your own role."
-    end
-    if @user.update(user_params)
+    actor = Admin::Users::ChangeRole.result(
+      current_user: current_user,
+      target_user: @user,
+      role: user_params[:role]
+    )
+    @user = actor.user
+
+    if actor.success?
       redirect_to admin_users_path, notice: "#{@user.display_name}'s role updated to #{@user.role}."
+    elsif actor.error == "Cannot change your own role." || actor.error == "Invalid role."
+      redirect_to admin_users_path, alert: actor.error
     else
-      @users = User.order(created_at: :desc)
+      @users = Admin::Users::Index.call.users
       render :index, status: :unprocessable_content
     end
-  rescue ArgumentError
-    redirect_to admin_users_path, alert: "Invalid role."
   end
 
   private

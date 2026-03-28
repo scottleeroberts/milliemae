@@ -3,8 +3,14 @@ class CommentsController < ApplicationController
   before_action :set_project
 
   def create
-    @comment = @project.comments.build(comment_params.merge(user: current_user))
-    if @comment.save
+    actor = Comments::Create.result(
+      project: @project,
+      user: current_user,
+      attributes: comment_params.to_h.symbolize_keys
+    )
+    @comment = actor.comment
+
+    if actor.success?
       respond_to do |format|
         format.turbo_stream
         format.html { redirect_to project_path(@project) }
@@ -19,11 +25,9 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = @project.comments.find(params[:id])
-    unless @comment.user == current_user || current_user.admin?
-      return redirect_to project_path(@project), alert: "Not authorized."
-    end
+    actor = Comments::Destroy.result(comment_record: @comment, current_user: current_user)
+    return redirect_to project_path(@project), alert: actor.error if actor.failure?
 
-    @comment.destroy
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to project_path(@project) }

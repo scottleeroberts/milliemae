@@ -5,9 +5,13 @@ class Creator::ProjectImages::ProductLinksController < ApplicationController
   before_action :set_project_image
 
   def create
-    @product_link = @project_image.product_links.new(product_link_params)
+    actor = Creator::ProjectImages::ProductLinks::Create.result(
+      project_image: @project_image,
+      attributes: product_link_params.to_h.symbolize_keys
+    )
+    @product_link = actor.product_link
 
-    if @product_link.save
+    if actor.success?
       respond_to do |format|
         format.turbo_stream
         format.html { redirect_to creator_project_path(@project), notice: "Hotspot added." }
@@ -22,8 +26,13 @@ class Creator::ProjectImages::ProductLinksController < ApplicationController
 
   def update
     @product_link = @project_image.product_links.find(params[:id])
+    actor = Creator::ProjectImages::ProductLinks::Update.result(
+      link: @product_link,
+      attributes: product_link_params.to_h.symbolize_keys
+    )
+    @product_link = actor.product_link
 
-    if @product_link.update(product_link_params)
+    if actor.success?
       respond_to do |format|
         format.turbo_stream
         format.html { redirect_to creator_project_path(@project), notice: "Hotspot updated." }
@@ -38,7 +47,7 @@ class Creator::ProjectImages::ProductLinksController < ApplicationController
 
   def destroy
     @product_link = @project_image.product_links.find(params[:id])
-    @product_link.destroy
+    Creator::ProjectImages::ProductLinks::Destroy.call(product_link: @product_link)
 
     respond_to do |format|
       format.turbo_stream

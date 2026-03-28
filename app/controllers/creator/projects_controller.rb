@@ -4,10 +4,11 @@ class Creator::ProjectsController < ApplicationController
   before_action :set_project, only: [ :show, :edit, :update, :destroy, :publish, :unpublish ]
 
   def index
-    @projects = current_user.projects.includes(:tags).recent
-    @published_count = @projects.count(&:published?)
-    @total_likes = Like.joins(:project).where(projects: { user_id: current_user.id }).count
-    @follower_count = current_user.followers.count
+    actor = Creator::Projects::Index.call(user: current_user)
+    @projects = actor.projects
+    @published_count = actor.published_count
+    @total_likes = actor.total_likes
+    @follower_count = actor.follower_count
   end
 
   def show; end
@@ -17,8 +18,13 @@ class Creator::ProjectsController < ApplicationController
   end
 
   def create
-    @project = current_user.projects.new(project_params)
-    if @project.save
+    actor = Creator::Projects::Create.result(
+      user: current_user,
+      attributes: project_params.to_h.symbolize_keys
+    )
+    @project = actor.project
+
+    if actor.success?
       redirect_to creator_project_path(@project), notice: "Project created."
     else
       render :new, status: :unprocessable_content
@@ -28,7 +34,13 @@ class Creator::ProjectsController < ApplicationController
   def edit; end
 
   def update
-    if @project.update(project_params)
+    actor = Creator::Projects::Update.result(
+      project_record: @project,
+      attributes: project_params.to_h.symbolize_keys
+    )
+    @project = actor.project
+
+    if actor.success?
       redirect_to creator_project_path(@project), notice: "Project updated."
     else
       render :edit, status: :unprocessable_content
@@ -36,26 +48,24 @@ class Creator::ProjectsController < ApplicationController
   end
 
   def destroy
-    @project.destroy
+    Creator::Projects::Destroy.call(project: @project)
     redirect_to creator_projects_path, notice: "Project deleted."
   end
 
   def publish
-    @project.publish!
+    Creator::Projects::Publish.call(project: @project)
     redirect_to creator_projects_path, notice: "\"#{@project.title}\" published."
   end
 
   def unpublish
-    @project.unpublish!
+    Creator::Projects::Unpublish.call(project: @project)
     redirect_to creator_projects_path, notice: "\"#{@project.title}\" unpublished."
   end
 
   private
 
   def set_project
-    @project = current_user.projects
-                            .includes(project_images: :product_links)
-                            .find_by!(slug: params[:id])
+    @project = Creator::Projects::Show.call(user: current_user, slug: params[:id]).project
   end
 
   def project_params

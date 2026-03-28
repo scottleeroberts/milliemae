@@ -1,8 +1,7 @@
 class CreatorsController < ApplicationController
   def show
-    @creator = User.creator.includes(:followers).find_by!(username: params[:id])
-    @projects = @creator.projects.for_feed
-                        .includes(:tags, :likes, :comments, :rich_text_body,
-                                  project_images: { image_attachment: :blob })
+    actor = Creators::Show.call(username: params[:id])
+    @creator = actor.creator
+    @projects = actor.projects
   end
 end

@@ -2,16 +2,16 @@ class Admin::ProjectsController < Admin::BaseController
   before_action :set_project, only: [:destroy, :unpublish]
 
   def index
-    @projects = Project.includes(:user, :tags).order(created_at: :desc)
+    @projects = Admin::Projects::Index.call.projects
   end
 
   def destroy
-    @project.destroy
+    Admin::Projects::Destroy.call(project: @project)
     redirect_to admin_projects_path, notice: "Project deleted."
   end
 
   def unpublish
-    @project.unpublish!
+    Admin::Projects::Unpublish.call(project: @project)
     redirect_to admin_projects_path, notice: "\"#{@project.title}\" unpublished."
   end
 
