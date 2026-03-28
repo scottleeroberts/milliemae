@@ -47,6 +47,7 @@ gem "slim-rails"
 
 # Rate limiting and request throttling [https://github.com/rack/rack-attack]
 gem "rack-attack"
+gem "service_actor"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
