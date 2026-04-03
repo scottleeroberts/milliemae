@@ -36,7 +36,7 @@ RSpec.describe "Authentication", type: :system do
       expect(page).to have_text("Existing User")
       expect(page).to have_text("Sign out")
 
-      click_on "Sign out"
+      first(:link, "Sign out").click
       expect(page).to have_text("Sign in")
     end
 
