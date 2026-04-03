@@ -141,6 +141,26 @@ RSpec.describe "Projects", type: :request do
       end
     end
 
+    context "with product links (hotspot shopping list)" do
+      let!(:project) { create(:project, :published, user: creator, title: "My Dress") }
+      let!(:project_image) { create(:project_image, project: project) }
+      let!(:product_link) { create(:product_link, project_image: project_image, label: "Linen Blouse", url: "https://example.com/blouse") }
+
+      it "renders the shopping list with product link labels" do
+        get project_path(project)
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include("Shopping List")
+        expect(response.body).to include("Linen Blouse")
+      end
+
+      it "renders multiple numbered hotspot items" do
+        create(:product_link, project_image: project_image, label: "Silk Skirt", url: "https://example.com/skirt")
+        get project_path(project)
+        expect(response.body).to include("Linen Blouse")
+        expect(response.body).to include("Silk Skirt")
+      end
+    end
+
     context "with a draft project" do
       let!(:draft) { create(:project, user: creator, title: "Unpublished") }
 

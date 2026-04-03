@@ -23,5 +23,5 @@
           - project_image.product_links.each.with_index(1) do |pl, idx|
             li
               = link_to pl.url, class: "flex items-center gap-3 group/item", target: "_blank", rel: "noopener noreferrer"
-                span.flex.items-center.justify-center.bg-pink-600.text-white.text-xs.font-bold.rounded-full.w-6.h-6.shrink-0.group-hover/item:bg-pink-700.transition-colors = idx
-                span.text-sm.text-gray-700.group-hover/item:text-pink-600.transition-colors = pl.label
+                span class="flex items-center justify-center bg-pink-600 text-white text-xs font-bold rounded-full w-6 h-6 shrink-0 group-hover/item:bg-pink-700 transition-colors" = idx
+                span class="text-sm text-gray-700 group-hover/item:text-pink-600 transition-colors" = pl.label

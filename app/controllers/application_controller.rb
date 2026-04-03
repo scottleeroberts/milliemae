@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  allow_browser versions: :modern
+  allow_browser versions: :modern unless Rails.env.test?
 
   stale_when_importmap_changes
 
