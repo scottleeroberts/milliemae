@@ -22,7 +22,7 @@
 }
 
 @layer utilities {
-  .animate-hotspot-pulse:hover {
+  .animate-hotspot-pulse {
     animation: hotspot-pulse 1.2s ease-in-out infinite;
   }
 }
