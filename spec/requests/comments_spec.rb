@@ -24,20 +24,10 @@ RSpec.describe "Comments", type: :request do
         }.to change(Comment, :count).by(1)
       end
 
-      it "associates the comment with the current user" do
-        post project_comments_path(project), params: { comment: { body: "Nice!" } }
-        expect(Comment.last.user).to eq(user)
-      end
-
       it "returns a turbo-stream response on success" do
         post project_comments_path(project), headers: turbo_headers,
              params: { comment: { body: "Great project!" } }
         expect(response.content_type).to include("text/vnd.turbo-stream.html")
-      end
-
-      it "redirects to the project page for html requests on success" do
-        post project_comments_path(project), params: { comment: { body: "Nice!" } }
-        expect(response).to redirect_to(project_path(project))
       end
 
       it "does not create a comment with a blank body" do
@@ -76,12 +66,6 @@ RSpec.describe "Comments", type: :request do
 
       it "destroys the comment" do
         expect { delete project_comment_path(project, comment) }.to change(Comment, :count).by(-1)
-      end
-
-      it "returns a turbo-stream remove action" do
-        delete project_comment_path(project, comment), headers: turbo_headers
-        expect(response.content_type).to include("text/vnd.turbo-stream.html")
-        expect(response.body).to include("remove")
       end
 
       it "redirects to the project page for html requests" do

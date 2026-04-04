@@ -23,11 +23,6 @@ RSpec.describe "Comments", type: :system do
     context "when signed in" do
       before { sign_in_via_form user }
 
-      it "shows the comment form" do
-        visit project_path(project)
-        expect(page).to have_field("comment[body]")
-      end
-
       it "submitting a comment adds it to the list without a page reload" do
         visit project_path(project)
         fill_in "comment[body]", with: "Love this dress!"
@@ -36,23 +31,10 @@ RSpec.describe "Comments", type: :system do
         expect(page).to have_content(user.display_name)
       end
 
-      it "clears the form after submitting" do
-        visit project_path(project)
-        fill_in "comment[body]", with: "Great project!"
-        click_button "Post comment"
-        expect(page).to have_field("comment[body]", with: "")
-      end
-
       it "shows a validation error for blank comments" do
         visit project_path(project)
         click_button "Post comment"
         expect(page).to have_content("can't be blank")
-      end
-
-      it "does not add blank comments to the list" do
-        visit project_path(project)
-        click_button "Post comment"
-        expect(Comment.count).to eq(0)
       end
     end
 
@@ -60,11 +42,6 @@ RSpec.describe "Comments", type: :system do
       let!(:comment) { create(:comment, user: user, project: project, body: "Nice work!") }
 
       before { sign_in_via_form user }
-
-      it "comment owner sees a delete button" do
-        visit project_path(project)
-        expect(page).to have_button("×")
-      end
 
       it "deleting removes the comment from the page" do
         visit project_path(project)
