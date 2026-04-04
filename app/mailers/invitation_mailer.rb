@@ -1,6 +1,4 @@
 class InvitationMailer < ApplicationMailer
-  default from: "noreply@sewtwirly.com"
-
   def invite(invitation)
     @invitation = invitation
     @accept_url = invitation_url(@invitation.token)

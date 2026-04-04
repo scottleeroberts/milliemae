@@ -245,7 +245,7 @@ RSpec.describe User, type: :model do
   describe "#gravatar_url" do
     it "returns a gravatar URL based on email" do
       user = build(:user, :creator, email: "test@example.com")
-      expected_hash = Digest::MD5.hexdigest("test@example.com")
+      expected_hash = Digest::SHA256.hexdigest("test@example.com")
       expect(user.gravatar_url).to include(expected_hash)
       expect(user.gravatar_url).to include("gravatar.com/avatar")
     end
