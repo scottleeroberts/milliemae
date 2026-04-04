@@ -9,4 +9,4 @@
 - [x] 7. Introduce a lighter `project_image` factory path and update specs that do not need attachments.
 - [x] 8. Remove request assertions that only restate persistence details.
 - [x] 9. Review the CSS spec value and simplify or remove it.
-- [ ] 10. Document testing boundaries to prevent future overlap.
+- [x] 10. Document testing boundaries to prevent future overlap.
