@@ -17,6 +17,14 @@ class User < ApplicationRecord
   has_many :sent_invitations, class_name: "Invitation", foreign_key: :invited_by_id,
                               dependent: :destroy, inverse_of: :invited_by
 
+  SOCIAL_LINK_FIELDS = {
+    "Instagram" => :instagram,
+    "Etsy"      => :etsy,
+    "Pinterest" => :pinterest,
+    "Website"   => :website,
+    "Facebook"  => :facebook
+  }.freeze
+
   SOCIAL_URL_PATTERN = /\Ahttps?:\/\/[^\s]+\z/i
 
   validates :name, presence: true
@@ -48,6 +56,13 @@ class User < ApplicationRecord
 
   def following?(user)
     follows.exists?(following: user)
+  end
+
+  def social_links
+    SOCIAL_LINK_FIELDS.filter_map do |label, field|
+      url = public_send(field)
+      [label, url] if url.present?
+    end.to_h
   end
 
   private

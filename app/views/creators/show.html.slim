@@ -23,17 +23,17 @@
           span.text-xs.text-gray-500 Followers
 
       / Social links
-      - social_links = { "Instagram" => @creator.instagram, "Etsy" => @creator.etsy, "Pinterest" => @creator.pinterest, "Website" => @creator.website, "Facebook" => @creator.facebook }.select { |_label, url| url.present? }
-      - if social_links.any?
+      - social = @creator.social_links
+      - if social.any?
         .flex.flex-wrap.justify-center.sm:justify-start.gap-2.mt-4
-          - social_links.each do |label, url|
+          - social.each do |label, url|
             = link_to label, url, target: "_blank", rel: "noopener noreferrer", class: "inline-block text-xs font-medium text-pink-600 bg-white border border-pink-200 rounded-full px-3 py-1 hover:bg-pink-100 hover:text-pink-700 shadow-sm transition-colors"
 
 hr.mb-8.border-rose-100
 
 - if @projects.any?
   h2.text-lg.font-semibold.mb-4 Projects
-  .grid.grid-cols-1.gap-6 style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));"
+  .grid.grid-cols-1.sm:grid-cols-2.lg:grid-cols-3.gap-6
     - @projects.each do |project|
       = render "projects/card", project: project
 - else

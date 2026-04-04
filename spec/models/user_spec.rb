@@ -204,6 +204,30 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "#social_links" do
+    it "returns only populated social fields" do
+      user = build(:user, instagram: "https://instagram.com/sewer",
+                           etsy: nil, pinterest: nil, website: nil, facebook: nil)
+      expect(user.social_links).to eq({ "Instagram" => "https://instagram.com/sewer" })
+    end
+
+    it "returns an empty hash when no social fields are set" do
+      user = build(:user, instagram: nil, etsy: nil, pinterest: nil, website: nil, facebook: nil)
+      expect(user.social_links).to be_empty
+    end
+
+    it "returns all five links in SOCIAL_LINK_FIELDS order" do
+      user = build(:user,
+        instagram: "https://ig.com/a",
+        etsy: "https://etsy.com/shop/a",
+        pinterest: "https://pinterest.com/a",
+        website: "https://example.com",
+        facebook: "https://fb.com/a"
+      )
+      expect(user.social_links.keys).to eq(%w[Instagram Etsy Pinterest Website Facebook])
+    end
+  end
+
   describe "#gravatar_url" do
     it "returns a gravatar URL based on email" do
       user = build(:user, :creator, email: "test@example.com")

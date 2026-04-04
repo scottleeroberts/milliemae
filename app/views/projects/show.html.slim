@@ -31,10 +31,10 @@
       = link_to creator_path(@project.user) do
         img.w-16.h-16.rounded-full.shadow src=@project.user.gravatar_url(size: 128) alt="#{@project.user.display_name}'s avatar"
       = link_to @project.user.display_name, creator_path(@project.user), class: "text-sm font-medium text-gray-700 hover:text-pink-600 mt-2"
-      - social_links = { "Instagram" => @project.user.instagram, "Etsy" => @project.user.etsy, "Pinterest" => @project.user.pinterest, "Website" => @project.user.website, "Facebook" => @project.user.facebook }.select { |_label, url| url.present? }
-      - if social_links.any?
-        .flex.gap-2.mt-1
-          - social_links.each do |label, url|
+      - social = @project.user.social_links
+      - if social.any?
+        .flex.flex-wrap.gap-2.mt-1
+          - social.each do |label, url|
             = link_to label, url, target: "_blank", rel: "noopener noreferrer", class: "text-xs text-pink-600 hover:text-pink-700"
 
 - if @project.body.present?
