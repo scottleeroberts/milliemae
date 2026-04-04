@@ -1,13 +1,13 @@
 - content_for :title, "#{@creator.display_name} — Sew Twirly"
 - content_for :description, "Sewing projects by #{@creator.display_name} on Sew Twirly."
 
-.bg-rose-50.rounded-xl.p-8.mb-8.-mx-4
+.bg-rose-50.rounded-xl.p-4.sm:p-6.md:p-8.mb-8.-mx-4
   .flex.flex-col.sm:flex-row.items-center.sm:items-start.gap-6
     img.w-24.h-24.rounded-full.shadow-md.shrink-0 src=@creator.gravatar_url(size: 192) alt="#{@creator.display_name}'s avatar"
 
     .flex-1.text-center.sm:text-left
       .flex.flex-col.sm:flex-row.sm:items-center.sm:justify-between.gap-4
-        h1.text-3xl.font-bold = @creator.display_name
+        h1.text-2xl.sm:text-3xl.font-bold = @creator.display_name
         = render "follows/button", creator: @creator
 
       - if @creator.bio.present?
