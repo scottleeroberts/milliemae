@@ -8,5 +8,5 @@
 - [x] 6. Extract invitation lookup and invalid-token handling into shared controller logic.
 - [x] 7. Move presentation helpers like `Project#published_date` out of models.
 - [x] 8. Rename retained read actors to clearer query/loader roles where appropriate.
-- [ ] 9. Isolate image metadata extraction from `ProjectImage` persistence concerns.
-- [ ] 10. Document architecture rules for models, queries, actors, and spec layers.
+- [x] 9. Isolate image metadata extraction from `ProjectImage` persistence concerns.
+- [x] 10. Document architecture rules for models, queries, actors, and spec layers.
