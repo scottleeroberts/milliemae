@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe ProjectImage, type: :model do
   describe "associations" do
     it "belongs to a project" do
-      project_image = build(:project_image)
+      project_image = build(:project_image, :without_image)
       expect(project_image.project).to be_present
     end
 
@@ -32,7 +32,7 @@ RSpec.describe ProjectImage, type: :model do
     end
 
     it "rejects non-image content types" do
-      project_image = build(:project_image)
+      project_image = build(:project_image, :without_image)
       project_image.image.attach(
         io: StringIO.new("<html>evil</html>"),
         filename: "evil.html",

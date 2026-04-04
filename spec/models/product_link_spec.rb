@@ -94,7 +94,7 @@ RSpec.describe ProductLink, type: :model do
 
   describe "associations" do
     it "belongs to a project_image" do
-      product_link = build(:product_link)
+      product_link = described_class.new(project_image: build(:project_image, :without_image))
       expect(product_link.project_image).to be_present
     end
   end

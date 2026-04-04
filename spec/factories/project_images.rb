@@ -5,8 +5,16 @@ FactoryBot.define do
     image_width { nil }
     image_height { nil }
 
-    after(:build) do |project_image|
-      unless project_image.image.attached?
+    transient do
+      attach_image { true }
+    end
+
+    trait :without_image do
+      attach_image { false }
+    end
+
+    after(:build) do |project_image, evaluator|
+      if evaluator.attach_image && !project_image.image.attached?
         png_bytes = Base64.decode64(
           "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
         )
