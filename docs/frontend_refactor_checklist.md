@@ -9,4 +9,4 @@
 - [x] 7. Extract shared interactive component classes in Tailwind CSS.
 - [x] 8. Reduce inline style and class mutation where Stimulus values or classes fit better.
 - [x] 9. Add stronger system coverage for nav and hotspot accessibility behavior.
-- [ ] 10. Keep Action Text styling isolated and document frontend boundaries.
+- [x] 10. Keep Action Text styling isolated and document frontend boundaries.
