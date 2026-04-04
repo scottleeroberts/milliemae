@@ -5,7 +5,7 @@
 - [x] 3. Introduce reusable loaders for creator-owned nested resources.
 - [x] 4. Standardize authorization predicates for ownership and admin checks.
 - [x] 5. Replace string-based failure handling with symbolic or domain-level reasons.
-- [ ] 6. Extract invitation lookup and invalid-token handling into shared controller logic.
+- [x] 6. Extract invitation lookup and invalid-token handling into shared controller logic.
 - [ ] 7. Move presentation helpers like `Project#published_date` out of models.
 - [ ] 8. Rename retained read actors to clearer query/loader roles where appropriate.
 - [ ] 9. Isolate image metadata extraction from `ProjectImage` persistence concerns.

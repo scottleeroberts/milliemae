@@ -1,13 +1,11 @@
 class InvitationsController < ApplicationController
+  before_action :set_pending_invitation, only: [:show, :accept]
+
   def show
-    @invitation = Invitation.pending.find_by!(token: params[:token])
     @user = User.new(email: @invitation.email)
-  rescue ActiveRecord::RecordNotFound
-    redirect_to root_path, alert: "This invitation is invalid or has already been used."
   end
 
   def accept
-    @invitation = Invitation.pending.find_by!(token: params[:token])
     actor = Invitations::Accept.result(
       invitation: @invitation,
       attributes: user_params.to_h.symbolize_keys
@@ -20,11 +18,15 @@ class InvitationsController < ApplicationController
     else
       render :show, status: :unprocessable_content
     end
-  rescue ActiveRecord::RecordNotFound
-    redirect_to root_path, alert: "This invitation is invalid or has already been used."
   end
 
   private
+
+  def set_pending_invitation
+    @invitation = Invitation.pending.find_by!(token: params[:token])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path, alert: "This invitation is invalid or has already been used."
+  end
 
   def user_params
     params.require(:user).permit(:name, :password, :password_confirmation)
