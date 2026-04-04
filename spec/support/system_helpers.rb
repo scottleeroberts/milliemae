@@ -11,6 +11,12 @@ module SystemHelpers
   end
 end
 
+RSpec.shared_context "mobile viewport" do
+  before { page.driver.browser.manage.window.resize_to(390, 844) }
+  after  { page.driver.browser.manage.window.resize_to(1400, 900) }
+end
+
 RSpec.configure do |config|
   config.include SystemHelpers, type: :system
+  config.include_context "mobile viewport", mobile: true
 end
