@@ -42,3 +42,6 @@
 
 # RSpec persistence file
 /spec/examples.txt
+
+# SimpleCov output
+/coverage/

@@ -56,6 +56,6 @@ section.mt-12
       | = link_to "Sign in", new_user_session_path, class: "text-pink-600 hover:underline"
       |  to leave a comment.
   div id=dom_id(@project, :comments) class="space-y-4 divide-y divide-gray-100"
-    - @project.comments.includes(:user).each do |comment|
+    - @project.comments.each do |comment|
       .py-3
         = render "comments/comment", comment: comment, project: @project

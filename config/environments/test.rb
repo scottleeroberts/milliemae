@@ -53,4 +53,17 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions.
   config.action_controller.raise_on_missing_callback_actions = true
+
+  # Bullet N+1 query detection
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.raise = true
+    # project_tags is a join table loaded implicitly via .includes(:tags)
+    Bullet.add_safelist type: :unused_eager_loading, class_name: "Project", association: :project_tags
+    # Active Storage internals: blob/record loaded through framework eager loading
+    Bullet.add_safelist type: :unused_eager_loading, class_name: "ActiveStorage::Attachment", association: :blob
+    Bullet.add_safelist type: :unused_eager_loading, class_name: "ActiveStorage::Attachment", association: :record
+    # ProjectLoader is shared across show/edit/update/publish/unpublish — images only used on show
+    Bullet.add_safelist type: :unused_eager_loading, class_name: "Project", association: :project_images
+  end
 end

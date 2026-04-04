@@ -48,11 +48,13 @@ gem "slim-rails"
 # Rate limiting and request throttling [https://github.com/rack/rack-attack]
 gem "rack-attack"
 gem "service_actor"
+gem "strong_migrations"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "bundler-audit", require: false
   gem "brakeman", require: false
+  gem "bullet"
   gem "rubocop-rails-omakase", require: false
   gem "rspec-rails"
   gem "factory_bot_rails"
@@ -61,8 +63,10 @@ end
 group :test do
   gem "capybara"
   gem "selenium-webdriver"
+  gem "simplecov", require: false
 end
 
 group :development do
+  gem "rack-mini-profiler"
   gem "web-console"
 end

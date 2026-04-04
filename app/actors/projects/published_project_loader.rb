@@ -5,7 +5,7 @@ class Projects::PublishedProjectLoader < ApplicationActor
 
   def call
     self.project = Project.published
-                          .includes(:user, :tags, :likes,
+                          .includes(:user, :tags, comments: :user,
                                     project_images: [:product_links, { image_attachment: :blob }])
                           .find_by!(slug: slug)
   end
