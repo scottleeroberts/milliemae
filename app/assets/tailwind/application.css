@@ -36,3 +36,13 @@
     opacity: 0;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hotspot-pulse {
+    animation: none;
+  }
+
+  [data-controller~="flash"] {
+    transition: none;
+  }
+}
