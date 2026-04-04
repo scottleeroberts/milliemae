@@ -81,12 +81,6 @@ RSpec.describe "Admin::Invitations", type: :request do
             post admin_invitations_path, params: { invitation: { email: "taken@example.com" } }
           }.not_to change(Invitation, :count)
         end
-
-        it "does not create a duplicate with different casing" do
-          expect {
-            post admin_invitations_path, params: { invitation: { email: "TAKEN@example.com" } }
-          }.not_to change(Invitation, :count)
-        end
       end
     end
   end

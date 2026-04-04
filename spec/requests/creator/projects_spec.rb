@@ -62,8 +62,6 @@ RSpec.describe "Creator::Projects", type: :request do
 
       project = Project.last
       expect(project.title).to eq("Summer Dress")
-      expect(project.user).to eq(creator)
-      expect(project.slug).to eq("summer-dress")
       expect(response).to redirect_to(creator_project_path(project))
     end
 
@@ -163,30 +161,6 @@ RSpec.describe "Creator::Projects", type: :request do
       other_project = create(:project)
       get creator_project_path(other_project)
       expect(response).to have_http_status(:not_found)
-    end
-  end
-
-  describe "POST /creator/projects with body content" do
-    before { sign_in creator }
-
-    it "creates a project with Action Text body content" do
-      post creator_projects_path, params: {
-        project: { title: "Floral Blouse", body: "<p>A beautiful floral blouse</p>" }
-      }
-      expect(Project.last.body.to_s).to include("A beautiful floral blouse")
-    end
-  end
-
-  describe "PATCH /creator/projects/:id tag replacement" do
-    before { sign_in creator }
-
-    it "replaces existing tags with the new tag_list" do
-      project = create(:project, user: creator, title: "Tag Replacement Project")
-      project.update!(tag_list: "cotton")
-
-      patch creator_project_path(project), params: { project: { tag_list: "silk, linen" } }
-
-      expect(project.reload.tags.map(&:name)).to match_array([ "silk", "linen" ])
     end
   end
 

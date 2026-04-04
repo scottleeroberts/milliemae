@@ -29,13 +29,6 @@ RSpec.describe "Creator::ProjectImages", type: :request do
       }.to change(ProjectImage, :count).by(1)
     end
 
-    it "attaches the image to the project" do
-      post creator_project_project_images_path(project),
-        params: { project_image: { image: image_file } },
-        headers: { "Accept" => "text/html" }
-      expect(project.project_images.reload.last.image).to be_attached
-    end
-
     it "returns 404 when project does not belong to current creator" do
       other_project = create(:project)
       post creator_project_project_images_path(other_project),

@@ -7,6 +7,6 @@
 - [x] 5. Collapse likes system specs to core scenarios.
 - [x] 6. Collapse follows system specs to core scenarios.
 - [x] 7. Introduce a lighter `project_image` factory path and update specs that do not need attachments.
-- [ ] 8. Remove request assertions that only restate persistence details.
+- [x] 8. Remove request assertions that only restate persistence details.
 - [ ] 9. Review the CSS spec value and simplify or remove it.
 - [ ] 10. Document testing boundaries to prevent future overlap.
