@@ -45,6 +45,10 @@ class User < ApplicationRecord
     name
   end
 
+  def creator_access?
+    creator? || admin?
+  end
+
   def gravatar_url(size: 80)
     hash = Digest::MD5.hexdigest(email.to_s.strip.downcase)
     "https://www.gravatar.com/avatar/#{hash}?s=#{size}&d=mp"

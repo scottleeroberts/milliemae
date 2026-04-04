@@ -56,4 +56,24 @@ RSpec.describe Comment, type: :model do
       expect(project.comments.to_a).to eq([ newer, older ])
     end
   end
+
+  describe "#destroyable_by?" do
+    let(:comment) { create(:comment) }
+
+    it "allows the owner" do
+      expect(comment).to be_destroyable_by(comment.user)
+    end
+
+    it "allows admins" do
+      expect(comment).to be_destroyable_by(create(:user, :admin))
+    end
+
+    it "rejects other users" do
+      expect(comment).not_to be_destroyable_by(create(:user))
+    end
+
+    it "rejects nil" do
+      expect(comment).not_to be_destroyable_by(nil)
+    end
+  end
 end

@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   private
 
   def require_creator!
-    redirect_to root_path, alert: "Not authorized." unless current_user&.creator? || current_user&.admin?
+    redirect_to root_path, alert: "Not authorized." unless current_user&.creator_access?
   end
 
   def require_admin!

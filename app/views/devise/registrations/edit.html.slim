@@ -30,7 +30,7 @@
       span.text-xs.text-gray-500 We need your current password to confirm changes
       = f.password_field :current_password, autocomplete: "current-password", class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
 
-    - if resource.creator? || resource.admin?
+    - if resource.creator_access?
       .mb-6.border.border-gray-200.rounded.p-4
         h3.text-sm.font-semibold.text-gray-700.mb-3 Creator Links
         .mb-3

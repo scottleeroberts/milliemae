@@ -123,6 +123,20 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "#creator_access?" do
+    it "returns false for audience users" do
+      expect(build(:user)).not_to be_creator_access
+    end
+
+    it "returns true for creators" do
+      expect(build(:user, :creator)).to be_creator_access
+    end
+
+    it "returns true for admins" do
+      expect(build(:user, :admin)).to be_creator_access
+    end
+  end
+
   describe "associations" do
     it "destroys associated projects when the user is destroyed" do
       user = create(:user, :creator)

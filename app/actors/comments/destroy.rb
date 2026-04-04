@@ -3,7 +3,7 @@ class Comments::Destroy < ApplicationActor
   input :current_user, type: User
 
   def call
-    fail!(error: "Not authorized.") unless comment_record.user == current_user || current_user.admin?
+    fail!(error: "Not authorized.") unless comment_record.destroyable_by?(current_user)
 
     comment_record.destroy!
   end
