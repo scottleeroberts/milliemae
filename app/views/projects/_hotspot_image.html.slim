@@ -4,7 +4,24 @@
   - has_products = project_image.product_links.any?
   div class=(has_products ? "grid grid-cols-1 lg:grid-cols-3 gap-6 items-start" : "")
     .relative.lg:col-span-2 data-controller="hotspot-tooltip"
-      = image_tag project_image.image, class: "block w-full rounded-lg shadow", alt: local_assigns.fetch(:image_alt, ""), loading: "lazy"
+      - if project_image.image.variable?
+        - small_url = url_for(project_image.image.variant(resize_to_limit: [800, 600]))
+        - large_url = url_for(project_image.image.variant(resize_to_limit: [1600, 1200]))
+        = image_tag(project_image.image.variant(resize_to_limit: [1600, 1200]),
+            class: "block w-full rounded-lg shadow",
+            alt: local_assigns.fetch(:image_alt, ""),
+            loading: "lazy",
+            srcset: "#{small_url} 800w, #{large_url} 1600w",
+            sizes: "(max-width: 768px) 100vw, 66vw",
+            width: project_image.image_width.presence,
+            height: project_image.image_height.presence)
+      - else
+        = image_tag(project_image.image,
+            class: "block w-full rounded-lg shadow",
+            alt: local_assigns.fetch(:image_alt, ""),
+            loading: "lazy",
+            width: project_image.image_width.presence,
+            height: project_image.image_height.presence)
 
       - project_image.product_links.each.with_index(1) do |pl, idx|
         button.absolute.flex.items-center.justify-center.bg-pink-600.text-white.text-xs.font-bold.rounded-full.w-9.h-9.sm:w-7.sm:h-7.shadow-lg.-translate-x-4.sm:-translate-x-3.5.-translate-y-4.sm:-translate-y-3.5.hover:bg-purple-800.transition-colors.duration-200.animate-hotspot-pulse.cursor-pointer type="button" aria-label="Product #{idx}: #{pl.label}" style="left: #{(pl.x * 100).round(2)}%; top: #{(pl.y * 100).round(2)}%;" data-action="hotspot-tooltip#show" data-label=pl.label data-url=pl.url

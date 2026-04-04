@@ -2,7 +2,10 @@ article.group.bg-white.rounded-3xl.shadow-md.overflow-hidden.flex.flex-col.hover
   - cover = project.cover_image
   - if cover&.image&.attached?
     = link_to project_path(project), class: "block overflow-hidden"
-      = image_tag cover.image, class: "w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300", alt: project.title, loading: "lazy"
+      - if cover.image.variable?
+        = image_tag cover.image.variant(resize_to_fill: [800, 512]), class: "w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300", alt: project.title, loading: "lazy"
+      - else
+        = image_tag cover.image, class: "w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300", alt: project.title, loading: "lazy"
   - else
     .w-full.h-64.bg-gray-100.flex.items-center.justify-center
       span.text-gray-500.text-sm No image yet
