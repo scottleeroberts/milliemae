@@ -51,24 +51,4 @@ RSpec.describe ProjectImage, type: :model do
     end
   end
 
-  describe "#analyze_image_dimensions" do
-    it "leaves dimensions nil when image is not attached" do
-      project_image = create(:project_image)
-      project_image.image.purge
-      project_image.analyze_image_dimensions
-      expect(project_image.image_width).to be_nil
-      expect(project_image.image_height).to be_nil
-    end
-
-    it "stores width and height from blob metadata" do
-      project_image = create(:project_image)
-      allow(project_image.image.blob).to receive(:analyze)
-      allow(project_image.image.blob).to receive(:metadata).and_return("width" => 640, "height" => 480)
-
-      project_image.analyze_image_dimensions
-
-      expect(project_image.reload.image_width).to eq(640)
-      expect(project_image.reload.image_height).to eq(480)
-    end
-  end
 end

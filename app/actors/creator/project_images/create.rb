@@ -10,6 +10,6 @@ class Creator::ProjectImages::Create < ApplicationActor
 
     fail_with_record!(project_image) unless project_image.save
 
-    project_image.analyze_image_dimensions
+    ProjectImages::DimensionAnalyzer.call(project_image: project_image)
   end
 end
