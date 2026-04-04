@@ -52,12 +52,6 @@ RSpec.describe "Admin::Invitations", type: :request do
           }.to change(Invitation, :count).by(1)
         end
 
-        it "enqueues an invitation email" do
-          expect {
-            post admin_invitations_path, params: { invitation: { email: "new@example.com" } }
-          }.to have_enqueued_mail(InvitationMailer, :invite)
-        end
-
         it "redirects with notice" do
           post admin_invitations_path, params: { invitation: { email: "new@example.com" } }
           expect(response).to redirect_to(admin_invitations_path)

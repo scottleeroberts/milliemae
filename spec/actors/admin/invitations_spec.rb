@@ -18,14 +18,4 @@ RSpec.describe "Admin invitation actors" do
       expect(result.invitation.errors[:email]).to be_present
     end
   end
-
-  describe Admin::Invitations::Destroy do
-    it "destroys the invitation" do
-      invitation = create(:invitation)
-
-      expect {
-        described_class.call(invitation: invitation)
-      }.to change(Invitation, :count).by(-1)
-    end
-  end
 end

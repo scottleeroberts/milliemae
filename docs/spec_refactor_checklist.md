@@ -3,7 +3,7 @@
 - [x] 1. Delete low-value comment actor specs and rebalance coverage.
 - [x] 2. Delete low-value creator project image actor specs and rebalance coverage.
 - [x] 3. Prune duplicate comment request and system assertions.
-- [ ] 4. Reduce invitation overlap across actor, request, and system layers.
+- [x] 4. Reduce invitation overlap across actor, request, and system layers.
 - [ ] 5. Collapse likes system specs to core scenarios.
 - [ ] 6. Collapse follows system specs to core scenarios.
 - [ ] 7. Introduce a lighter `project_image` factory path and update specs that do not need attachments.
