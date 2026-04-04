@@ -1,7 +1,8 @@
 = turbo_frame_tag "project_image_#{project_image.id}" do
   .mb-8 data-controller="hotspot-annotator" data-hotspot-annotator-hidden-class="hidden" data-hotspot-annotator-annotating-class="cursor-crosshair"
     .relative.inline-block.max-w-full
-      = image_tag project_image.image, class: "block max-w-full", loading: "lazy", data: { hotspot_annotator_target: "image", action: "click->hotspot-annotator#placeHotspot" }
+      - editor_image = project_image.image.variable? ? project_image.image.variant(resize_to_limit: [1200, 900]) : project_image.image
+      = image_tag editor_image, class: "block max-w-full", loading: "lazy", data: { hotspot_annotator_target: "image", action: "click->hotspot-annotator#placeHotspot" }
 
       - project_image.product_links.each.with_index(1) do |pl, idx|
         a.hotspot-pin href=pl.url target="_blank" rel="noopener noreferrer" title=pl.label style="left: #{(pl.x * 100).round(2)}%; top: #{(pl.y * 100).round(2)}%;"
