@@ -1,0 +1,12 @@
+# Spec Refactor Checklist
+
+- [x] 1. Delete low-value comment actor specs and rebalance coverage.
+- [ ] 2. Delete low-value creator project image actor specs and rebalance coverage.
+- [ ] 3. Prune duplicate comment request and system assertions.
+- [ ] 4. Reduce invitation overlap across actor, request, and system layers.
+- [ ] 5. Collapse likes system specs to core scenarios.
+- [ ] 6. Collapse follows system specs to core scenarios.
+- [ ] 7. Introduce a lighter `project_image` factory path and update specs that do not need attachments.
+- [ ] 8. Remove request assertions that only restate persistence details.
+- [ ] 9. Review the CSS spec value and simplify or remove it.
+- [ ] 10. Document testing boundaries to prevent future overlap.
