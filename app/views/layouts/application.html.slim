@@ -38,16 +38,16 @@ html
             = link_to "Sign in", new_user_session_path, class: "text-sm text-gray-600 hover:text-gray-900"
             = link_to "Sign up", new_user_registration_path, class: "text-sm bg-pink-600 text-white px-3 py-1 rounded hover:bg-pink-700"
         / Hamburger button (mobile only)
-        button.sm:hidden.flex.items-center.justify-center.w-10.h-10.rounded.text-gray-600.hover:text-pink-600.transition-colors type="button" data-action="mobile-nav#toggle" aria-label="Open menu"
+        button.sm:hidden.flex.items-center.justify-center.w-10.h-10.rounded.text-gray-600.hover:text-pink-600.transition-colors type="button" data-action="mobile-nav#toggle" data-mobile-nav-target="trigger" aria-label="Open menu" aria-controls="mobile-navigation" aria-expanded="false"
           svg.w-6.h-6 fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
             path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"
       / Mobile overlay
-      .fixed.inset-0.bg-black/50.z-40.hidden data-mobile-nav-target="overlay" data-action="click->mobile-nav#close"
+      .fixed.inset-0.bg-black/50.z-40.hidden data-mobile-nav-target="overlay" data-action="click->mobile-nav#close" aria-hidden="true"
       / Mobile drawer
-      .fixed.top-0.left-0.h-full.w-64.bg-white.shadow-xl.z-50.hidden data-mobile-nav-target="menu"
+      .fixed.top-0.left-0.h-full.w-64.bg-white.shadow-xl.z-50.hidden id="mobile-navigation" data-mobile-nav-target="menu" role="dialog" aria-modal="true" aria-label="Mobile navigation" aria-hidden="true"
         .flex.items-center.justify-between.p-4.border-b.border-pink-100
           span.text-lg.font-bold.font-display.text-pink-600 Sew Twirly
-          button.text-gray-500.hover:text-gray-700 type="button" data-action="mobile-nav#close" aria-label="Close menu"
+          button.text-gray-500.hover:text-gray-700 type="button" data-action="mobile-nav#close" data-mobile-nav-target="closeButton" aria-label="Close menu"
             svg.w-6.h-6 fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
               path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"
         nav.p-4.space-y-1
