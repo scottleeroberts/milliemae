@@ -24,4 +24,14 @@ RSpec.describe "Navigation", type: :system, mobile: true do
     expect(page).to have_css("#mobile-navigation.hidden", visible: :all)
     expect(page.evaluate_script("document.activeElement.getAttribute('aria-controls')")).to eq("mobile-navigation")
   end
+
+  it "closes the mobile navigation drawer when a nav link is activated" do
+    visit root_path
+
+    find('button[aria-controls="mobile-navigation"]', visible: true).click
+    within("#mobile-navigation") { click_link "About" }
+
+    expect(page).to have_current_path(about_path)
+    expect(find("#mobile-navigation", visible: :all)["aria-hidden"]).to eq("true")
+  end
 end

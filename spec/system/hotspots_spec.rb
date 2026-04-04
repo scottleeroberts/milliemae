@@ -57,11 +57,14 @@ RSpec.describe "Hotspot tooltips", type: :system do
       within(tooltip) do
         expect(page).to have_text("Linen Fabric")
       end
-      find("[aria-label^='Product 2:']").click
+      second_pin = find("[aria-label^='Product 2:']")
+      second_pin.click
       within(tooltip) do
         expect(page).to have_text("Cotton Thread")
         expect(page).not_to have_text("Linen Fabric")
       end
+      expect(first_pin["aria-expanded"]).to eq("false")
+      expect(second_pin["aria-expanded"]).to eq("true")
     end
 
     it "hides the tooltip on Escape" do
@@ -110,6 +113,11 @@ RSpec.describe "Hotspot tooltips", type: :system do
       within(tooltip) do
         expect(page).to have_text("Cotton Thread")
       end
+    end
+
+    it "wires each pin to the shared tooltip through aria-controls" do
+      expect(first_pin["aria-controls"]).to eq(tooltip[:id])
+      expect(tooltip["role"]).to eq("dialog")
     end
   end
 end

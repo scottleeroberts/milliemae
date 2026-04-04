@@ -42,8 +42,12 @@ export default class extends Controller {
     const isOpen = this.openValue
     this.tooltipTarget.classList.toggle(this.hiddenClass, !isOpen)
     this.tooltipTarget.setAttribute("aria-hidden", isOpen ? "false" : "true")
+    this.syncPinState()
+  }
+
+  syncPinState() {
     this.pinTargets.forEach((pin) => {
-      pin.setAttribute("aria-expanded", this.activePin === pin && isOpen ? "true" : "false")
+      pin.setAttribute("aria-expanded", this.activePin === pin && this.openValue ? "true" : "false")
     })
   }
 
@@ -71,6 +75,7 @@ export default class extends Controller {
     let top = pinRect.top - containerRect.top + pinRect.height + 8
 
     this.openValue = true
+    this.syncPinState()
 
     const tooltipRect = this.tooltipTarget.getBoundingClientRect()
 
