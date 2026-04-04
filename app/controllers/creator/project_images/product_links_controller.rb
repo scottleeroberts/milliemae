@@ -1,8 +1,11 @@
 class Creator::ProjectImages::ProductLinksController < ApplicationController
+  include Creator::ProjectResourceLoader
+
   before_action :authenticate_user!
   before_action :require_creator!
-  before_action :set_project
-  before_action :set_project_image
+  before_action :set_creator_project
+  before_action :set_creator_project_image
+  before_action :set_creator_product_link, only: [:update, :destroy]
 
   def create
     actor = Creator::ProjectImages::ProductLinks::Create.result(
@@ -25,7 +28,6 @@ class Creator::ProjectImages::ProductLinksController < ApplicationController
   end
 
   def update
-    @product_link = @project_image.product_links.find(params[:id])
     actor = Creator::ProjectImages::ProductLinks::Update.result(
       link: @product_link,
       attributes: product_link_params.to_h.symbolize_keys
@@ -46,7 +48,6 @@ class Creator::ProjectImages::ProductLinksController < ApplicationController
   end
 
   def destroy
-    @product_link = @project_image.product_links.find(params[:id])
     Creator::ProjectImages::ProductLinks::Destroy.call(product_link: @product_link)
 
     respond_to do |format|
@@ -56,14 +57,6 @@ class Creator::ProjectImages::ProductLinksController < ApplicationController
   end
 
   private
-
-  def set_project
-    @project = current_user.projects.find_by!(slug: params[:project_id])
-  end
-
-  def set_project_image
-    @project_image = @project.project_images.find(params[:project_image_id])
-  end
 
   def product_link_params
     params.require(:product_link).permit(:label, :url, :x, :y)

@@ -2,7 +2,7 @@
 
 - [x] 1. Collapse trivial creator project CRUD actors into controller/model flow.
 - [x] 2. Remove low-value actor specs made obsolete by the actor-heavy pattern and rebalance coverage.
-- [ ] 3. Introduce reusable loaders for creator-owned nested resources.
+- [x] 3. Introduce reusable loaders for creator-owned nested resources.
 - [ ] 4. Standardize authorization predicates for ownership and admin checks.
 - [ ] 5. Replace string-based failure handling with symbolic or domain-level reasons.
 - [ ] 6. Extract invitation lookup and invalid-token handling into shared controller logic.

@@ -1,7 +1,10 @@
 class Creator::ProjectImagesController < ApplicationController
+  include Creator::ProjectResourceLoader
+
   before_action :authenticate_user!
   before_action :require_creator!
-  before_action :set_project
+  before_action :set_creator_project
+  before_action :set_creator_project_image, only: :destroy
 
   def create
     actor = Creator::ProjectImages::Create.result(
@@ -24,7 +27,6 @@ class Creator::ProjectImagesController < ApplicationController
   end
 
   def destroy
-    @project_image = @project.project_images.find(params[:id])
     Creator::ProjectImages::Destroy.call(project_image: @project_image)
 
     respond_to do |format|
@@ -35,7 +37,4 @@ class Creator::ProjectImagesController < ApplicationController
 
   private
 
-  def set_project
-    @project = current_user.projects.find_by!(slug: params[:project_id])
-  end
 end
