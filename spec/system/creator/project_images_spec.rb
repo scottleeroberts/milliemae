@@ -38,4 +38,33 @@ RSpec.describe "Creator project image management", type: :system do
 
     expect(page).to have_css("a.bg-pink-600.rounded-full", text: "1")
   end
+
+  it "enters annotate mode, places a hotspot form, and cancels cleanly" do
+    project_image = create(:project_image, project: project)
+
+    visit creator_project_path(project)
+
+    click_button "+ Add hotspot"
+
+    image = find("[data-hotspot-annotator-target='image']", match: :first)
+    page.execute_script(<<~JS, image.native)
+      const image = arguments[0]
+      const rect = image.getBoundingClientRect()
+      image.dispatchEvent(new MouseEvent("click", {
+        bubbles: true,
+        clientX: rect.left + 30,
+        clientY: rect.top + 30
+      }))
+    JS
+
+    expect(page).to have_field("Product name")
+    expect(find("input[name='product_link[x]']", visible: false).value).not_to be_empty
+    expect(find("input[name='product_link[y]']", visible: false).value).not_to be_empty
+
+    click_button "Cancel"
+
+    expect(page).to have_css("[data-hotspot-annotator-target='annotationForm'].hidden", visible: :all)
+    expect(find("input[name='product_link[x]']", visible: false).value).to eq("")
+    expect(find("input[name='product_link[y]']", visible: false).value).to eq("")
+  end
 end

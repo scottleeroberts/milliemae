@@ -2,40 +2,34 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["image", "xInput", "yInput", "annotationForm"]
+  static values = { annotating: Boolean }
 
   connect() {
-    this.annotating = false
+    this.annotatingValue = false
   }
 
   startAnnotating() {
-    this.annotating = true
-    this.imageTarget.classList.add("cursor-crosshair")
+    this.annotatingValue = true
   }
 
   placeHotspot(event) {
-    if (!this.annotating) return
+    if (!this.annotatingValue) return
 
     const rect = this.imageTarget.getBoundingClientRect()
     const x = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width))
     const y = Math.max(0, Math.min(1, (event.clientY - rect.top) / rect.height))
+    const offsetX = event.clientX - rect.left
+    const offsetY = event.clientY - rect.top
 
     this.xInputTarget.value = x.toFixed(4)
     this.yInputTarget.value = y.toFixed(4)
-
-    const offsetX = event.clientX - rect.left
-    const offsetY = event.clientY - rect.top
-    this.annotationFormTarget.style.left = `${offsetX}px`
-    this.annotationFormTarget.style.top = `${offsetY}px`
-    this.annotationFormTarget.classList.remove("hidden")
-
-    this.annotating = false
-    this.imageTarget.classList.remove("cursor-crosshair")
+    this.showAnnotationFormAt(offsetX, offsetY)
+    this.annotatingValue = false
   }
 
   cancelAnnotating() {
-    this.annotating = false
-    this.imageTarget.classList.remove("cursor-crosshair")
-    this.annotationFormTarget.classList.add("hidden")
+    this.annotatingValue = false
+    this.hideAnnotationForm()
   }
 
   hideAnnotationForm() {
@@ -44,5 +38,15 @@ export default class extends Controller {
     this.annotationFormTarget.style.top = ""
     if (this.hasXInputTarget) this.xInputTarget.value = ""
     if (this.hasYInputTarget) this.yInputTarget.value = ""
+  }
+
+  annotatingValueChanged() {
+    this.imageTarget.classList.toggle("cursor-crosshair", this.annotatingValue)
+  }
+
+  showAnnotationFormAt(x, y) {
+    this.annotationFormTarget.style.left = `${x}px`
+    this.annotationFormTarget.style.top = `${y}px`
+    this.annotationFormTarget.classList.remove("hidden")
   }
 }
