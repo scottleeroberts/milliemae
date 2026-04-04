@@ -3,6 +3,7 @@
 .mb-10
   - has_products = project_image.product_links.any?
   div class=(has_products ? "grid grid-cols-1 lg:grid-cols-3 gap-6 items-start" : "")
+    - tooltip_id = "project_image_#{project_image.id}_tooltip"
     .relative.lg:col-span-2 data-controller="hotspot-tooltip"
       - if project_image.image.variable?
         - small_url = url_for(project_image.image.variant(resize_to_limit: [800, 600]))
@@ -24,11 +25,11 @@
             height: project_image.image_height.presence)
 
       - project_image.product_links.each.with_index(1) do |pl, idx|
-        button.absolute.flex.items-center.justify-center.bg-pink-600.text-white.text-xs.font-bold.rounded-full.w-9.h-9.sm:w-7.sm:h-7.shadow-lg.-translate-x-4.sm:-translate-x-3.5.-translate-y-4.sm:-translate-y-3.5.hover:bg-purple-800.transition-colors.duration-200.animate-hotspot-pulse.cursor-pointer type="button" aria-label="Product #{idx}: #{pl.label}" style="left: #{(pl.x * 100).round(2)}%; top: #{(pl.y * 100).round(2)}%;" data-action="hotspot-tooltip#toggle" data-label=pl.label data-url=pl.url
+        button.absolute.flex.items-center.justify-center.bg-pink-600.text-white.text-xs.font-bold.rounded-full.w-9.h-9.sm:w-7.sm:h-7.shadow-lg.-translate-x-4.sm:-translate-x-3.5.-translate-y-4.sm:-translate-y-3.5.hover:bg-purple-800.transition-colors.duration-200.animate-hotspot-pulse.cursor-pointer type="button" aria-label="Product #{idx}: #{pl.label}" aria-controls=tooltip_id aria-expanded="false" style="left: #{(pl.x * 100).round(2)}%; top: #{(pl.y * 100).round(2)}%;" data-action="hotspot-tooltip#toggle" data-hotspot-tooltip-target="pin" data-label=pl.label data-url=pl.url
           = idx
 
       / Tooltip (hidden by default, positioned by Stimulus controller)
-      .hidden.absolute.bg-white.rounded-lg.shadow-xl.p-3.z-10.min-w-48 data-hotspot-tooltip-target="tooltip"
+      .hidden.absolute.bg-white.rounded-lg.shadow-xl.p-3.z-10.min-w-48 id=tooltip_id role="dialog" aria-label="Product details" aria-hidden="true" data-hotspot-tooltip-target="tooltip"
         p.font-medium.text-sm.text-gray-900 data-hotspot-tooltip-target="tooltipLabel"
         a.text-pink-600.text-sm.font-medium.hover:underline.mt-1.inline-block href="#" target="_blank" rel="noopener noreferrer" data-hotspot-tooltip-target="tooltipLink"
           | Shop →

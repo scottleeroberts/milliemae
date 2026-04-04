@@ -1,59 +1,77 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["tooltip", "tooltipLabel", "tooltipLink"]
+  static targets = ["tooltip", "tooltipLabel", "tooltipLink", "pin"]
+  static values = { open: Boolean }
 
   connect() {
-    this._activePin = null
-    this.hideOnOutsideClick = this.hide.bind(this)
-    this.hideOnEscape = (e) => { if (e.key === "Escape") this.hide() }
+    this.activePin = null
+    this.hideOnOutsideClick = this.hideOnOutsideClick.bind(this)
+    this.hideOnEscape = this.hideOnEscape.bind(this)
+    this.openValue = false
   }
 
   toggle(event) {
     event.preventDefault()
     event.stopPropagation()
 
-    const dot = event.currentTarget
-    const isVisible = !this.tooltipTarget.classList.contains("hidden")
+    const pin = event.currentTarget
 
-    if (isVisible && this._activePin === dot) {
+    if (this.openValue && this.activePin === pin) {
       this.hide()
       return
     }
 
-    this._activePin = dot
-    this._reveal(dot)
+    this.activePin = pin
+    this.reveal(pin)
   }
 
   hide() {
-    this.tooltipTarget.classList.add("hidden")
-    this._activePin = null
+    this.activePin = null
+    this.openValue = false
     document.removeEventListener("click", this.hideOnOutsideClick)
     document.removeEventListener("keydown", this.hideOnEscape)
   }
 
   disconnect() {
-    document.removeEventListener("click", this.hideOnOutsideClick)
-    document.removeEventListener("keydown", this.hideOnEscape)
+    this.hide()
   }
 
-  // — private —
+  openValueChanged() {
+    const isOpen = this.openValue
+    this.tooltipTarget.classList.toggle("hidden", !isOpen)
+    this.tooltipTarget.setAttribute("aria-hidden", isOpen ? "false" : "true")
+    this.pinTargets.forEach((pin) => {
+      pin.setAttribute("aria-expanded", this.activePin === pin && isOpen ? "true" : "false")
+    })
+  }
 
-  _reveal(dot) {
-    this.tooltipLabelTarget.textContent = dot.dataset.label
-    this.tooltipLinkTarget.href = dot.dataset.url
+  hideOnOutsideClick(event) {
+    if (this.element.contains(event.target)) return
+    this.hide()
+  }
 
-    const container = this.element
-    const containerRect = container.getBoundingClientRect()
-    const dotRect = dot.getBoundingClientRect()
+  hideOnEscape(event) {
+    if (event.key !== "Escape") return
 
-    let left = dotRect.left - containerRect.left + dotRect.width / 2
-    let top = dotRect.top - containerRect.top + dotRect.height + 8
+    const activePin = this.activePin
+    this.hide()
+    if (activePin?.focus) activePin.focus()
+  }
 
-    const tooltip = this.tooltipTarget
-    tooltip.classList.remove("hidden")
+  reveal(pin) {
+    this.tooltipLabelTarget.textContent = pin.dataset.label
+    this.tooltipLinkTarget.href = pin.dataset.url
 
-    const tooltipRect = tooltip.getBoundingClientRect()
+    const containerRect = this.element.getBoundingClientRect()
+    const pinRect = pin.getBoundingClientRect()
+
+    let left = pinRect.left - containerRect.left + pinRect.width / 2
+    let top = pinRect.top - containerRect.top + pinRect.height + 8
+
+    this.openValue = true
+
+    const tooltipRect = this.tooltipTarget.getBoundingClientRect()
 
     if (left + tooltipRect.width > containerRect.width) {
       left = containerRect.width - tooltipRect.width - 8
@@ -61,15 +79,12 @@ export default class extends Controller {
     if (left < 8) left = 8
 
     if (top + tooltipRect.height > containerRect.height) {
-      top = dotRect.top - containerRect.top - tooltipRect.height - 8
+      top = pinRect.top - containerRect.top - tooltipRect.height - 8
     }
 
-    tooltip.style.left = `${left}px`
-    tooltip.style.top = `${top}px`
+    this.tooltipTarget.style.left = `${left}px`
+    this.tooltipTarget.style.top = `${top}px`
 
-    // Bind dismiss listeners in the next frame so this click doesn't immediately
-    // trigger hideOnOutsideClick. document.addEventListener deduplicates same-reference
-    // listeners, so calling this on each _reveal is safe.
     requestAnimationFrame(() => {
       document.addEventListener("click", this.hideOnOutsideClick)
       document.addEventListener("keydown", this.hideOnEscape)
