@@ -29,4 +29,13 @@ RSpec.describe "Creator project image management", type: :system do
     expect(page).to have_content("No image yet", wait: 5)
     expect(ProjectImage.count).to eq(0)
   end
+
+  it "renders existing hotspots with the shared pink pin styling" do
+    project_image = create(:project_image, project: project)
+    create(:product_link, project_image: project_image, label: "Pattern", url: "https://example.com/pattern", x: 0.25, y: 0.5)
+
+    visit creator_project_path(project)
+
+    expect(page).to have_css("a.bg-pink-600.rounded-full", text: "1")
+  end
 end

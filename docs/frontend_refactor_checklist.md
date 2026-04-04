@@ -4,7 +4,7 @@
 - [x] 2. Make hotspot tooltips keyboard-accessible and state-driven.
 - [x] 3. Move flash animation styling out of JavaScript and into CSS classes.
 - [x] 4. Add reduced-motion support for pulse and dismiss animations.
-- [ ] 5. Unify hotspot pin styling across public and creator views.
+- [x] 5. Unify hotspot pin styling across public and creator views.
 - [ ] 6. Simplify hotspot annotator state transitions.
 - [ ] 7. Extract shared interactive component classes in Tailwind CSS.
 - [ ] 8. Reduce inline style and class mutation where Stimulus values or classes fit better.
