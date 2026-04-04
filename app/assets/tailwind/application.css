@@ -26,3 +26,13 @@
     animation: hotspot-pulse 1.2s ease-in-out infinite;
   }
 }
+
+@layer components {
+  [data-controller~="flash"] {
+    transition: opacity 0.3s ease-out;
+  }
+
+  [data-controller~="flash"].is-dismissing {
+    opacity: 0;
+  }
+}

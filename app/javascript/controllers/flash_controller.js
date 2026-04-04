@@ -11,8 +11,7 @@ export default class extends Controller {
 
   dismiss() {
     clearTimeout(this.timeout)
-    this.element.style.transition = "opacity 0.3s ease-out"
-    this.element.style.opacity = "0"
+    this.element.classList.add("is-dismissing")
     setTimeout(() => this.element.remove(), 300)
   }
 
