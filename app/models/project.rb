@@ -46,12 +46,6 @@ class Project < ApplicationRecord
     update!(published: false, published_at: nil)
   end
 
-  def published_date
-    return "Not published yet" unless published_at
-
-    "Twirled on #{published_at.strftime('%-b %-d, %-Y')}"
-  end
-
   validate :tag_limit
 
   private

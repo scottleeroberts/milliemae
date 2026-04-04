@@ -9,7 +9,7 @@
     p.text-sm.text-gray-500.mt-1
       - if @project.published?
         span.text-green-600 Published ·
-        = @project.published_date
+        = published_date(@project)
       - else
         span.text-yellow-600 Draft
   .flex.gap-2

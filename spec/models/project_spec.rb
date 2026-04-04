@@ -118,18 +118,6 @@ RSpec.describe Project, type: :model do
     end
   end
 
-  describe "#published_date" do
-    it "returns a formatted date when published" do
-      project = build(:project, published_at: Time.zone.parse("2026-03-22"))
-      expect(project.published_date).to eq("Twirled on Mar 22, 2026")
-    end
-
-    it "returns 'Not published yet' when not published" do
-      project = build(:project, published_at: nil)
-      expect(project.published_date).to eq("Not published yet")
-    end
-  end
-
   describe "scopes" do
     let!(:draft) { create(:project) }
     let!(:published) { create(:project, :published) }

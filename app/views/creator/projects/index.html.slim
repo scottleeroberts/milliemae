@@ -30,7 +30,7 @@
             - if project.published?
               span.text-green-600 Published
               span.text-gray-500 ·
-              = project.published_date
+              = published_date(project)
             - else
               span.text-yellow-600 Draft
           - if project.tags.any?
