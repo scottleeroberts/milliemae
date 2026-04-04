@@ -6,6 +6,7 @@ class FollowsController < ApplicationController
     actor = Follows::Create.result(follower: current_user, following: @creator)
     return redirect_to creator_path(@creator), alert: actor.error if actor.failure?
 
+    @creator.reload
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to creator_path(@creator) }
@@ -14,6 +15,7 @@ class FollowsController < ApplicationController
 
   def destroy
     Follows::Destroy.call(follower: current_user, following: @creator)
+    @creator.reload
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to creator_path(@creator) }

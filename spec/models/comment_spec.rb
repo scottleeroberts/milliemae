@@ -36,6 +36,18 @@ RSpec.describe Comment, type: :model do
     end
   end
 
+  describe "counter cache" do
+    it "increments project comments_count on create" do
+      project = create(:project, :published)
+      expect { create(:comment, project: project) }.to change { project.reload.comments_count }.by(1)
+    end
+
+    it "decrements project comments_count on destroy" do
+      comment = create(:comment)
+      expect { comment.destroy }.to change { comment.project.reload.comments_count }.by(-1)
+    end
+  end
+
   describe "dependent destroy" do
     it "is destroyed when the project is destroyed" do
       comment = create(:comment)

@@ -5,9 +5,9 @@ class Creators::ProfileLoader < ApplicationActor
   output :projects
 
   def call
-    self.creator = User.creator.includes(:followers).find_by!(username: username)
+    self.creator = User.creator.find_by!(username: username)
     self.projects = creator.projects.for_feed
-                           .includes(:tags, :likes, :comments, :rich_text_body,
+                           .includes(:tags, :rich_text_body,
                                      project_images: { image_attachment: :blob })
   end
 end

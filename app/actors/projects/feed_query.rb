@@ -14,7 +14,7 @@ class Projects::FeedQuery < ApplicationActor
 
     base = Project.for_feed.with_tag(self.tag)
     self.total_pages = [(base.count(:all).to_f / Project::PER_PAGE).ceil, 1].max
-    self.projects = base.includes(:user, :tags, :likes, :comments, :rich_text_body,
+    self.projects = base.includes(:user, :tags, :rich_text_body,
                                   project_images: { image_attachment: :blob })
                         .limit(Project::PER_PAGE)
                         .offset((self.page - 1) * Project::PER_PAGE)

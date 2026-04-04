@@ -55,6 +55,18 @@ RSpec.describe Like, type: :model do
     end
   end
 
+  describe "counter cache" do
+    it "increments project likes_count on create" do
+      project = create(:project, :published)
+      expect { create(:like, project: project) }.to change { project.reload.likes_count }.by(1)
+    end
+
+    it "decrements project likes_count on destroy" do
+      like = create(:like)
+      expect { like.destroy }.to change { like.project.reload.likes_count }.by(-1)
+    end
+  end
+
   describe "dependent destroy" do
     it "is destroyed when the user is destroyed" do
       like = create(:like)

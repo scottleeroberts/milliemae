@@ -4,6 +4,7 @@ class LikesController < ApplicationController
 
   def create
     Likes::Create.call(project: @project, user: current_user)
+    @project.reload
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to project_path(@project) }
@@ -12,6 +13,7 @@ class LikesController < ApplicationController
 
   def destroy
     Likes::Destroy.call(project: @project, user: current_user)
+    @project.reload
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to project_path(@project) }

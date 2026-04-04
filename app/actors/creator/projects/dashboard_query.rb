@@ -8,8 +8,8 @@ class Creator::Projects::DashboardQuery < ApplicationActor
 
   def call
     self.projects = user.projects.includes(:tags).recent
-    self.published_count = projects.count(&:published?)
-    self.total_likes = Like.joins(:project).where(projects: { user_id: user.id }).count
-    self.follower_count = user.followers.count
+    self.published_count = user.projects.published.count
+    self.total_likes = user.projects.sum(:likes_count)
+    self.follower_count = user.followers_count
   end
 end

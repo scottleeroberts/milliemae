@@ -71,6 +71,20 @@ RSpec.describe Follow, type: :model do
     end
   end
 
+  describe "counter cache" do
+    it "increments following user's followers_count on create" do
+      creator = create(:user)
+      follower = create(:user)
+      expect { create(:follow, follower: follower, following: creator) }.to change { creator.reload.followers_count }.by(1)
+    end
+
+    it "decrements following user's followers_count on destroy" do
+      follow = create(:follow)
+      creator = follow.following
+      expect { follow.destroy }.to change { creator.reload.followers_count }.by(-1)
+    end
+  end
+
   describe "dependent destroy" do
     it "is destroyed when the follower is destroyed" do
       follow = create(:follow)

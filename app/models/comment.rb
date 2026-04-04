@@ -1,6 +1,6 @@
 class Comment < ApplicationRecord
   belongs_to :user
-  belongs_to :project
+  belongs_to :project, counter_cache: true
 
   validates :body, presence: true, length: { maximum: 2000 }
 
