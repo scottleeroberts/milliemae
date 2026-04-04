@@ -25,7 +25,7 @@
             height: project_image.image_height.presence)
 
       - project_image.product_links.each.with_index(1) do |pl, idx|
-        button.absolute.flex.items-center.justify-center.bg-pink-600.text-white.text-xs.font-bold.rounded-full.w-9.h-9.sm:w-7.sm:h-7.shadow-lg.-translate-x-4.sm:-translate-x-3.5.-translate-y-4.sm:-translate-y-3.5.hover:bg-purple-800.transition-colors.duration-200.animate-hotspot-pulse.cursor-pointer type="button" aria-label="Product #{idx}: #{pl.label}" aria-controls=tooltip_id aria-expanded="false" style="left: #{(pl.x * 100).round(2)}%; top: #{(pl.y * 100).round(2)}%;" data-action="hotspot-tooltip#toggle" data-hotspot-tooltip-target="pin" data-label=pl.label data-url=pl.url
+        button.hotspot-pin.animate-hotspot-pulse.cursor-pointer type="button" aria-label="Product #{idx}: #{pl.label}" aria-controls=tooltip_id aria-expanded="false" style="left: #{(pl.x * 100).round(2)}%; top: #{(pl.y * 100).round(2)}%;" data-action="hotspot-tooltip#toggle" data-hotspot-tooltip-target="pin" data-label=pl.label data-url=pl.url
           = idx
 
       / Tooltip (hidden by default, positioned by Stimulus controller)
@@ -41,5 +41,5 @@
           - project_image.product_links.each.with_index(1) do |pl, idx|
             li
               = link_to pl.url, class: "flex items-center gap-3 group/item", target: "_blank", rel: "noopener noreferrer"
-                span class="flex items-center justify-center bg-pink-600 text-white text-xs font-bold rounded-full w-6 h-6 shrink-0 group-hover/item:bg-pink-700 transition-colors" = idx
+                span class="hotspot-pin-index hotspot-pin-index--list group-hover/item:bg-pink-700 transition-colors" = idx
                 span class="text-sm text-gray-700 group-hover/item:text-pink-600 transition-colors" = pl.label

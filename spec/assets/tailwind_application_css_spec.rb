@@ -13,4 +13,10 @@ RSpec.describe "Tailwind application CSS" do
     expect(css).to include('[data-controller~="flash"]')
     expect(css).to include("transition: none;")
   end
+
+  it "defines shared hotspot pin component classes" do
+    expect(css).to include(".hotspot-pin")
+    expect(css).to include(".hotspot-pin-index")
+    expect(css).to include(".flash-banner")
+  end
 end

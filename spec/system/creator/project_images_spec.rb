@@ -36,7 +36,7 @@ RSpec.describe "Creator project image management", type: :system do
 
     visit creator_project_path(project)
 
-    expect(page).to have_css("a.bg-pink-600.rounded-full", text: "1")
+    expect(page).to have_css("a.hotspot-pin", text: "1")
   end
 
   it "enters annotate mode, places a hotspot form, and cancels cleanly" do
