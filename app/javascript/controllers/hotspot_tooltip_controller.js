@@ -2,6 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["tooltip", "tooltipLabel", "tooltipLink", "pin"]
+  static classes = ["hidden"]
   static values = { open: Boolean }
 
   connect() {
@@ -39,7 +40,7 @@ export default class extends Controller {
 
   openValueChanged() {
     const isOpen = this.openValue
-    this.tooltipTarget.classList.toggle("hidden", !isOpen)
+    this.tooltipTarget.classList.toggle(this.hiddenClass, !isOpen)
     this.tooltipTarget.setAttribute("aria-hidden", isOpen ? "false" : "true")
     this.pinTargets.forEach((pin) => {
       pin.setAttribute("aria-expanded", this.activePin === pin && isOpen ? "true" : "false")

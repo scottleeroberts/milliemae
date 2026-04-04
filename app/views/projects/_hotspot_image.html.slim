@@ -4,7 +4,7 @@
   - has_products = project_image.product_links.any?
   div class=(has_products ? "grid grid-cols-1 lg:grid-cols-3 gap-6 items-start" : "")
     - tooltip_id = "project_image_#{project_image.id}_tooltip"
-    .relative.lg:col-span-2 data-controller="hotspot-tooltip"
+    .relative.lg:col-span-2 data-controller="hotspot-tooltip" data-hotspot-tooltip-hidden-class="hidden"
       - if project_image.image.variable?
         - small_url = url_for(project_image.image.variant(resize_to_limit: [800, 600]))
         - large_url = url_for(project_image.image.variant(resize_to_limit: [1600, 1200]))

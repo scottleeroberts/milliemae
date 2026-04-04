@@ -7,6 +7,6 @@
 - [x] 5. Unify hotspot pin styling across public and creator views.
 - [x] 6. Simplify hotspot annotator state transitions.
 - [x] 7. Extract shared interactive component classes in Tailwind CSS.
-- [ ] 8. Reduce inline style and class mutation where Stimulus values or classes fit better.
+- [x] 8. Reduce inline style and class mutation where Stimulus values or classes fit better.
 - [ ] 9. Add stronger system coverage for nav and hotspot accessibility behavior.
 - [ ] 10. Keep Action Text styling isolated and document frontend boundaries.

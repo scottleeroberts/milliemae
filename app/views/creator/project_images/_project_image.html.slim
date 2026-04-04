@@ -1,5 +1,5 @@
 = turbo_frame_tag "project_image_#{project_image.id}" do
-  .mb-8 data-controller="hotspot-annotator"
+  .mb-8 data-controller="hotspot-annotator" data-hotspot-annotator-hidden-class="hidden" data-hotspot-annotator-annotating-class="cursor-crosshair"
     .relative.inline-block.max-w-full
       = image_tag project_image.image, class: "block max-w-full", loading: "lazy", data: { hotspot_annotator_target: "image", action: "click->hotspot-annotator#placeHotspot" }
 

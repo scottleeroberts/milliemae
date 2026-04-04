@@ -2,6 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["image", "xInput", "yInput", "annotationForm"]
+  static classes = ["hidden", "annotating"]
   static values = { annotating: Boolean }
 
   connect() {
@@ -33,7 +34,7 @@ export default class extends Controller {
   }
 
   hideAnnotationForm() {
-    this.annotationFormTarget.classList.add("hidden")
+    this.annotationFormTarget.classList.add(this.hiddenClass)
     this.annotationFormTarget.style.left = ""
     this.annotationFormTarget.style.top = ""
     if (this.hasXInputTarget) this.xInputTarget.value = ""
@@ -41,12 +42,12 @@ export default class extends Controller {
   }
 
   annotatingValueChanged() {
-    this.imageTarget.classList.toggle("cursor-crosshair", this.annotatingValue)
+    this.imageTarget.classList.toggle(this.annotatingClass, this.annotatingValue)
   }
 
   showAnnotationFormAt(x, y) {
     this.annotationFormTarget.style.left = `${x}px`
     this.annotationFormTarget.style.top = `${y}px`
-    this.annotationFormTarget.classList.remove("hidden")
+    this.annotationFormTarget.classList.remove(this.hiddenClass)
   }
 }
