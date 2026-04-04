@@ -18,13 +18,9 @@ class Creator::ProjectsController < ApplicationController
   end
 
   def create
-    actor = Creator::Projects::Create.result(
-      user: current_user,
-      attributes: project_params.to_h.symbolize_keys
-    )
-    @project = actor.project
+    @project = current_user.projects.new(project_params)
 
-    if actor.success?
+    if @project.save
       redirect_to creator_project_path(@project), notice: "Project created."
     else
       render :new, status: :unprocessable_content
@@ -34,13 +30,7 @@ class Creator::ProjectsController < ApplicationController
   def edit; end
 
   def update
-    actor = Creator::Projects::Update.result(
-      project_record: @project,
-      attributes: project_params.to_h.symbolize_keys
-    )
-    @project = actor.project
-
-    if actor.success?
+    if @project.update(project_params)
       redirect_to creator_project_path(@project), notice: "Project updated."
     else
       render :edit, status: :unprocessable_content
@@ -48,17 +38,17 @@ class Creator::ProjectsController < ApplicationController
   end
 
   def destroy
-    Creator::Projects::Destroy.call(project: @project)
+    @project.destroy!
     redirect_to creator_projects_path, notice: "Project deleted."
   end
 
   def publish
-    Creator::Projects::Publish.call(project: @project)
+    @project.publish!
     redirect_to creator_projects_path, notice: "\"#{@project.title}\" published."
   end
 
   def unpublish
-    Creator::Projects::Unpublish.call(project: @project)
+    @project.unpublish!
     redirect_to creator_projects_path, notice: "\"#{@project.title}\" unpublished."
   end
 
