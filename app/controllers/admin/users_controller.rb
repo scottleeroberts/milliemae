@@ -14,7 +14,10 @@ class Admin::UsersController < Admin::BaseController
 
     if actor.success?
       redirect_to admin_users_path, notice: "#{@user.display_name}'s role updated to #{@user.role}."
-    elsif actor.error == "Cannot change your own role." || actor.error == "Invalid role."
+    elsif [
+      Admin::Users::ChangeRole::SELF_ROLE_CHANGE,
+      Admin::Users::ChangeRole::INVALID_ROLE
+    ].include?(actor.failure_reason)
       redirect_to admin_users_path, alert: actor.error
     else
       @users = Admin::Users::Index.call.users

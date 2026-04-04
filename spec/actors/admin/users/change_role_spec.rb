@@ -14,6 +14,7 @@ RSpec.describe Admin::Users::ChangeRole do
     result = described_class.result(current_user: admin, target_user: admin, role: "audience")
 
     expect(result).to be_failure
+    expect(result.failure_reason).to eq(described_class::SELF_ROLE_CHANGE)
     expect(result.error).to eq("Cannot change your own role.")
   end
 
@@ -21,6 +22,7 @@ RSpec.describe Admin::Users::ChangeRole do
     result = described_class.result(current_user: admin, target_user: user, role: "superadmin")
 
     expect(result).to be_failure
+    expect(result.failure_reason).to eq(described_class::INVALID_ROLE)
     expect(result.error).to eq("Invalid role.")
   end
 end
