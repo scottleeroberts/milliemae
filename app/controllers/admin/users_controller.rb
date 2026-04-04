@@ -1,6 +1,6 @@
 class Admin::UsersController < Admin::BaseController
   def index
-    @users = Admin::Users::Index.call.users
+    @users = Admin::Users::DirectoryQuery.call.users
   end
 
   def update
@@ -20,7 +20,7 @@ class Admin::UsersController < Admin::BaseController
     ].include?(actor.failure_reason)
       redirect_to admin_users_path, alert: actor.error
     else
-      @users = Admin::Users::Index.call.users
+      @users = Admin::Users::DirectoryQuery.call.users
       render :index, status: :unprocessable_content
     end
   end

@@ -4,7 +4,7 @@ class Creator::ProjectsController < ApplicationController
   before_action :set_project, only: [ :show, :edit, :update, :destroy, :publish, :unpublish ]
 
   def index
-    actor = Creator::Projects::Index.call(user: current_user)
+    actor = Creator::Projects::DashboardQuery.call(user: current_user)
     @projects = actor.projects
     @published_count = actor.published_count
     @total_likes = actor.total_likes
@@ -55,7 +55,7 @@ class Creator::ProjectsController < ApplicationController
   private
 
   def set_project
-    @project = Creator::Projects::Show.call(user: current_user, slug: params[:id]).project
+    @project = Creator::Projects::ProjectLoader.call(user: current_user, slug: params[:id]).project
   end
 
   def project_params

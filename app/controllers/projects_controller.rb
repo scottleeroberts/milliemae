@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   def index
-    actor = Projects::Index.call(requested_tag: params[:tag], requested_page: params[:page].to_i)
+    actor = Projects::FeedQuery.call(requested_tag: params[:tag], requested_page: params[:page].to_i)
     @tag = actor.tag
     @page = actor.page
     @total_pages = actor.total_pages
@@ -9,6 +9,6 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Projects::Show.call(slug: params[:id]).project
+    @project = Projects::PublishedProjectLoader.call(slug: params[:id]).project
   end
 end

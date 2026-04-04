@@ -2,7 +2,7 @@ class Admin::ProjectsController < Admin::BaseController
   before_action :set_project, only: [:destroy, :unpublish]
 
   def index
-    @projects = Admin::Projects::Index.call.projects
+    @projects = Admin::Projects::DirectoryQuery.call.projects
   end
 
   def destroy

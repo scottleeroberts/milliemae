@@ -1,6 +1,6 @@
 class Admin::InvitationsController < Admin::BaseController
   def index
-    actor = Admin::Invitations::Index.call
+    actor = Admin::Invitations::DirectoryQuery.call
     @invitations = actor.invitations
     @new_invitation = actor.new_invitation
   end
@@ -15,7 +15,7 @@ class Admin::InvitationsController < Admin::BaseController
     if actor.success?
       redirect_to admin_invitations_path, notice: "Invitation sent to #{@new_invitation.email}."
     else
-      index_actor = Admin::Invitations::Index.call
+      index_actor = Admin::Invitations::DirectoryQuery.call
       @invitations = index_actor.invitations
       render :index, status: :unprocessable_content
     end
