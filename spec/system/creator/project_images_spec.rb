@@ -67,4 +67,34 @@ RSpec.describe "Creator project image management", type: :system do
     expect(find("input[name='product_link[x]']", visible: false).value).to eq("")
     expect(find("input[name='product_link[y]']", visible: false).value).to eq("")
   end
+
+  it "switches between image tabs" do
+    image1 = create(:project_image, project: project)
+    image2 = create(:project_image, project: project)
+    create(:product_link, project_image: image1, label: "Fabric A", url: "https://example.com/a", x: 0.1, y: 0.1)
+    create(:product_link, project_image: image2, label: "Fabric B", url: "https://example.com/b", x: 0.2, y: 0.2)
+
+    visit creator_project_path(project)
+
+    # First image tab is active by default
+    expect(page).to have_button("Image 1")
+    expect(page).to have_button("Image 2")
+    expect(page).to have_content("Fabric A")
+    expect(page).not_to have_content("Fabric B")
+
+    # Switch to second image tab
+    click_button "Image 2"
+    expect(page).to have_content("Fabric B")
+    expect(page).not_to have_content("Fabric A")
+
+    # Switch to upload tab
+    click_button "+ Upload"
+    expect(page).to have_button("Upload")
+    expect(page).not_to have_content("Fabric A")
+    expect(page).not_to have_content("Fabric B")
+
+    # Switch back to first image tab
+    click_button "Image 1"
+    expect(page).to have_content("Fabric A")
+  end
 end

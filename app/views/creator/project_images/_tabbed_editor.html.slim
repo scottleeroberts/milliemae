@@ -1,0 +1,29 @@
+- active_index ||= 0
+- images = project.project_images
+
+- if images.empty?
+  p.text-gray-500.text-sm.mb-4 No image yet. Upload one to start annotating hotspots.
+  .mt-4
+    h3.text-sm.font-medium.text-gray-700.mb-2 Upload Image
+    = render "creator/project_images/upload_form", project: project
+
+- else
+  div data-controller="tabs" data-tabs-active-index-value=active_index
+    / Tab bar
+    .flex.gap-1.border-b.border-gray-200.mb-4 role="tablist"
+      - images.each_with_index do |_img, i|
+        button.px-3.py-2.text-sm type="button" role="tab" data-tabs-target="tab" data-index=i data-action="click->tabs#select"
+          = "Image #{i + 1}"
+      button.px-3.py-2.text-sm type="button" role="tab" data-tabs-target="tab" data-index=images.size data-action="click->tabs#select"
+        | + Upload
+
+    / Tab panels
+    - images.each do |pi|
+      div data-tabs-target="panel"
+        = render "creator/project_images/project_image", project: project, project_image: pi
+
+    div data-tabs-target="panel"
+      - if local_assigns[:upload_error]
+        p.text-sm.text-red-600.mb-2 Image could not be uploaded. Please try again.
+      h3.text-sm.font-medium.text-gray-700.mb-2 Upload Image
+      = render "creator/project_images/upload_form", project: project

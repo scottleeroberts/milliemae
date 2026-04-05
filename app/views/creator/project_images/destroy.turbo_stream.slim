@@ -1,11 +1,4 @@
+- @project.project_images.reload
 = turbo_stream.replace "project_images_#{@project.id}" do
   = turbo_frame_tag "project_images_#{@project.id}" do
-    - remaining = @project.project_images.reload
-    - if remaining.any?
-      - remaining.each do |pi|
-        = render "creator/project_images/project_image", project: @project, project_image: pi
-    - else
-      p.text-gray-500.text-sm.mb-4 No image yet. Upload one to start annotating hotspots.
-    .mt-4
-      h3.text-sm.font-medium.text-gray-700.mb-2 Upload Image
-      = render "creator/project_images/upload_form", project: @project
+    = render "creator/project_images/tabbed_editor", project: @project, active_index: 0
