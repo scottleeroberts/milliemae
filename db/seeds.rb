@@ -329,7 +329,7 @@ project_defs.each do |creator, projects|
         content_type: content_type
       )
       project_image.save!
-      project_image.analyze_image_dimensions
+      ProjectImages::DimensionAnalyzer.call(project_image: project_image)
 
       img_def[:links].each do |link|
         project_image.product_links.create!(
